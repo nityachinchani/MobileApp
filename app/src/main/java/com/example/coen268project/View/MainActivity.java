@@ -1,8 +1,10 @@
-package com.example.coen268project;
+package com.example.coen268project.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.example.coen268project.R;
 
 public class MainActivity extends AppCompatActivity {
 
