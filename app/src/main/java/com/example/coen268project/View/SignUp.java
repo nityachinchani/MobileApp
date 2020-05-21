@@ -76,7 +76,7 @@ public class SignUp extends AppCompatActivity {
                                 @Override
                                 public void onComplete(@NonNull Task<AuthResult> task) {
                                     if(!task.isSuccessful()){
-                                        Toast.makeText(SignUp.this,"Signup Unsuccessful, try again",Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(SignUp.this,"Signup unsuccessful, try again",Toast.LENGTH_SHORT).show();
                                     }
                                     else {
                                         startActivity(new Intent(SignUp.this, MainActivity.class));  //change this class once homescreen is created

@@ -17,12 +17,14 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity {
     EditText usernameEditText, passwordEditText;
     Button logInBtn, guestLoginBtn;
     TextView signUpTextView, forgotPasswordTextView;
     FirebaseAuth mFirebaseAuth ;
+    private FirebaseAuth.AuthStateListener mAuthStateListener;
 
 
     @Override
@@ -50,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String email=usernameEditText.getText().toString();
                 String password=passwordEditText.getText().toString();
+
                 if(email.isEmpty() ){
                     usernameEditText.setError("Please enter email id");
                     usernameEditText.requestFocus();
@@ -59,9 +62,21 @@ public class MainActivity extends AppCompatActivity {
                     passwordEditText.requestFocus();
                 }
 
-                else {
-                    //login will take place and user will go to home screen
+                else if (!(email.isEmpty() && password.isEmpty() )){
+                    mFirebaseAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(MainActivity.this,
+                            new OnCompleteListener<AuthResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                    if(!task.isSuccessful()){
+                                        Toast.makeText(MainActivity.this,"Login error, please check credentials",Toast.LENGTH_SHORT).show();
+                                    }
+                                    else {
+                                        startActivity(new Intent(MainActivity.this, SignUp.class));  //change this class once homescreen is created
+                                    }
+                                }
+                            });
                 }
+
 
             }
         });
