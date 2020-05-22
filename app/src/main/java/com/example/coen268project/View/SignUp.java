@@ -1,8 +1,6 @@
 package com.example.coen268project.View;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -10,37 +8,32 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
+import com.example.coen268project.Firebase.CallBack;
+import com.example.coen268project.Presentation.Account;
 import com.example.coen268project.R;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
 
 public class SignUp extends AppCompatActivity {
-    EditText fullnameEditText, emailEditText, passwordEditText, confirmPasswordEditText;
+    EditText fullNameEditText, emailEditText, passwordEditText, confirmPasswordEditText;
     Button signUpBtn;
     TextView signInTextView;
-    FirebaseAuth mFirebaseAuth;
+    private Account account;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        account = new Account(this);
         setContentView(R.layout.activity_sign_up);
-
-        fullnameEditText=findViewById(R.id.fullnameEditText);
+        fullNameEditText=findViewById(R.id.fullNameEditText);
         emailEditText=findViewById(R.id.emailEditText);
         passwordEditText=findViewById(R.id.passwordEditText);
         confirmPasswordEditText=findViewById(R.id.confirmpasswordEditText);
         signUpBtn=findViewById(R.id.signUpBtn);
         signInTextView=findViewById(R.id.signInTextView);
 
-        mFirebaseAuth=FirebaseAuth.getInstance();
-
         signUpBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String fullname=fullnameEditText.getText().toString();
+                String fullname=fullNameEditText.getText().toString();
                 String email=emailEditText.getText().toString();
                 String password=passwordEditText.getText().toString();
                 String confirmPassword=confirmPasswordEditText.getText().toString();
@@ -51,8 +44,8 @@ public class SignUp extends AppCompatActivity {
                 }
 
                 else if(fullname.isEmpty() ){
-                    fullnameEditText.setError("Please enter fullname");
-                    fullnameEditText.requestFocus();
+                    fullNameEditText.setError("Please enter fullname");
+                    fullNameEditText.requestFocus();
                 }
 
                 else if(password.isEmpty() ){
@@ -69,22 +62,19 @@ public class SignUp extends AppCompatActivity {
                     Toast.makeText(SignUp.this,"Passwords dont match",Toast.LENGTH_SHORT).show();
                 }
 
-
                 else if (!(email.isEmpty() && password.isEmpty() && confirmPassword.isEmpty())){
-                    mFirebaseAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(SignUp.this,
-                            new OnCompleteListener<AuthResult>() {
-                                @Override
-                                public void onComplete(@NonNull Task<AuthResult> task) {
-                                    if(!task.isSuccessful()){
-                                        Toast.makeText(SignUp.this,"Signup unsuccessful, try again",Toast.LENGTH_SHORT).show();
-                                    }
-                                    else {
-                                        startActivity(new Intent(SignUp.this, MainActivity.class));  //change this class once homescreen is created
-                                    }
-                                }
-                            });
-                }
+                    account.createUserWithEmailAndPassword(email, password, new CallBack() {
+                        @Override
+                        public void onSuccess(Object object) {
+                            startActivity(new Intent(SignUp.this, MainActivity.class));  //change this class once homescreen is created
+                        }
 
+                        @Override
+                        public void onError(Object object) {
+                            Toast.makeText(SignUp.this,"Signup unsuccessful, try again",Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
             }
         });
 

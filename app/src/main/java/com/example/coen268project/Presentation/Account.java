@@ -9,9 +9,11 @@ import com.example.coen268project.Firebase.FirebaseRequestModel;
 import com.example.coen268project.Model.AccountDao;
 import com.example.coen268project.Model.AccountRepository;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
@@ -26,6 +28,7 @@ public class Account extends FirebaseRepository implements AccountRepository {
     public Account(Activity activity) {
         this.activity = activity;
         accountDatabaseReference = FirebaseInstance.DATABASE.getReference(FirebaseConstants.ACCOUNT_TABLE);
+        accountAuthentication = FirebaseInstance.AUTHENTICATION;
     }
 
     @Override
@@ -33,6 +36,26 @@ public class Account extends FirebaseRepository implements AccountRepository {
         accountAuthentication = FirebaseInstance.AUTHENTICATION;
         if (!email.isEmpty() && !password.isEmpty()) {
             fireBaseAuthentication(accountAuthentication, email, password, new CallBack() {
+                @Override
+                public void onSuccess(Object object) {
+                    callBack.onSuccess(FirebaseConstants.SUCCESS);
+                }
+
+                @Override
+                public void onError(Object object) {
+                    callBack.onError(object);
+                }
+            });
+        } else {
+            callBack.onError(FirebaseConstants.FAIL);
+        }
+    }
+
+    @Override
+    public void createUserWithEmailAndPassword(String email, String password, final CallBack callBack) {
+        accountAuthentication = FirebaseInstance.AUTHENTICATION;
+        if (!email.isEmpty() && !password.isEmpty()) {
+            fireBaseCreateAuthenticatedUser(accountAuthentication, email, password, new CallBack() {
                 @Override
                 public void onSuccess(Object object) {
                     callBack.onSuccess(FirebaseConstants.SUCCESS);

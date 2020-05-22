@@ -17,12 +17,27 @@ import java.util.Map;
 
 public abstract class FirebaseRepository {
 
-    protected final void fireBaseAuthentication(FirebaseAuth mFirebaseAuth, String email, String password, final CallBack callback)
+    protected final void fireBaseAuthentication(final FirebaseAuth mFirebaseAuth, String email, String password, final CallBack callback)
     {
         mFirebaseAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-                if(!task.isSuccessful()){
+                if(task.isSuccessful()){
+                    callback.onSuccess(null);
+                }
+                else {
+                    callback.onError(task);
+                }
+            }
+        });
+    }
+
+    protected final void fireBaseCreateAuthenticatedUser(final FirebaseAuth mFirebaseAuth, String email, String password, final CallBack callback)
+    {
+        mFirebaseAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if(task.isSuccessful()){
                     callback.onSuccess(null);
                 }
                 else {
