@@ -1,4 +1,4 @@
 package com.example.coen268project.Presentation;
 
-public class Buyer extends Account{
+public class Buyer{
 }
