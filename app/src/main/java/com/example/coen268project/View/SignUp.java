@@ -13,7 +13,7 @@ import com.example.coen268project.Presentation.Account;
 import com.example.coen268project.R;
 
 public class SignUp extends AppCompatActivity {
-    EditText fullNameEditText, emailEditText, passwordEditText, confirmPasswordEditText;
+    EditText fullnameEditText, emailEditText, passwordEditText, confirmPasswordEditText;
     Button signUpBtn;
     TextView signInTextView;
     private Account account;
@@ -23,7 +23,7 @@ public class SignUp extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         account = new Account(this);
         setContentView(R.layout.activity_sign_up);
-        fullNameEditText=findViewById(R.id.fullNameEditText);
+        fullnameEditText=findViewById(R.id.fullnameEditText);
         emailEditText=findViewById(R.id.emailEditText);
         passwordEditText=findViewById(R.id.passwordEditText);
         confirmPasswordEditText=findViewById(R.id.confirmpasswordEditText);
@@ -33,7 +33,7 @@ public class SignUp extends AppCompatActivity {
         signUpBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String fullname=fullNameEditText.getText().toString();
+                String fullname=fullnameEditText.getText().toString();
                 String email=emailEditText.getText().toString();
                 String password=passwordEditText.getText().toString();
                 String confirmPassword=confirmPasswordEditText.getText().toString();
@@ -44,8 +44,8 @@ public class SignUp extends AppCompatActivity {
                 }
 
                 else if(fullname.isEmpty() ){
-                    fullNameEditText.setError("Please enter fullname");
-                    fullNameEditText.requestFocus();
+                    fullnameEditText.setError("Please enter fullname");
+                    fullnameEditText.requestFocus();
                 }
 
                 else if(password.isEmpty() ){
@@ -61,6 +61,7 @@ public class SignUp extends AppCompatActivity {
                 else if(!password.equals(confirmPassword) ){
                     Toast.makeText(SignUp.this,"Passwords dont match",Toast.LENGTH_SHORT).show();
                 }
+
 
                 else if (!(email.isEmpty() && password.isEmpty() && confirmPassword.isEmpty())){
                     account.createUserWithEmailAndPassword(email, password, new CallBack() {
