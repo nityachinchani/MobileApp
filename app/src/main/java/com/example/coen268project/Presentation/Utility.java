@@ -2,21 +2,21 @@ package com.example.coen268project.Presentation;
 
 public class Utility {
 
-    public enum ItemStatus
+    public static enum ItemStatus
     {
         POSTED,
         SOLD,
         BOOKED
     }
 
-    public enum CommunicationType
+    public static enum CommunicationType
     {
         TEXT,
         AUDIO,
         VIDEO
     }
 
-    public enum BillingStatus
+    public static enum BillingStatus
     {
         PENDING,
         DELIVERED,
