@@ -1,6 +1,7 @@
 package com.example.coen268project.Firebase;
 import androidx.annotation.NonNull;
 
+import com.example.coen268project.Model.AccountDao;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -38,7 +39,7 @@ public abstract class FirebaseRepository {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
-                    callback.onSuccess(null);
+                    callback.onSuccess(mFirebaseAuth.getCurrentUser().getUid());
                 }
                 else {
                     callback.onError(task);

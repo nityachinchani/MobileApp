@@ -3,6 +3,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.telecom.Call;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -33,9 +34,9 @@ public class SignUp extends AppCompatActivity {
         signUpBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String fullname=fullnameEditText.getText().toString();
-                String email=emailEditText.getText().toString();
-                String password=passwordEditText.getText().toString();
+                final String fullName=fullnameEditText.getText().toString();
+                final String email=emailEditText.getText().toString();
+                final String password=passwordEditText.getText().toString();
                 String confirmPassword=confirmPasswordEditText.getText().toString();
 
                 if(email.isEmpty() ){
@@ -43,7 +44,7 @@ public class SignUp extends AppCompatActivity {
                     emailEditText.requestFocus();
                 }
 
-                else if(fullname.isEmpty() ){
+                else if(fullName.isEmpty() ){
                     fullnameEditText.setError("Please enter fullname");
                     fullnameEditText.requestFocus();
                 }
@@ -67,7 +68,18 @@ public class SignUp extends AppCompatActivity {
                     account.createUserWithEmailAndPassword(email, password, new CallBack() {
                         @Override
                         public void onSuccess(Object object) {
-                            startActivity(new Intent(SignUp.this, MainActivity.class));  //change this class once homescreen is created
+                            Toast.makeText(SignUp.this,"push key" + object.toString() ,Toast.LENGTH_SHORT).show();
+                            account.createAccount(object.toString(), fullName, email, "123-456-9696", password, new CallBack() {
+                                @Override
+                                public void onSuccess(Object object) {
+                                    startActivity(new Intent(SignUp.this, MainActivity.class));  //change this class once homescreen is created
+                                }
+
+                                @Override
+                                public void onError(Object object) {
+                                    Toast.makeText(SignUp.this,"User creation unsuccessful, try again",Toast.LENGTH_SHORT).show();
+                                }
+                            });
                         }
 
                         @Override

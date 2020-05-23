@@ -1,7 +1,5 @@
 package com.example.coen268project.Model;
-
 import java.io.Serializable;
-import java.util.HashMap;
 
 public class AccountDao implements Serializable {
     private String userName;
@@ -47,14 +45,5 @@ public class AccountDao implements Serializable {
 
     public void setPassword(String password) {
         password = password;
-    }
-
-    public HashMap<String, Object> getMap() {
-        HashMap<String, Object> map = new HashMap<>();
-        map.put("userName", getUserName());
-        map.put("email", getEmail());
-        map.put("phoneNumber", getPhoneNumber());
-        map.put("password", getPassword());
-        return map;
     }
 }
