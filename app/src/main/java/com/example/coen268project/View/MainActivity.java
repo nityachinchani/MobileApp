@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
         forgotPasswordTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // handle forgot password
+                startActivity(new Intent(MainActivity.this, ForgotPassword.class));
             }
         });
     }
