@@ -111,7 +111,7 @@ public class Account extends FirebaseRepository implements AccountRepository {
     }
 
     @Override
-    public void deleteEmployee(String userName, final CallBack callBack) {
+    public void deleteAccount(String userName, final CallBack callBack) {
         if (!userName.isEmpty()) {
             DatabaseReference databaseReference = accountDatabaseReference.child(userName);
             fireBaseDelete(databaseReference, new CallBack() {
@@ -160,19 +160,18 @@ public class Account extends FirebaseRepository implements AccountRepository {
 
     @Override
     public void getAllAccounts(final CallBack callBack) {
-        Query query = accountDatabaseReference.orderByChild(FirebaseConstants.USER_NAME);
+        Query query = accountDatabaseReference.orderByKey();
         fireBaseReadData(query, new CallBack() {
             @Override
             public void onSuccess(Object object) {
                 if (object != null) {
                     DataSnapshot dataSnapshot = (DataSnapshot) object;
                     if (dataSnapshot.getValue() != null && dataSnapshot.hasChildren()) {
-                        ArrayList<AccountDao> accountArrayList = new ArrayList<>();
+                        ArrayList<String> accountArrayList = new ArrayList<>();
                         for (DataSnapshot suggestionSnapshot : dataSnapshot.getChildren()) {
-                            AccountDao account = suggestionSnapshot.getValue(AccountDao.class);
-                            accountArrayList.add(account);
+                            accountArrayList.add(suggestionSnapshot.child("userName").getValue().toString());
                         }
-                        callBack.onSuccess(accountArrayList);
+                        callBack.onSuccess(accountArrayList.toArray());
                     } else
                         callBack.onSuccess(null);
                 } else
