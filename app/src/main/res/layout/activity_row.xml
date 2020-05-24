@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<<<<<<< HEAD
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -12,5 +13,19 @@
         android:layout_gravity="center_horizontal|top"
         android:text="Large text"
         android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+=======
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/text_id"
+        android:layout_width="match_parent"
+        android:layout_height="96dp"
+        android:background="#ffffff"
+        android:text="No data"
+        android:gravity="center_horizontal|center_vertical"
+        android:textAlignment="center"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+>>>>>>> 4d225059ff86b63d47e7a076092445df3ec9330e
 
 </LinearLayout>
