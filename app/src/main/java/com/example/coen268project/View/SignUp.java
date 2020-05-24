@@ -200,7 +200,6 @@ public class SignUp extends AppCompatActivity {
             mediaScanIntent.setData(contentUri);
             this.sendBroadcast(mediaScanIntent);
 
-            //uploadImageToFirebase(f.getName(),contentUri);
         }
     }
 
@@ -272,63 +271,4 @@ public class SignUp extends AppCompatActivity {
         }
     }
 
-
-
-    //    private void takePictureIntent() {
-//        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-//        if (intent.resolveActivity(getPackageManager()) != null) {
-//            startActivityForResult(intent, REQUEST_IMAGE_CAPTURE);
-//        }
-//    }
-
-//    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-//            Bundle extras = data.getExtras();
-//            imageBitmap = (Bitmap) extras.get("data");
-//                imageUri=data.getData();
-//                System.out.println("-------------------------------------------------------------"+imageBitmap);
-//                uploadImageToFirebase();
-//            profileImage.setImageBitmap(imageBitmap);
-//            try {
-//                imageBitmap = MediaStore.Images.Media.getBitmap(getContentResolver(),imageUri);
-//                profileImage.setImageBitmap(imageBitmap);
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-            //uploadImageAndSaveUri(imageBitmap);
-//        }
-//    }
-
-//    private void uploadImageToFirebase() {
-//        StorageReference profileImageRef= FirebaseStorage.getInstance().getReference("profilepics/"+System.currentTimeMillis()+".jpg");
-//        if(imageBitmap !=null){
-//            profileImageRef.putFile(imageBitmap);
-//        }
-//    }
-//"gs://coen268project-c7554.appspot.com"
-//    private void uploadImageAndSaveUri(final Bitmap imageBitmap) {
-//        ByteArrayOutputStream baos= new ByteArrayOutputStream();
-//        String userUid = FirebaseAuth.getInstance().getCurrentUser().getUid();
-//        mStorageReference = FirebaseStorage.getInstance().getReference("Images");
-//        final StorageReference ref= mStorageReference.child(userUid);
-//
-//        imageBitmap.compress(Bitmap.CompressFormat.JPEG,100,baos);
-//        uploadImage= (UploadTask) mStorageReference.putBytes(baos.toByteArray()).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
-//            @Override
-//            public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
-//                if (task.isSuccessful()) {
-//                    imageUri=mStorageReference.getDownloadUrl();
-//                    Toast.makeText(SignUp.this,imageUri.toString(),Toast.LENGTH_SHORT).show();
-//                    profileImage.setImageBitmap(imageBitmap);
-//                }
-//                else {
-//                    Toast.makeText(SignUp.this,"Image upload failed please try again",Toast.LENGTH_SHORT).show();
-//                }
-//
-//            }
-//        });
-//
-//    }
 }
