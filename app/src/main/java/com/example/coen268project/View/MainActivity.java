@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
         guestLoginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, SignUp.class));
+                startActivity(new Intent(MainActivity.this, GuestLogin.class));
                 // change this to homescreen once activity is created
             }
         });
