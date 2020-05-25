@@ -28,7 +28,6 @@ public class Sell_fragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
 
-        return inflater.inflate(R.layout.sell_fragment,container,false);
 
         View view = inflater.inflate(R.layout.activity_sell, container, false);
         listView = (ListView) view.findViewById(R.id.list_view);
