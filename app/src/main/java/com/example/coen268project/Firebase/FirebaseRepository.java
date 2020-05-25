@@ -1,22 +1,26 @@
 package com.example.coen268project.Firebase;
+import android.net.Uri;
+
 import androidx.annotation.NonNull;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-
-import java.util.HashMap;
 import java.util.Map;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 public abstract class FirebaseRepository {
 
-    protected final void fireBaseAuthentication(final FirebaseAuth mFirebaseAuth, String email, String password, final CallBack callback)
+    protected final void firebaseAuthentication(final FirebaseAuth mFirebaseAuth, String email, String password, final CallBack callback)
     {
         mFirebaseAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
@@ -31,7 +35,7 @@ public abstract class FirebaseRepository {
         });
     }
 
-    protected final void fireBaseCreateAuthenticatedUser(final FirebaseAuth mFirebaseAuth, String email, String password, final CallBack callback)
+    protected final void firebaseCreateAuthenticatedUser(final FirebaseAuth mFirebaseAuth, String email, String password, final CallBack callback)
     {
         mFirebaseAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
@@ -46,7 +50,29 @@ public abstract class FirebaseRepository {
         });
     }
 
-    protected final void fireBaseCreate(final DatabaseReference databaseReference, final Object model, final CallBack callback) {
+    protected void firebaseUploadImageToStorage(final StorageReference storageReference, String name, Uri contentUri, final CallBack callback) {
+        StorageReference image = storageReference.child("images/"+name);
+        final StorageReference imageFilePath = image.child(contentUri.getLastPathSegment());
+        image.putFile(contentUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                imageFilePath.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+                        callback.onSuccess(FirebaseConstants.SUCCESS);
+                    }
+                });
+
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                callback.onError(e.getMessage());
+            }
+        });
+    }
+
+    protected final void firebaseCreate(final DatabaseReference databaseReference, final Object model, final CallBack callback) {
         databaseReference.keepSynced(true);
         databaseReference.setValue(model, new DatabaseReference.CompletionListener() {
             @Override
@@ -60,7 +86,7 @@ public abstract class FirebaseRepository {
         });
     }
 
-    protected final void fireBaseUpdateChildren(final DatabaseReference databaseReference, final Map map, final CallBack callback) {
+    protected final void firebaseUpdateChildren(final DatabaseReference databaseReference, final Map map, final CallBack callback) {
         databaseReference.keepSynced(true);
         databaseReference.updateChildren(map, new DatabaseReference.CompletionListener() {
             @Override
@@ -74,7 +100,7 @@ public abstract class FirebaseRepository {
         });
     }
 
-    protected final void fireBaseDelete(final DatabaseReference databaseReference, final CallBack callback) {
+    protected final void firebaseDelete(final DatabaseReference databaseReference, final CallBack callback) {
         databaseReference.keepSynced(true);
         databaseReference.removeValue(new DatabaseReference.CompletionListener() {
             @Override
@@ -88,7 +114,7 @@ public abstract class FirebaseRepository {
         });
     }
 
-    protected final void fireBaseReadData(final Query query, final CallBack callback) {
+    protected final void firebaseReadData(final Query query, final CallBack callback) {
         query.keepSynced(true);
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

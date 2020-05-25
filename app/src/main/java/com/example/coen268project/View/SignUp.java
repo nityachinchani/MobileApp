@@ -5,22 +5,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
-
 import android.Manifest;
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
-
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
-
-import android.telecom.Call;
-
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -30,20 +22,8 @@ import android.widget.Toast;
 import com.example.coen268project.Firebase.CallBack;
 import com.example.coen268project.Presentation.Account;
 import com.example.coen268project.R;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.UserProfileChangeRequest;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
-
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
-import java.net.URI;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -56,20 +36,15 @@ public class SignUp extends AppCompatActivity {
     ImageView profileImage;
     public static final int CAMERA_PERMISSION_CODE=100;
     String currentPhotoPath;
-    StorageReference mStorageReference;
     Uri imageUri;
     Uri contentUri;
     File f;
-    UploadTask uploadImage;
-    Bitmap imageBitmap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         account = new Account(this);
         setContentView(R.layout.activity_sign_up);
-
-
         fullnameEditText=findViewById(R.id.fullnameEditText);
         emailEditText=findViewById(R.id.emailEditText);
         passwordEditText=findViewById(R.id.passwordEditText);
@@ -77,8 +52,6 @@ public class SignUp extends AppCompatActivity {
         signUpBtn=findViewById(R.id.signUpBtn);
         signInTextView=findViewById(R.id.signInTextView);
         profileImage=findViewById(R.id.profileImage);
-        mStorageReference=FirebaseStorage.getInstance().getReference();
-
 
         signUpBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -117,18 +90,27 @@ public class SignUp extends AppCompatActivity {
                     account.createUserWithEmailAndPassword(email, password, new CallBack() {
                         @Override
                         public void onSuccess(Object object) {
-
-                            //startActivity(new Intent(SignUp.this, MainActivity.class));  //change this class once homescreen is created
-                            uploadImageToFirebase(f.getName(),contentUri);
-
-                            account.createAccount(object.toString(), fullName, email, "123-456-9696", password, new CallBack() {
+                            account.createAccount(object.toString(), fullName, email, "123-456-9696", password, "testLink", new CallBack() {
                                 @Override
                                 public void onSuccess(Object object) {
+                                    account.uploadImageToStorage(f.getName(),contentUri, new CallBack() {
+                                        @Override
+                                        public void onSuccess(Object object) {
+                                            Toast.makeText(SignUp.this,"Image upload succeeded",Toast.LENGTH_LONG).show();
+                                        }
+
+                                        @Override
+                                        public void onError(Object object) {
+                                            Toast.makeText(SignUp.this,"Image upload failed",Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+
                                     startActivity(new Intent(SignUp.this, MainActivity.class));  //change this class once homescreen is created
                                 }
 
                                 @Override
                                 public void onError(Object object) {
+                                    // TO Do: Delete authentication entry on user creation failure
                                     Toast.makeText(SignUp.this,"User creation unsuccessful, try again",Toast.LENGTH_SHORT).show();
                                 }
                             });
@@ -143,7 +125,6 @@ public class SignUp extends AppCompatActivity {
                 }
             }
         });
-
 
         signInTextView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -183,8 +164,6 @@ public class SignUp extends AppCompatActivity {
         }
     }
 
-
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -203,44 +182,28 @@ public class SignUp extends AppCompatActivity {
         }
     }
 
-    private void uploadImageToFirebase(String name, Uri contentUri) {
-        StorageReference image = mStorageReference.child("images/"+name);
-        final StorageReference imageFilePath = image.child(contentUri.getLastPathSegment());
-        image.putFile(contentUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                imageFilePath.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                    @Override
-                    public void onSuccess(Uri uri) {
-                        Toast.makeText(SignUp.this,"Image upload succeeded",Toast.LENGTH_LONG).show();
-                    }
-                });
-
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(SignUp.this,"Image upload failed",Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-
-
     private File createImageFile() throws IOException {
-        // Create an image file name
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        String imageFileName = "JPEG_" + timeStamp + "_";
-//        File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
-        File storageDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
-        File image = File.createTempFile(
-                imageFileName,  /* prefix */
-                ".jpg",         /* suffix */
-                storageDir      /* directory */
-        );
+        try {
+            String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+            String imageFileName = "JPEG_" + timeStamp + "_";
+            File storageDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
+            File image = File.createTempFile(
+                    imageFileName,  /* prefix */
+                    ".jpg",         /* suffix */
+                    storageDir      /* directory */
+            );
+            // Save a file: path for use with ACTION_VIEW intents
+            currentPhotoPath = image.getAbsolutePath();
+            // Create an image file name
+            return image;
+        }
+        catch(Exception e)
+        {
+            System.out.println(e.getMessage());
+        }
 
-        // Save a file: path for use with ACTION_VIEW intents
-        currentPhotoPath = image.getAbsolutePath();
-        return image;
+       return null;
+
     }
 
 
