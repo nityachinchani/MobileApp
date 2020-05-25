@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#E5F6F8"
+    android:paddingBottom="56dp">
 
 
     <LinearLayout
         android:layout_width="match_parent"
+        android:background="#E5F6F8"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
@@ -25,15 +29,15 @@
             android:layout_gravity="right"
             android:layout_weight="1"
             android:gravity="center_horizontal|center_vertical"
-            android:spinnerMode="dialog"/>
+            android:spinnerMode="dialog" />
 
     </LinearLayout>
 
     <ListView
         android:id="@+id/explore_List_View"
+        android:background="#E5F6F8"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
-
 
 
 </LinearLayout>

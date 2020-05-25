@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <TextView
         android:id="@+id/text_id"
         android:text="No data"
-        android:textColor="#2499AA"
-        android:backgroundTint="#AFDEEA"
+        android:textColor="@android:color/holo_blue_dark"
+        android:backgroundTint="@android:color/background_light"
         android:gravity="center_horizontal|center_vertical"
         android:textAlignment="center"
         android:textAppearance="?android:attr/textAppearanceLarge"
