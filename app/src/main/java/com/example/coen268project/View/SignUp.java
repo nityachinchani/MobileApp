@@ -90,21 +90,21 @@ public class SignUp extends AppCompatActivity {
                     account.createUserWithEmailAndPassword(email, password, new CallBack() {
                         @Override
                         public void onSuccess(Object object) {
+                            account.uploadImageToStorage(f.getName(),contentUri, new CallBack() {
+                                @Override
+                                public void onSuccess(Object object) {
+                                    Toast.makeText(SignUp.this,"Image upload succeeded",Toast.LENGTH_LONG).show();
+                                }
+
+                                @Override
+                                public void onError(Object object) {
+                                    Toast.makeText(SignUp.this,"Image upload failed",Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                            
                             account.createAccount(object.toString(), fullName, email, "123-456-9696", password, "testLink", new CallBack() {
                                 @Override
                                 public void onSuccess(Object object) {
-                                    account.uploadImageToStorage(f.getName(),contentUri, new CallBack() {
-                                        @Override
-                                        public void onSuccess(Object object) {
-                                            Toast.makeText(SignUp.this,"Image upload succeeded",Toast.LENGTH_LONG).show();
-                                        }
-
-                                        @Override
-                                        public void onError(Object object) {
-                                            Toast.makeText(SignUp.this,"Image upload failed",Toast.LENGTH_SHORT).show();
-                                        }
-                                    });
-
                                     startActivity(new Intent(SignUp.this, MainActivity.class));  //change this class once homescreen is created
                                 }
 
