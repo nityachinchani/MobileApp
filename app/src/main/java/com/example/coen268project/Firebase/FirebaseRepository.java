@@ -59,10 +59,9 @@ public abstract class FirebaseRepository {
                 imageFilePath.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                     @Override
                     public void onSuccess(Uri uri) {
-                        callback.onSuccess(FirebaseConstants.SUCCESS);
+                        callback.onSuccess(imageFilePath.getDownloadUrl().getResult().getPath());
                     }
                 });
-
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override

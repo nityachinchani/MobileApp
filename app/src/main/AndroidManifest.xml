@@ -50,7 +50,7 @@
         <activity android:name=".View.SignUp"
             android:label="Sign Up"/>
         <activity android:name=".View.MainActivity"
-            android:label="Buy and Sell">
+            android:label="Buy-rona">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

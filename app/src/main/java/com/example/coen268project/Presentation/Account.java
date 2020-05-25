@@ -10,16 +10,12 @@ import com.example.coen268project.Firebase.FirebaseInstance;
 import com.example.coen268project.Firebase.FirebaseRepository;
 import com.example.coen268project.Model.AccountDao;
 import com.example.coen268project.Model.AccountRepository;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.Query;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -109,75 +105,6 @@ public class Account extends FirebaseRepository implements AccountRepository {
         }
     }
 
-    @Override
-    public void updateAccount(String userName, HashMap map, final CallBack callBack) {
-        if (!userName.isEmpty()) {
-            DatabaseReference databaseReference = accountDatabaseReference.child(userName);
-            firebaseUpdateChildren(databaseReference, map, new CallBack() {
-                @Override
-                public void onSuccess(Object object) {
-                    callBack.onSuccess(FirebaseConstants.SUCCESS);
-                }
-
-                @Override
-                public void onError(Object object) {
-                    callBack.onError(object);
-                }
-            });
-        } else {
-            callBack.onError(FirebaseConstants.FAIL);
-        }
-    }
-
-    @Override
-    public void deleteAccount(String userName, final CallBack callBack) {
-        if (!userName.isEmpty()) {
-            DatabaseReference databaseReference = accountDatabaseReference.child(userName);
-            firebaseDelete(databaseReference, new CallBack() {
-                @Override
-                public void onSuccess(Object object) {
-                    callBack.onSuccess(FirebaseConstants.SUCCESS);
-                }
-
-                @Override
-                public void onError(Object object) {
-                    callBack.onError(object);
-                }
-            });
-        } else {
-            callBack.onError(FirebaseConstants.FAIL);
-        }
-    }
-
-    @Override
-    public void getAccount(String userName, final CallBack callBack) {
-        if (!userName.isEmpty()) {
-            Query query = accountDatabaseReference.child(userName);
-            firebaseReadData(query, new CallBack() {
-                @Override
-                public void onSuccess(Object object) {
-                    if (object != null) {
-                        DataSnapshot dataSnapshot = (DataSnapshot) object;
-                        if (dataSnapshot.getValue() != null && dataSnapshot.hasChildren()) {
-                            AccountDao account = dataSnapshot.getValue(AccountDao.class);
-                            callBack.onSuccess(account);
-                        } else
-                            callBack.onSuccess(null);
-                    } else
-                        callBack.onSuccess(null);
-                }
-
-                @Override
-                public void onError(Object object) {
-                    callBack.onError(object);
-                }
-            });
-        } else {
-            callBack.onError(FirebaseConstants.FAIL);
-        }
-    }
-
-    @Override
     public void getAllAccounts(final CallBack callBack) {
         Query query = accountDatabaseReference.orderByKey();
         firebaseReadData(query, new CallBack() {
