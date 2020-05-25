@@ -1,9 +1,8 @@
 package com.example.coen268project.View;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentTransaction;
 
 import android.Manifest;
 import android.content.Intent;
@@ -37,7 +36,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class location_fragment extends FragmentActivity implements OnMapReadyCallback {
+public class location_fragment extends AppCompatActivity implements OnMapReadyCallback {
     private static final String TAG = "location";
     private static final String FINE_LOCATION = Manifest.permission.ACCESS_FINE_LOCATION;
     private static final String COURSE_LOCATION = Manifest.permission.ACCESS_COARSE_LOCATION;
@@ -61,15 +60,18 @@ public class location_fragment extends FragmentActivity implements OnMapReadyCal
         button = findViewById(R.id.button_continue);
         getLocationPermission();
 
+        //location_fragment.this.getActionBar().setTitle("Choose Location");
+
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//
+
 //                intent.putExtra("Item_1", getIntent().getCharSequenceExtra("Item"));
 //                intent.putExtra("Location", searchText.getText().toString());
-//
-                FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.map, new Upload_fragment()).addToBackStack(null).commit();
+                Intent intent = new Intent(location_fragment.this, FragmentBaseSellActivityController.class);
+                intent.putExtra("from", Upload_fragment.class.getSimpleName());
+                startActivity(intent);
+
             }
         });
     }
@@ -173,7 +175,6 @@ public class location_fragment extends FragmentActivity implements OnMapReadyCal
             }
         });
 
-
     }
 
     /**
@@ -236,9 +237,10 @@ public class location_fragment extends FragmentActivity implements OnMapReadyCal
 
     /**
      * Method to move and focus the camera to a specific loaction
+     *
      * @param latLong - latitude and longitude position to move to
-     * @param zoom - magnification value
-     * @param title - title of the location
+     * @param zoom    - magnification value
+     * @param title   - title of the location
      */
     private void moveCamera(LatLng latLong, float zoom, String title) {
         Log.d(TAG, "moving the camera to: latitude: " + latLong.latitude + ", longitude: " + latLong.longitude);

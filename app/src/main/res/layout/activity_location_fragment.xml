@@ -3,8 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    style="@style/Theme.AppCompat.DayNight.DarkActionBar"
     tools:context=".View.location_fragment"
-    android:id="@+id/loc">
+    android:id="@+id/loc"
+    android:background="@color/color_blue">
 
 
     <fragment
@@ -13,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="375dp"
         tools:context=".MapsActivity"
-        android:layout_marginTop="100dp">
+        android:layout_marginTop="30dp">
     </fragment>
 
     <LinearLayout
@@ -21,7 +23,7 @@
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="500dp"
+        android:layout_marginTop="410dp"
         android:layout_marginRight="55dp"
         android:background="#FFFFFF"
         android:elevation="200dp">
@@ -58,8 +60,8 @@
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_alignParentRight="true"
-        android:layout_marginTop="500dp"
-        android:layout_marginLeft="360dp"
+        android:layout_marginTop="410dp"
+        android:layout_marginLeft="350dp"
         android:scaleType="centerCrop"
         android:src="@drawable/ic_go" />
 
@@ -80,7 +82,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/ic_current"
         android:text="Continue"
-        android:layout_marginTop="600dp">
+        android:layout_marginTop="460dp">
 
     </Button>
 </FrameLayout>

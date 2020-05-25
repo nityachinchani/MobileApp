@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import com.example.coen268project.R;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -46,9 +47,9 @@ public class Explore_fragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-                Intent intent = new Intent(getActivity(), location_fragment.class);
-                intent.putExtra("Item", (CharSequence) exploreListView.getItemAtPosition(i+1));
-                startActivity(intent);
+//                Intent intent = new Intent(getActivity(), location_fragment.class);
+//                intent.putExtra("Item", (CharSequence) exploreListView.getItemAtPosition(i+1));
+//                startActivity(intent);
             }
         });
 
@@ -57,9 +58,9 @@ public class Explore_fragment extends Fragment {
         categorySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getActivity(), location_fragment.class);
-                intent.putExtra("Item", (CharSequence) categorySpinner.getItemAtPosition(position+1));
-                startActivity(intent);
+//                Intent intent = new Intent(getActivity(), location_fragment.class);
+//                intent.putExtra("Item", (CharSequence) categorySpinner.getItemAtPosition(position+1));
+//                startActivity(intent);
             }
 
             @Override
@@ -74,9 +75,9 @@ public class Explore_fragment extends Fragment {
         locationSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getActivity(), location_fragment.class);
-                intent.putExtra("Item", (CharSequence) locationSpinner.getItemAtPosition(position+1));
-                startActivity(intent);
+//                Intent intent = new Intent(getActivity(), location_fragment.class);
+//                intent.putExtra("Item", (CharSequence) locationSpinner.getItemAtPosition(position+1));
+//                startActivity(intent);
             }
 
             @Override

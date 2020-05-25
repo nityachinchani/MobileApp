@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.coen268project">
-
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but you must specify either coarse or fine
@@ -34,16 +33,25 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
+        <activity android:name=".View.FragmentBaseSellActivityController">
+
+        </activity>
         <activity
             android:name=".View.location_fragment"
-            android:label="@string/title_activity_location_fragment">
-        </activity>
-        <activity android:name=".View.Main_Fragment_Controller" />
-        <activity android:name=".View.Sell_fragment" />
-        <activity android:name=".View.Upload_fragment" />
-        <activity android:name=".View.ForgotPassword" />
-        <activity android:name=".View.SignUp" />
-        <activity android:name=".View.MainActivity">
+            android:label="Choose Location" />
+        <activity android:name=".View.Main_Fragment_Controller"
+            android:label="Buy"/>
+        <activity android:name=".View.Sell_fragment"
+            android:label="Choose Furniture"/>
+        <activity android:name=".View.Upload_fragment"
+            android:label="Choose Image"/>
+        <activity android:name=".View.ForgotPassword"
+            android:label="Forgot Password"/>
+        <activity android:name=".View.SignUp"
+            android:label="Sign Up"/>
+        <activity android:name=".View.MainActivity"
+            android:label="Buy and Sell">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
