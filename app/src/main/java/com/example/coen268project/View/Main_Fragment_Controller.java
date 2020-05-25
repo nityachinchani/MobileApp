@@ -7,29 +7,35 @@ import androidx.fragment.app.Fragment;
 import com.example.coen268project.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.FrameLayout;
 
 public class Main_Fragment_Controller extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
-
+    FrameLayout f;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main__fragment__controller);
 
         bottomNavigationView=findViewById(R.id.bottomNavigation);
+        f=findViewById(R.id.fragmentContainer);
 
-        if(savedInstanceState == null){
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer,new Explore_fragment()).commit();
+
+        bottomNavigationView = findViewById(R.id.bottomNavigation);
+
+        if (savedInstanceState == null) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new Explore_fragment()).commit();
         }
 
-        bottomNavigationView.setOnNavigationItemReselectedListener(new BottomNavigationView.OnNavigationItemReselectedListener() {
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
-            public void onNavigationItemReselected(@NonNull MenuItem item) {
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 Fragment fragment = null;
 
-                switch (item.getItemId()){
+                switch (item.getItemId()) {
                     case R.id.explore:
                         fragment = new Explore_fragment();
                         break;
@@ -51,10 +57,14 @@ public class Main_Fragment_Controller extends AppCompatActivity {
                         break;
                 }
 
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer,fragment).commit();
+
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, fragment).commit();
+                return true;
             }
+
         });
 
-
     }
+
+
 }

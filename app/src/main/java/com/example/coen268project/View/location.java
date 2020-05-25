@@ -8,7 +8,6 @@ import android.Manifest;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
-import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -35,7 +34,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class location extends FragmentActivity implements OnMapReadyCallback {
+public class Location extends FragmentActivity implements OnMapReadyCallback {
 
     private static final String TAG = "location";
     private static final String FINE_LOCATION = Manifest.permission.ACCESS_FINE_LOCATION;
@@ -168,7 +167,7 @@ public class location extends FragmentActivity implements OnMapReadyCallback {
     private void initializeMap() {
         Log.d(TAG, "initializing map");
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
-        mapFragment.getMapAsync(location.this);
+        mapFragment.getMapAsync(Location.this);
     }
 
     /**
@@ -177,7 +176,7 @@ public class location extends FragmentActivity implements OnMapReadyCallback {
     private void geoLocate() {
         Log.d(TAG, "geoLocate the current position");
         String searchString = searchText.getText().toString();
-        Geocoder geocoder = new Geocoder(location.this);
+        Geocoder geocoder = new Geocoder(Location.this);
         List<Address> addressList = new ArrayList<>();
         try {
             addressList = geocoder.getFromLocationName(searchString, 1);
@@ -206,11 +205,11 @@ public class location extends FragmentActivity implements OnMapReadyCallback {
                     public void onComplete(Task task) {
                         if (task.isSuccessful()) {
                             Log.d(TAG, "Location found!");
-                            Location currentLocation = (Location) task.getResult();
+                            android.location.Location currentLocation = (android.location.Location) task.getResult();
                             moveCamera(new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude()), DEFAULT_ZOOM, "Current Location");
                         } else {
                             Log.d(TAG, "Location not found");
-                            Toast.makeText(location.this, "unable to get current location", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Location.this, "unable to get current location", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
