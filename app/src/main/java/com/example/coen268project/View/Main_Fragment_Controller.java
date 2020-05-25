@@ -10,14 +10,19 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.FrameLayout;
 
 public class Main_Fragment_Controller extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
-
+    FrameLayout f;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main__fragment__controller);
+
+        bottomNavigationView=findViewById(R.id.bottomNavigation);
+        f=findViewById(R.id.fragmentContainer);
+
 
         bottomNavigationView = findViewById(R.id.bottomNavigation);
 

@@ -15,15 +15,21 @@ import android.widget.TextView;
 import com.example.coen268project.R;
 
 public class Sell_fragment extends Fragment {
+
     private static final String[] titles = new String[]{"Sofa and Dining", "Bed and Wardrobes",
             "Home Decor and Garden", "Kids Furniture", "Other Household Items"};
 
     private ListView listView;
     private TextView textView;
 
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
+
+        return inflater.inflate(R.layout.sell_fragment,container,false);
+
         View view = inflater.inflate(R.layout.activity_sell, container, false);
         listView = (ListView) view.findViewById(R.id.list_view);
         ArrayAdapter<String> adapter=new ArrayAdapter<String>(getActivity(), R.layout.activity_row,R.id.text_id,titles);
@@ -43,6 +49,7 @@ public class Sell_fragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
+
     }
 }
 
