@@ -66,10 +66,10 @@ public class location_fragment extends AppCompatActivity implements OnMapReadyCa
             @Override
             public void onClick(View v) {
 
-//                intent.putExtra("Item_1", getIntent().getCharSequenceExtra("Item"));
-//                intent.putExtra("Location", searchText.getText().toString());
                 Intent intent = new Intent(location_fragment.this, FragmentBaseSellActivityController.class);
                 intent.putExtra("from", Upload_fragment.class.getSimpleName());
+                intent.putExtra("Item_1", getIntent().getCharSequenceExtra("Item"));
+                intent.putExtra("Location",searchText.getText().toString());
                 startActivity(intent);
 
             }

@@ -8,9 +8,10 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.coen268project.R;
-import com.example.coen268project.R;
+
 public class FragmentBaseSellActivityController extends AppCompatActivity {
     String from="";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,7 +26,7 @@ public class FragmentBaseSellActivityController extends AppCompatActivity {
     }
 
     private void getExtras() {
-        Intent intent =getIntent();
+        Intent intent = getIntent();
         if (intent.hasExtra("from")){
            from=intent.getExtras().getString("from");
         }

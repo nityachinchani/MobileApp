@@ -39,8 +39,7 @@
         <activity
             android:name=".View.location_fragment"
             android:label="Choose Location" />
-        <activity android:name=".View.Main_Fragment_Controller"
-            android:label="Buy"/>
+        <activity android:name=".View.Main_Fragment_Controller" />
         <activity android:name=".View.Sell_fragment"
             android:label="Choose Furniture"/>
         <activity android:name=".View.Upload_fragment"
@@ -50,7 +49,7 @@
         <activity android:name=".View.SignUp"
             android:label="Sign Up"/>
         <activity android:name=".View.MainActivity"
-            android:label="Buy-rona">
+            android:label="Buy-Rona">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
