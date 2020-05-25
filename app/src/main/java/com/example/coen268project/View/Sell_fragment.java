@@ -32,8 +32,8 @@ public class Sell_fragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 //Toast.makeText(getActivity(), (CharSequence) listView.getItemAtPosition(i),Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(getActivity(), Location.class);
-                intent.putExtra("Item", (CharSequence) listView.getItemAtPosition(i));
+                Intent intent = new Intent(getActivity(), location_fragment.class);
+                intent.putExtra("Item", (CharSequence) listView.getItemAtPosition(i+1));
                 startActivity(intent);
             }
         });

@@ -3,8 +3,10 @@ package com.example.coen268project.View;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
@@ -13,12 +15,12 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.coen268project.R;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -27,6 +29,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.example.coen268project.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
@@ -34,12 +37,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Location extends FragmentActivity implements OnMapReadyCallback {
-
+public class location_fragment extends FragmentActivity implements OnMapReadyCallback {
     private static final String TAG = "location";
     private static final String FINE_LOCATION = Manifest.permission.ACCESS_FINE_LOCATION;
     private static final String COURSE_LOCATION = Manifest.permission.ACCESS_COARSE_LOCATION;
-    private static final int LOCATION_PERMISSION_REQUEST_CODE = 12451000;
+    private static final int LOCATION_PERMISSION_REQUEST_CODE = 1245;
     private static final float DEFAULT_ZOOM = 15f;
     private EditText searchText;
     private ImageView currentLocation;
@@ -47,16 +49,29 @@ public class Location extends FragmentActivity implements OnMapReadyCallback {
     private Boolean locationPermissionsGranted = false;
     private GoogleMap map;
     private FusedLocationProviderClient fusedLocationProviderClient;
+    private Button button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_location);
+        setContentView(R.layout.activity_location_fragment);
         searchText = findViewById(R.id.edit_search);
         currentLocation = findViewById(R.id.ic_current);
-
         findHomeLocation = findViewById(R.id.ic_go);
+        button = findViewById(R.id.button_continue);
         getLocationPermission();
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//
+//                intent.putExtra("Item_1", getIntent().getCharSequenceExtra("Item"));
+//                intent.putExtra("Location", searchText.getText().toString());
+//
+                FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.map, new Upload_fragment()).addToBackStack(null).commit();
+            }
+        });
     }
 
     @Override
@@ -71,7 +86,7 @@ public class Location extends FragmentActivity implements OnMapReadyCallback {
                     Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                 return;
             }
-            map.setMyLocationEnabled(true);
+            map.setMyLocationEnabled(false);
             //map.getUiSettings().setMyLocationButtonEnabled(false);
             initializeControls();
         }
@@ -167,7 +182,7 @@ public class Location extends FragmentActivity implements OnMapReadyCallback {
     private void initializeMap() {
         Log.d(TAG, "initializing map");
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
-        mapFragment.getMapAsync(Location.this);
+        mapFragment.getMapAsync(location_fragment.this);
     }
 
     /**
@@ -176,7 +191,7 @@ public class Location extends FragmentActivity implements OnMapReadyCallback {
     private void geoLocate() {
         Log.d(TAG, "geoLocate the current position");
         String searchString = searchText.getText().toString();
-        Geocoder geocoder = new Geocoder(Location.this);
+        Geocoder geocoder = new Geocoder(location_fragment.this);
         List<Address> addressList = new ArrayList<>();
         try {
             addressList = geocoder.getFromLocationName(searchString, 1);
@@ -209,7 +224,7 @@ public class Location extends FragmentActivity implements OnMapReadyCallback {
                             moveCamera(new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude()), DEFAULT_ZOOM, "Current Location");
                         } else {
                             Log.d(TAG, "Location not found");
-                            Toast.makeText(Location.this, "unable to get current location", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(location_fragment.this, "unable to get current location", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });

@@ -1,23 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="100dp">
+    android:layout_height="match_parent"
+    tools:context=".View.location_fragment"
+    android:id="@+id/loc">
+
 
     <fragment
         android:id="@+id/map"
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
-        android:layout_height="400dp"
-        tools:context=".MapsActivity" />
+        android:layout_height="375dp"
+        tools:context=".MapsActivity"
+        android:layout_marginTop="100dp">
+    </fragment>
 
-    <RelativeLayout
+    <LinearLayout
         android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="420dp"
+        android:layout_marginTop="500dp"
         android:layout_marginRight="55dp"
         android:background="#FFFFFF"
         android:elevation="200dp">
@@ -29,44 +33,54 @@
             android:layout_width="15dp"
             android:layout_height="15dp"
             android:layout_centerVertical="true"
+            android:layout_marginTop="10dp"
             android:layout_marginLeft="15dp"
             android:src="@drawable/ic_search"/>
 
         <EditText
-            android:layout_marginLeft="15dp"
             android:id="@+id/edit_search"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_centerVertical="true"
+            android:layout_marginLeft="15dp"
             android:layout_toRightOf="@+id/ic_search"
             android:background="@null"
             android:hint="Enter Address, City or Zip Code"
             android:imeOptions="actionSearch"
             android:textColor="#000"
             android:textSize="15sp" />
-    </RelativeLayout>
+
+    </LinearLayout>
+
 
     <ImageView
         android:id="@+id/ic_go"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="420dp"
-        android:scaleType="centerCrop"
         android:layout_alignParentRight="true"
-        android:src="@drawable/ic_go"
-        />
+        android:layout_marginTop="500dp"
+        android:layout_marginLeft="360dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_go" />
 
     <ImageView
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_below="@id/relativeLayout"
+        android:layout_below="@id/ic_search"
         android:layout_alignParentRight="true"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginLeft="320dp"
+        android:layout_marginTop="150dp"
         android:scaleType="centerCrop"
         android:id="@+id/ic_current"
         android:src="@drawable/ic_current"/>
 
+    <Button
+        android:id="@+id/button_continue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ic_current"
+        android:text="Continue"
+        android:layout_marginTop="600dp">
 
-</RelativeLayout>
+    </Button>
+</FrameLayout>
