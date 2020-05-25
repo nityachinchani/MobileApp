@@ -3,10 +3,37 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/textView"
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="90dp"
-        android:text="Explore"
-        android:textSize="25sp" />
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Spinner
+            android:id="@+id/categorySpinner"
+            android:layout_width="118dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="left"
+            android:layout_weight="1"
+            android:gravity="center_horizontal|center_vertical"
+            android:spinnerMode="dialog" />
+
+        <Spinner
+            android:id="@+id/locationSpinner"
+            android:layout_width="118dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="right"
+            android:layout_weight="1"
+            android:gravity="center_horizontal|center_vertical"
+            android:spinnerMode="dialog"/>
+
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/explore_List_View"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+
+
 </LinearLayout>
