@@ -32,11 +32,28 @@ public class FragmentBaseSellActivityController extends AppCompatActivity {
         }
 
         if (from.equals(Upload_fragment.class.getSimpleName())){
-            fragmentTransaction(new Upload_fragment());
+            Bundle bundle = new Bundle();
+            final String item_2 = getIntent().getStringExtra("Item_1");
+            final String location_2 = getIntent().getStringExtra("Location");
+            bundle.putString("Item",item_2);
+            bundle.putString("Location",location_2);
+            Upload_fragment upload_fragment = new Upload_fragment();
+            upload_fragment.setArguments(bundle);
+            fragmentTransaction(upload_fragment);
         }
 
-        if (from.equals(Explore_fragment.class.getSimpleName())){
-            fragmentTransaction(new Explore_fragment());
+        if (from.equals(Sell_Description.class.getSimpleName()))
+        {
+            Bundle bundle = new Bundle();
+            final String item_3 = getIntent().getStringExtra("Item");
+            final String location_3 = getIntent().getStringExtra("Location");
+            final String path_3  = getIntent().getStringExtra("Path");
+            bundle.putString("Item",item_3);
+            bundle.putString("Location",location_3);
+            bundle.putString("Path",path_3);
+            Sell_Description sell_description = new Sell_Description();
+            sell_description.setArguments(bundle);
+            fragmentTransaction(sell_description);
         }
 
 

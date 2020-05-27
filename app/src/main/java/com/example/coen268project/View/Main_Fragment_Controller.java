@@ -7,7 +7,6 @@ import androidx.fragment.app.Fragment;
 import com.example.coen268project.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
@@ -27,7 +26,7 @@ public class Main_Fragment_Controller extends AppCompatActivity {
         bottomNavigationView = findViewById(R.id.bottomNavigation);
 
         if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new Explore_fragment()).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new Explore()).commit();
         }
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -37,7 +36,7 @@ public class Main_Fragment_Controller extends AppCompatActivity {
 
                 switch (item.getItemId()) {
                     case R.id.explore:
-                        fragment = new Explore_fragment();
+                        fragment = new Explore();
                         break;
 
                     case R.id.chats:

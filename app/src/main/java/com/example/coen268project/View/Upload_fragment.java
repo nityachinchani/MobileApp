@@ -22,12 +22,15 @@ import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 
+import com.bumptech.glide.Glide;
 import com.example.coen268project.R;
 
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import static android.app.Activity.RESULT_OK;
 
 public class Upload_fragment extends Fragment {
 
@@ -44,13 +47,19 @@ public class Upload_fragment extends Fragment {
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
+    {
         View view = inflater.inflate(R.layout.upload_fragment, container, false);
         button = (Button) view.findViewById(R.id.button_con);
         butcam = (Button) view.findViewById(R.id.button_camera);
         butupload = (Button) view.findViewById(R.id.button_choose);
         imageView = (ImageView) view.findViewById(R.id.upload_image);
 
+        Bundle bundle = getArguments();
+        final String item = bundle.getString("Item");
+        final String Location = bundle.getString("Location_1");
+        final String path_1 = bundle.getString(currentPhotoPath);
+        //Log.d("tag"," Item is "+ item +" Location is "+Location);
 
         butupload.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,15 +80,23 @@ public class Upload_fragment extends Fragment {
             @Override
             public void onClick (View v)
             {
-                Intent intent = new Intent(getActivity(), Main_Fragment_Controller.class);
+                Intent intent = new Intent(getActivity(), FragmentBaseSellActivityController.class);
+                intent.putExtra("from", Sell_Description.class.getSimpleName());
+                intent.putExtra("Item",item);
+                intent.putExtra("Location",Location);
+                intent.putExtra("Path",path_1);
                 startActivity(intent);
             }
         });
+
+
+
         return view;
 
     }
 
-    public void openFileChooser() {
+    public void openFileChooser()
+    {
         Intent intent = new Intent();
         intent.setType("image/*");
 
@@ -87,7 +104,8 @@ public class Upload_fragment extends Fragment {
         startActivityForResult(intent, PICK_IMAGE_REQUEST);
     }
 
-    private void askCameraPermission() {
+    private void askCameraPermission()
+    {
         if(ContextCompat.checkSelfPermission(getContext(), Manifest.permission.CAMERA)!= PackageManager.PERMISSION_GRANTED){
             ActivityCompat.requestPermissions(getActivity(),new String[]{Manifest.permission.CAMERA},CAMERA_PERMISSION_CODE);
         }
@@ -110,20 +128,30 @@ public class Upload_fragment extends Fragment {
     }
 
     @Override
-    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data)
+    {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == CAMERA_REQUEST_CODE || requestCode == PICK_IMAGE_REQUEST) {
-            f= new File(currentPhotoPath);
-            imageView.setImageURI(Uri.fromFile(f));
+        if (requestCode == CAMERA_REQUEST_CODE)
+        {
+          if (data != null)
+          {
+              f = new File(currentPhotoPath);
+              imageView.setImageURI(Uri.fromFile(f));
 
-            Log.d("tag","Absolute url of image"+Uri.fromFile(f));
+              Log.d("tag", "Absolute url of image" + Uri.fromFile(f));
 
-            Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
-            contentUri = Uri.fromFile(f);
+              Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+              contentUri = Uri.fromFile(f);
 
-            mediaScanIntent.setData(contentUri);
-            getActivity().sendBroadcast(mediaScanIntent);
+              mediaScanIntent.setData(contentUri);
+              getActivity().sendBroadcast(mediaScanIntent);
+          }
+        }
 
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null)
+        {
+            imageUri = data.getData();
+            Glide.with(getActivity()).load(imageUri).into(imageView);
         }
     }
 
@@ -144,7 +172,7 @@ public class Upload_fragment extends Fragment {
         }
         catch(Exception e)
         {
-            System.out.println(e.getMessage());
+            e.printStackTrace();
         }
 
         return null;
@@ -155,6 +183,7 @@ public class Upload_fragment extends Fragment {
     private void dispatchTakePictureIntent() {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         // Ensure that there's a camera activity to handle the intent
+        Intent takePictureIntent1 = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
         if (takePictureIntent.resolveActivity(getActivity().getPackageManager()) != null) {
             // Create the File where the photo should go
@@ -177,6 +206,4 @@ public class Upload_fragment extends Fragment {
             }
         }
     }
-
-
 }
