@@ -9,10 +9,71 @@
     android:orientation="vertical"
     android:background="@color/color_blue">
 
+    <TextView
+        android:id="@+id/Product_tag"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:text="Product Name"
+        android:textSize="25dp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/edit_text_file_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:hint="Enter Product name"
+        android:maxLength="55"
+        android:maxLines="1"
+        android:singleLine="true" />
+
+    <TextView
+        android:id="@+id/Price_tag"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="2dp"
+        android:text="Price "
+        android:textSize="25dp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/edit_text_file_price"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="60dp"
+        android:hint="Enter Price"
+        android:inputType="number"
+        android:maxLength="4"
+        android:maxLines="1" />
+
+    <TextView
+        android:id="@+id/Description_tag"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:text="Description (optional) "
+        android:textSize="25dp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/Description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="10dp"
+        android:hint="Short Description"
+        android:lines="2"
+        android:maxLength="400" />
+
+
     <Button
         android:id="@+id/button_post"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Post"/>
+        android:text="Post"
+        android:layout_marginTop="20dp"/>
 
 </LinearLayout>
