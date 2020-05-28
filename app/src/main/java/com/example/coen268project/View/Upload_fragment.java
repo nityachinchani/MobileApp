@@ -3,6 +3,8 @@ package com.example.coen268project.View;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -28,7 +30,9 @@ import com.example.coen268project.Presentation.Utility;
 import com.example.coen268project.R;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -97,7 +101,6 @@ public class Upload_fragment extends Fragment {
                 intent.putExtra("from", Sell_Description.class.getSimpleName());
                 intent.putExtra("Item",item);
                 intent.putExtra("Location",Location);
-                intent.putExtra("Path",path_1);
                 startActivity(intent);
             }
         });
@@ -150,12 +153,9 @@ public class Upload_fragment extends Fragment {
           {
               f = new File(currentPhotoPath);
               imageView.setImageURI(Uri.fromFile(f));
-
               Log.d("tag", "Absolute url of image" + Uri.fromFile(f));
-
               Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
               contentUri = Uri.fromFile(f);
-
               mediaScanIntent.setData(contentUri);
               getActivity().sendBroadcast(mediaScanIntent);
           }
@@ -163,16 +163,27 @@ public class Upload_fragment extends Fragment {
 
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null)
         {
-            contentUri = data.getData();
-            Glide.with(getActivity()).load(contentUri).into(imageView);
-            f = new File(contentUri.toString());
+            try
+            {
+                contentUri = data.getData();
+                final InputStream imageStream = getContext().getContentResolver().openInputStream(contentUri);
+                final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
+                imageView.setImageBitmap(selectedImage);
+            }
+            catch (FileNotFoundException e)
+            {
+                e.printStackTrace();
+                Toast.makeText(getActivity(), "Something went wrong", Toast.LENGTH_LONG).show();
+            }
+
         }
     }
+
 
     private File createImageFile() throws IOException {
         try {
             String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-            String imageFileName = utility.getCurrentUserId() +Utility.ITEM+"_" + timeStamp + "_";
+            String imageFileName = utility.getCurrentUserId() +"_" + Utility.ITEM+"_" + timeStamp + "_";
             File storageDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
             File image = File.createTempFile(
                     imageFileName,  /* prefix */
@@ -205,17 +216,14 @@ public class Upload_fragment extends Fragment {
             File photoFile = null;
             try {
                 photoFile = createImageFile();
-
             } catch (IOException ex) {
 
             }
             // Continue only if the File was successfully created
             if (photoFile != null) {
-
                 Uri photoURI = FileProvider.getUriForFile(getContext(),
                         "com.example.android.fileprovider", photoFile);
                 takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
-
                 startActivityForResult(takePictureIntent, CAMERA_REQUEST_CODE);
             }
         }
