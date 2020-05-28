@@ -9,5 +9,6 @@ public interface ItemRepository {
     void getItem(String itemId, CallBack callBack);
     void getSpecificItems(String category, String location, CallBack callBack);
     void getAllItems(CallBack callBack);
+    void getAllLocations(CallBack callBack);
 
 }

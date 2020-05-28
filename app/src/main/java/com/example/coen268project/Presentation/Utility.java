@@ -16,9 +16,20 @@ public class Utility extends FirebaseRepository {
     public static String PROFILE = "Profile";
     public static String ITEM = "Item";
 
+    private String currentUserId;
+
     public Utility()
     {
         storageReference = FirebaseStorage.getInstance().getReference();
+    }
+
+    public String getCurrentUserId() {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        return user.getUid();
+    }
+
+    public void setCurrentUserId(String currentUserId) {
+        this.currentUserId = currentUserId;
     }
 
     public static enum ItemStatus

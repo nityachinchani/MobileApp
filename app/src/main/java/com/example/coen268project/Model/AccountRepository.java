@@ -1,6 +1,5 @@
 package com.example.coen268project.Model;
 import com.example.coen268project.Firebase.CallBack;
-import com.google.firebase.storage.StorageReference;
 
 public interface AccountRepository {
     void authenticateAccount(String email, String password, CallBack callback);

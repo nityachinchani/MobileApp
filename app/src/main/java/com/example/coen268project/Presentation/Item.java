@@ -146,4 +146,31 @@ public class Item extends FirebaseRepository implements ItemRepository {
             }
         });
     }
+
+    @Override
+    public void getAllLocations(final CallBack callBack) {
+        Query query = itemDatabaseReference.orderByKey();
+        firebaseReadData(query, new CallBack() {
+            @Override
+            public void onSuccess(Object object) {
+                if (object != null) {
+                    DataSnapshot dataSnapshot = (DataSnapshot) object;
+                    if (dataSnapshot.getValue() != null && dataSnapshot.hasChildren()) {
+                        ArrayList<String> locationList = new ArrayList<>();
+                        for (DataSnapshot suggestionSnapshot : dataSnapshot.getChildren()) {
+                            locationList.add(suggestionSnapshot.child("location").getValue().toString());
+                        }
+                        callBack.onSuccess(locationList.toArray());
+                    } else
+                        callBack.onSuccess(null);
+                } else
+                    callBack.onSuccess(null);
+            }
+
+            @Override
+            public void onError(Object object) {
+                callBack.onError(object);
+            }
+        });
+    }
 }

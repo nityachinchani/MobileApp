@@ -95,7 +95,8 @@ public class SignUp extends AppCompatActivity {
                     account.createUserWithEmailAndPassword(email, password, new CallBack() {
                         @Override
                         public void onSuccess(Object object) {
-                            utility.uploadImageToStorage(object.toString()+ "_" + f.getName(),contentUri, new CallBack() {
+                            utility.setCurrentUserId(object.toString());
+                            utility.uploadImageToStorage( utility.getCurrentUserId() + "_" + f.getName(),contentUri, new CallBack() {
                                 @Override
                                 public void onSuccess(Object object) {
                                     Toast.makeText(SignUp.this,"Image upload succeeded",Toast.LENGTH_LONG).show();
