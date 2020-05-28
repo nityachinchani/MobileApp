@@ -5,17 +5,12 @@ import com.example.coen268project.Firebase.CallBack;
 import com.example.coen268project.Firebase.FirebaseRepository;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.ListResult;
 import com.google.firebase.storage.StorageReference;
 
 public class Utility extends FirebaseRepository {
     private StorageReference storageReference;
-    public static String PROFILE = "Profile";
-    public static String ITEM = "Item";
-
     private static String currentUserId;
 
     public Utility()
@@ -89,10 +84,8 @@ public class Utility extends FirebaseRepository {
         });
     }
 
-    public StorageReference getProfilePicture()
+    public StorageReference getProfilePicture(final String pictureName)
     {
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        final String uid = user.getUid();
         StorageReference images = storageReference.child("images/");
         final StorageReference[] reference = new StorageReference[1];
         images.listAll()
@@ -100,7 +93,7 @@ public class Utility extends FirebaseRepository {
                     @Override
                     public void onSuccess(ListResult listResult) {
                         for (StorageReference item : listResult.getItems()) {
-                          if(item.getName().startsWith(uid + "_" + PROFILE)) {
+                          if(item.getName().equals(pictureName)) {
                               reference[0] = FirebaseStorage.getInstance().getReference().child(item.getPath());
                           }
                         }
@@ -118,10 +111,8 @@ public class Utility extends FirebaseRepository {
             return reference[0];
     }
 
-    public StorageReference getItemPicture()
+    public StorageReference getItemPicture(final String pictureName)
     {
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        final String uid = user.getUid();
         StorageReference images = storageReference.child("images/");
         final StorageReference[] reference = new StorageReference[1];
         images.listAll()
@@ -129,7 +120,7 @@ public class Utility extends FirebaseRepository {
                     @Override
                     public void onSuccess(ListResult listResult) {
                         for (StorageReference item : listResult.getItems()) {
-                            if(item.getName().startsWith(uid + "_" + ITEM)) {
+                            if(item.getName().equals(pictureName)) {
                                 reference[0] = FirebaseStorage.getInstance().getReference().child(item.getPath());
                             }
                         }

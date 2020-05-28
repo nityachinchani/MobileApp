@@ -67,7 +67,7 @@ public class Sell_Description extends Fragment {
                            p_price.requestFocus();
                            return;
                        }
-                       itemDb.createItem(product_name, item, Location, product_price, product_description, new CallBack() {
+                       itemDb.createItem(product_name, item, Location, product_price, product_description, path_1, new CallBack() {
                            @Override
                            public void onSuccess(Object object) {
                                Toast.makeText(getContext(),"Product uploaded successfully",Toast.LENGTH_LONG).show();

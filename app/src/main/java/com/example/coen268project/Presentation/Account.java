@@ -5,8 +5,12 @@ import com.example.coen268project.Firebase.FirebaseInstance;
 import com.example.coen268project.Firebase.FirebaseRepository;
 import com.example.coen268project.Model.AccountDao;
 import com.example.coen268project.Model.AccountRepository;
+import com.example.coen268project.Model.ItemDao;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.Query;
 
 public class Account extends FirebaseRepository implements AccountRepository {
     private DatabaseReference accountDatabaseReference;
@@ -56,8 +60,8 @@ public class Account extends FirebaseRepository implements AccountRepository {
     }
 
     @Override
-    public void createAccount(String pushKey, String userName, String email, String phoneNumber, String password, final CallBack callBack) {
-        AccountDao account = new AccountDao(userName, email, phoneNumber, password);
+    public void createAccount(String pushKey, String userName, String email, String phoneNumber, String password, String pictureName, final CallBack callBack) {
+        AccountDao account = new AccountDao(userName, email, phoneNumber, password, pictureName);
         if (account != null && !pushKey.isEmpty()) {
             DatabaseReference databaseReference = accountDatabaseReference.child(pushKey);
             firebaseCreate(databaseReference, account, new CallBack() {
@@ -74,5 +78,34 @@ public class Account extends FirebaseRepository implements AccountRepository {
         } else {
             callBack.onError(FirebaseConstants.FAIL);
         }
+    }
+
+    public AccountDao getCurrentAccount()
+    {
+        final AccountDao[] account = {null};
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        String uid = user.getUid();
+        if (!uid.isEmpty()) {
+            Query query = accountDatabaseReference.child(uid);
+            firebaseReadData(query, new CallBack() {
+                @Override
+                public void onSuccess(Object object) {
+                    if (object != null) {
+                        DataSnapshot dataSnapshot = (DataSnapshot) object;
+                        if (dataSnapshot.getValue() != null && dataSnapshot.hasChildren()) {
+                            account[0] = dataSnapshot.getValue(AccountDao.class);
+                        } else
+                            account[0] = null;
+                    } else
+                        account[0] = null;
+                }
+
+                @Override
+                public void onError(Object object) {
+                    account[0] = null;
+                }
+            });
+        }
+        return account[0];
     }
 }

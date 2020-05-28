@@ -96,7 +96,7 @@ public class SignUp extends AppCompatActivity {
                         @Override
                         public void onSuccess(Object object) {
                             utility.setCurrentUserId(object.toString());
-                            utility.uploadImageToStorage( utility.getCurrentUserId() + "_" + f.getName(),contentUri, new CallBack() {
+                            utility.uploadImageToStorage(f.getName(), contentUri, new CallBack() {
                                 @Override
                                 public void onSuccess(Object object) {
                                     Toast.makeText(SignUp.this,"Image upload succeeded",Toast.LENGTH_LONG).show();
@@ -108,7 +108,7 @@ public class SignUp extends AppCompatActivity {
                                 }
                             });
 
-                            account.createAccount(object.toString(), fullName, email, "123-456-9696", password, new CallBack() {
+                            account.createAccount(object.toString(), fullName, email, "123-456-9696", password, f.getName(), new CallBack() {
                                 @Override
                                 public void onSuccess(Object object) {
                                     startActivity(new Intent(SignUp.this, MainActivity.class));  //change this class once homescreen is created
@@ -191,7 +191,7 @@ public class SignUp extends AppCompatActivity {
     private File createImageFile() throws IOException {
         try {
             String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-            String imageFileName = Utility.PROFILE + "_" + timeStamp + "_";
+            String imageFileName = "JPEG_" + timeStamp + "_";
             File storageDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
             File image = File.createTempFile(
                     imageFileName,  /* prefix */
@@ -207,9 +207,7 @@ public class SignUp extends AppCompatActivity {
         {
             System.out.println(e.getMessage());
         }
-
        return null;
-
     }
 
 
