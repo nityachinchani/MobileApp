@@ -3,6 +3,7 @@ package com.example.coen268project.View;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -48,6 +49,7 @@ public class Upload_fragment extends Fragment {
     ImageView imageView;
     private static final int CAMERA_PERMISSION_CODE=100;
     String currentPhotoPath;
+    String imgDecodableString;
     Uri contentUri;
     File f;
 
@@ -64,7 +66,7 @@ public class Upload_fragment extends Fragment {
         Bundle bundle = getArguments();
         final String item = bundle.getString("Item");
         final String Location = bundle.getString("Location_1");
-        final String path_1 = bundle.getString(currentPhotoPath);
+
         //Log.d("tag"," Item is "+ item +" Location is "+Location);
 
         butupload.setOnClickListener(new View.OnClickListener() {
@@ -74,7 +76,8 @@ public class Upload_fragment extends Fragment {
             }
         });
 
-        butcam.setOnClickListener(new View.OnClickListener() {
+        butcam.setOnClickListener(new View.OnClickListener()
+        {
             @Override
             public void onClick(View v) {
                 askCameraPermission();
@@ -89,7 +92,8 @@ public class Upload_fragment extends Fragment {
                 utility.uploadImageToStorage(f.getName(),contentUri, new CallBack() {
                     @Override
                     public void onSuccess(Object object) {
-                        Toast.makeText(getContext(),"Image upload succeeded",Toast.LENGTH_LONG).show();
+                        Toast.makeText(getContext(),"Image upload succeeded"+ f.getName(),Toast.LENGTH_LONG).show();
+                        Log.d("tag","Image upload succeeded"+ f.getName());
                     }
 
                     @Override
@@ -104,20 +108,13 @@ public class Upload_fragment extends Fragment {
                 startActivity(intent);
             }
         });
-
-
-
         return view;
-
     }
 
     public void openFileChooser()
     {
-        Intent intent = new Intent();
-        intent.setType("image/*");
-
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(intent, PICK_IMAGE_REQUEST);
+        Intent galleryIntent = new Intent(Intent.ACTION_PICK,android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        startActivityForResult(galleryIntent, PICK_IMAGE_REQUEST);
     }
 
     private void askCameraPermission()
@@ -149,8 +146,6 @@ public class Upload_fragment extends Fragment {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == CAMERA_REQUEST_CODE)
         {
-          if (data != null)
-          {
               f = new File(currentPhotoPath);
               imageView.setImageURI(Uri.fromFile(f));
               Log.d("tag", "Absolute url of image" + Uri.fromFile(f));
@@ -158,33 +153,33 @@ public class Upload_fragment extends Fragment {
               contentUri = Uri.fromFile(f);
               mediaScanIntent.setData(contentUri);
               getActivity().sendBroadcast(mediaScanIntent);
-          }
+
         }
 
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null)
         {
-            try
-            {
-                contentUri = data.getData();
-                final InputStream imageStream = getContext().getContentResolver().openInputStream(contentUri);
-                final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
-                imageView.setImageBitmap(selectedImage);
-                f = new File(selectedImage.toString());
-            }
-            catch (FileNotFoundException e)
-            {
-                e.printStackTrace();
-                Toast.makeText(getActivity(), "Something went wrong", Toast.LENGTH_LONG).show();
-            }
+            contentUri = data.getData();
+            String[] filePathColumn = { MediaStore.Images.Media.DATA };
+            // Get the cursor
+            Cursor cursor = getContext().getContentResolver().query(contentUri, filePathColumn, null, null, null);
+            // Move to first row
+            cursor.moveToFirst();
+            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+            imgDecodableString = cursor.getString(columnIndex);
+            f = new File(imgDecodableString);
+            cursor.close();
+            Glide.with(getActivity()).load(contentUri).into(imageView);
+            Toast.makeText(getContext(),"File Path --> "+ f.getName(),Toast.LENGTH_LONG).show();
 
         }
     }
 
 
-    private File createImageFile() throws IOException {
+    private File createImageFile() throws IOException
+    {
         try {
             String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-            String imageFileName = utility.getCurrentUserId() +"_" + Utility.ITEM+"_" + timeStamp + "_";
+            String imageFileName = Utility.ITEM+"_" + timeStamp + "_";
 
             File storageDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
             File image = File.createTempFile(
@@ -210,7 +205,6 @@ public class Upload_fragment extends Fragment {
     private void dispatchTakePictureIntent() {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         // Ensure that there's a camera activity to handle the intent
-        Intent takePictureIntent1 = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
         if (takePictureIntent.resolveActivity(getActivity().getPackageManager()) != null) {
             // Create the File where the photo should go
