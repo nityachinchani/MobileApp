@@ -24,6 +24,7 @@ import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
 import com.example.coen268project.Firebase.CallBack;
+import com.example.coen268project.Presentation.Utility;
 import com.example.coen268project.R;
 
 import java.io.File;
@@ -38,6 +39,7 @@ public class Upload_fragment extends Fragment {
     Button button, butcam, butupload;
     private static final int CAMERA_REQUEST_CODE = 102;
     private static final int PICK_IMAGE_REQUEST = 103;
+    private Utility utility;
 
     ImageView imageView;
     private static final int CAMERA_PERMISSION_CODE=100;
@@ -54,7 +56,7 @@ public class Upload_fragment extends Fragment {
         butcam = (Button) view.findViewById(R.id.button_camera);
         butupload = (Button) view.findViewById(R.id.button_choose);
         imageView = (ImageView) view.findViewById(R.id.upload_image);
-
+        utility = new Utility();
         Bundle bundle = getArguments();
         final String item = bundle.getString("Item");
         final String Location = bundle.getString("Location_1");
@@ -80,18 +82,17 @@ public class Upload_fragment extends Fragment {
             @Override
             public void onClick (View v)
             {
-                /*utility.uploadImageToStorage(f.getName(),contentUri, new CallBack() {
+                utility.uploadImageToStorage(f.getName(),contentUri, new CallBack() {
                     @Override
                     public void onSuccess(Object object) {
-                        path_1 = object.toString();
-                        Toast.makeText(SignUp.this,"Image upload succeeded",Toast.LENGTH_LONG).show();
+                        Toast.makeText(getContext(),"Image upload succeeded",Toast.LENGTH_LONG).show();
                     }
 
                     @Override
                     public void onError(Object object) {
-                        Toast.makeText(SignUp.this,"Image upload failed",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(),"Image upload failed",Toast.LENGTH_SHORT).show();
                     }
-                });*/
+                });
                 Intent intent = new Intent(getActivity(), FragmentBaseSellActivityController.class);
                 intent.putExtra("from", Sell_Description.class.getSimpleName());
                 intent.putExtra("Item",item);
@@ -164,6 +165,7 @@ public class Upload_fragment extends Fragment {
         {
             contentUri = data.getData();
             Glide.with(getActivity()).load(contentUri).into(imageView);
+            f = new File(contentUri.toString());
         }
     }
 
