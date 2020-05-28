@@ -46,15 +46,15 @@ public class Sell_Description extends Fragment {
         final String Location = bundle.getString("Location_1");
         final String path_1 = bundle.getString("Path");
 
-        final String product_name = p_name.getText().toString();
-        final String product_price = p_price.getText().toString();
-        final String product_description = p_description.getText().toString();
 
-
-               button_post.setOnClickListener(new View.OnClickListener() {
+        button_post.setOnClickListener(new View.OnClickListener() {
                    @Override
                    public void onClick(View v)
                    {
+
+                       final String product_name = p_name.getText().toString();
+                       final String product_price = p_price.getText().toString();
+                       final String product_description = p_description.getText().toString();
 
                        if (p_name.getText().toString().trim().isEmpty()) {
                            p_name.setError("Name required");

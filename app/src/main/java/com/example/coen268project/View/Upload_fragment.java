@@ -172,7 +172,7 @@ public class Upload_fragment extends Fragment {
     private File createImageFile() throws IOException {
         try {
             String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-            String imageFileName = "JPEG_" + timeStamp + "_";
+            String imageFileName = utility.getCurrentUserId() +Utility.ITEM+"_" + timeStamp + "_";
             File storageDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
             File image = File.createTempFile(
                     imageFileName,  /* prefix */
