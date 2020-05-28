@@ -169,6 +169,7 @@ public class Upload_fragment extends Fragment {
                 final InputStream imageStream = getContext().getContentResolver().openInputStream(contentUri);
                 final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
                 imageView.setImageBitmap(selectedImage);
+                f = new File(selectedImage.toString());
             }
             catch (FileNotFoundException e)
             {
@@ -184,7 +185,7 @@ public class Upload_fragment extends Fragment {
         try {
             String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
             String imageFileName = utility.getCurrentUserId() +"_" + Utility.ITEM+"_" + timeStamp + "_";
-            
+
             File storageDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
             File image = File.createTempFile(
                     imageFileName,  /* prefix */
