@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.example.coen268project.Firebase.CallBack;
 import com.example.coen268project.Presentation.Account;
+import com.example.coen268project.Presentation.Utility;
 import com.example.coen268project.R;
 
 public class MainActivity extends AppCompatActivity {
@@ -72,7 +73,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this, Main_Fragment_Controller.class));
-
             }
         });
 

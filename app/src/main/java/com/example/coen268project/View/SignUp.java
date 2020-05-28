@@ -23,6 +23,8 @@ import com.example.coen268project.Firebase.CallBack;
 import com.example.coen268project.Presentation.Account;
 import com.example.coen268project.Presentation.Utility;
 import com.example.coen268project.R;
+import com.google.firebase.storage.StorageReference;
+
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -40,7 +42,6 @@ public class SignUp extends AppCompatActivity {
     String currentPhotoPath;
     Uri imageUri;
     Uri contentUri;
-    String profilePicturelink = "";
     File f;
 
     @Override
@@ -94,10 +95,9 @@ public class SignUp extends AppCompatActivity {
                     account.createUserWithEmailAndPassword(email, password, new CallBack() {
                         @Override
                         public void onSuccess(Object object) {
-                            utility.uploadImageToStorage(f.getName(),contentUri, new CallBack() {
+                            utility.uploadImageToStorage(object.toString()+ "_" + f.getName(),contentUri, new CallBack() {
                                 @Override
                                 public void onSuccess(Object object) {
-                                    profilePicturelink = object.toString();
                                     Toast.makeText(SignUp.this,"Image upload succeeded",Toast.LENGTH_LONG).show();
                                 }
 
@@ -107,7 +107,7 @@ public class SignUp extends AppCompatActivity {
                                 }
                             });
 
-                            account.createAccount(object.toString(), fullName, email, "123-456-9696", password, profilePicturelink, new CallBack() {
+                            account.createAccount(object.toString(), fullName, email, "123-456-9696", password, new CallBack() {
                                 @Override
                                 public void onSuccess(Object object) {
                                     startActivity(new Intent(SignUp.this, MainActivity.class));  //change this class once homescreen is created
@@ -190,7 +190,7 @@ public class SignUp extends AppCompatActivity {
     private File createImageFile() throws IOException {
         try {
             String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-            String imageFileName = "JPEG_" + timeStamp + "_";
+            String imageFileName = Utility.PROFILE + "_" + timeStamp + "_";
             File storageDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
             File image = File.createTempFile(
                     imageFileName,  /* prefix */

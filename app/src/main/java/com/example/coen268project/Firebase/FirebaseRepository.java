@@ -1,6 +1,8 @@
 package com.example.coen268project.Firebase;
 import android.net.Uri;
 import androidx.annotation.NonNull;
+
+import com.example.coen268project.View.Upload_fragment;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -48,7 +50,7 @@ public abstract class FirebaseRepository {
         });
     }
 
-    protected void firebaseUploadImageToStorage(final StorageReference storageReference, String name, Uri contentUri, final CallBack callback) {
+    protected void firebaseUploadImageToStorage(final StorageReference storageReference, String name, Uri contentUri, final CallBack callback){
         StorageReference image = storageReference.child("images/"+name);
         final StorageReference imageFilePath = image.child(contentUri.getLastPathSegment());
         image.putFile(contentUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {

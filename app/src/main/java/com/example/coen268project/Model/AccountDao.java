@@ -1,5 +1,4 @@
 package com.example.coen268project.Model;
-
 import java.io.Serializable;
 
 public class AccountDao implements Serializable {
@@ -7,14 +6,12 @@ public class AccountDao implements Serializable {
     private String email;
     private String phoneNumber;
     private String password;
-    private String profilePicture;
 
-    public AccountDao(String userName, String email, String phoneNumber, String password, String profilePicture) {
+    public AccountDao(String userName, String email, String phoneNumber, String password) {
         this.userName = userName;
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.password = password;
-        this.profilePicture = profilePicture;
     }
 
     public String getUserName() {
@@ -47,13 +44,5 @@ public class AccountDao implements Serializable {
 
     public void setPassword(String password) {
         password = password;
-    }
-
-    public String getProfilePicture() {
-        return profilePicture;
-    }
-
-    public void setProfilePicture(String profilePicture) {
-        this.profilePicture = profilePicture;
     }
 }

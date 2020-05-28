@@ -56,8 +56,8 @@ public class Account extends FirebaseRepository implements AccountRepository {
     }
 
     @Override
-    public void createAccount(String pushKey, String userName, String email, String phoneNumber, String password, String profilePicture, final CallBack callBack) {
-        AccountDao account = new AccountDao(userName, email, phoneNumber, password, profilePicture);
+    public void createAccount(String pushKey, String userName, String email, String phoneNumber, String password, final CallBack callBack) {
+        AccountDao account = new AccountDao(userName, email, phoneNumber, password);
         if (account != null && !pushKey.isEmpty()) {
             DatabaseReference databaseReference = accountDatabaseReference.child(pushKey);
             firebaseCreate(databaseReference, account, new CallBack() {
