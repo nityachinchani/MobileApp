@@ -24,15 +24,12 @@ public class Utility extends FirebaseRepository {
     }
 
     public static String getCurrentUserId() {
-        //return currentUserId;
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        return user.getUid();
+        return "HShwnTE38jNhhTZTczkfj3CAJmK2";
     }
 
     public static void setCurrentUserId(String currentUserId) {
         Utility.currentUserId = currentUserId;
     }
-
 
     public static enum ItemStatus
     {

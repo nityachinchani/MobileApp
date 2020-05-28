@@ -179,7 +179,7 @@ public class Upload_fragment extends Fragment {
     {
         try {
             String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-            String imageFileName = Utility.ITEM+"_" + timeStamp + "_";
+            String imageFileName = Utility.getCurrentUserId() + "_" + Utility.ITEM + "_" + timeStamp + "_";
 
             File storageDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
             File image = File.createTempFile(
