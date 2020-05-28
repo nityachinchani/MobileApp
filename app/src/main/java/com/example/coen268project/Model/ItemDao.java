@@ -11,8 +11,9 @@ public class ItemDao implements Serializable {
     private String pictureUrl;
     private String sellerId;
     private String buyerId;
+    private String itemStatus;
 
-    public ItemDao(String itemId, String itemName, String category, String location, String price, String description, String pictureUrl, String sellerId, String buyerId) {
+    public ItemDao(String itemId, String itemName, String category, String location, String price, String description, String pictureUrl, String sellerId, String buyerId, String itemStatus) {
         this.itemId = itemId;
         this.itemName = itemName;
         this.category = category;
@@ -22,6 +23,7 @@ public class ItemDao implements Serializable {
         this.pictureUrl = pictureUrl;
         this.sellerId = sellerId;
         this.buyerId = buyerId;
+        this.itemStatus = itemStatus;
     }
 
     public String getCategory() {
@@ -94,5 +96,13 @@ public class ItemDao implements Serializable {
 
     public void setItemId(String itemId) {
         this.itemId = itemId;
+    }
+
+    public String getItemStatus() {
+        return itemStatus;
+    }
+
+    public void setItemStatus(String itemStatus) {
+        this.itemStatus = itemStatus;
     }
 }

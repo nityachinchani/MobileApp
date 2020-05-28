@@ -23,6 +23,7 @@ import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
+import com.example.coen268project.Firebase.CallBack;
 import com.example.coen268project.R;
 
 import java.io.File;
@@ -41,7 +42,6 @@ public class Upload_fragment extends Fragment {
     ImageView imageView;
     private static final int CAMERA_PERMISSION_CODE=100;
     String currentPhotoPath;
-    Uri imageUri;
     Uri contentUri;
     File f;
 
@@ -80,6 +80,18 @@ public class Upload_fragment extends Fragment {
             @Override
             public void onClick (View v)
             {
+                /*utility.uploadImageToStorage(f.getName(),contentUri, new CallBack() {
+                    @Override
+                    public void onSuccess(Object object) {
+                        path_1 = object.toString();
+                        Toast.makeText(SignUp.this,"Image upload succeeded",Toast.LENGTH_LONG).show();
+                    }
+
+                    @Override
+                    public void onError(Object object) {
+                        Toast.makeText(SignUp.this,"Image upload failed",Toast.LENGTH_SHORT).show();
+                    }
+                });*/
                 Intent intent = new Intent(getActivity(), FragmentBaseSellActivityController.class);
                 intent.putExtra("from", Sell_Description.class.getSimpleName());
                 intent.putExtra("Item",item);
@@ -150,8 +162,8 @@ public class Upload_fragment extends Fragment {
 
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null)
         {
-            imageUri = data.getData();
-            Glide.with(getActivity()).load(imageUri).into(imageView);
+            contentUri = data.getData();
+            Glide.with(getActivity()).load(contentUri).into(imageView);
         }
     }
 

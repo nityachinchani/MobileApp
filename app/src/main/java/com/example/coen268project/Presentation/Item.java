@@ -1,36 +1,33 @@
 package com.example.coen268project.Presentation;
-import android.app.Activity;
 import com.example.coen268project.Firebase.CallBack;
 import com.example.coen268project.Firebase.FirebaseConstants;
 import com.example.coen268project.Firebase.FirebaseInstance;
 import com.example.coen268project.Firebase.FirebaseRepository;
 import com.example.coen268project.Model.ItemDao;
 import com.example.coen268project.Model.ItemRepository;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.Query;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Item extends FirebaseRepository implements ItemRepository {
-    private Activity activity;
     private DatabaseReference itemDatabaseReference;
-    private StorageReference storageReference;
 
-    public Item(Activity activity) {
-        this.activity = activity;
+    public Item() {
         itemDatabaseReference = FirebaseInstance.DATABASE.getReference(FirebaseConstants.DATABASE_ROOT).child("itemTable");
-        storageReference = FirebaseStorage.getInstance().getReference();
     }
 
     @Override
-    public void createItem(String itemName, String category, String location, String price, String description, String pictureUrl, String sellerId, String buyerId, final CallBack callBack) {
+    public void createItem(String itemName, String category, String location, String price, String description, String pictureUrl, final CallBack callBack) {
         String pushKey = itemDatabaseReference.push().getKey();
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        String sellerId = user.getUid();
         if (!pushKey.isEmpty()) {
-            ItemDao item = new ItemDao(pushKey, itemName, category, location, price, description, pictureUrl, sellerId, buyerId);
+            ItemDao item = new ItemDao(pushKey, itemName, category, location, price, description, pictureUrl, sellerId, "", Utility.ItemStatus.POSTED.toString());
             DatabaseReference databaseReference = itemDatabaseReference.child(pushKey);
             firebaseCreate(databaseReference, item, new CallBack() {
                 @Override

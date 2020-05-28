@@ -11,7 +11,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.coen268project.Firebase.CallBack;
+import com.example.coen268project.Presentation.Item;
 import com.example.coen268project.R;
 
 /**
@@ -24,13 +27,14 @@ public class Sell_Description extends Fragment {
     private EditText p_name;
     private EditText p_price;
     private TextView p_description;
+    private Item itemDb;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
        View view = inflater.inflate(R.layout.fragment_sell__description, container, false);
-
+        itemDb = new Item();
         p_name = view.findViewById(R.id.edit_text_file_name);
         p_price = view.findViewById(R.id.edit_text_file_price);
         p_description = view.findViewById(R.id.Description);
@@ -63,7 +67,17 @@ public class Sell_Description extends Fragment {
                            p_price.requestFocus();
                            return;
                        }
+                       itemDb.createItem(product_name, item, Location, product_price, product_description, path_1, new CallBack() {
+                           @Override
+                           public void onSuccess(Object object) {
+                               Toast.makeText(getContext(),"Product uploaded successfully",Toast.LENGTH_LONG).show();
+                           }
 
+                           @Override
+                           public void onError(Object object) {
+                               Toast.makeText(getContext(),"Product uploaded failed",Toast.LENGTH_LONG).show();
+                           }
+                       });
                        Intent intent = new Intent(getActivity(), Main_Fragment_Controller.class);
                        startActivity(intent);
                    }
