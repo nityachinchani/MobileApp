@@ -8,19 +8,17 @@ public class ItemDao implements Serializable {
     private String location;
     private String price;
     private String description;
-    private String pictureUrl;
     private String sellerId;
     private String buyerId;
     private String itemStatus;
 
-    public ItemDao(String itemId, String itemName, String category, String location, String price, String description, String pictureUrl, String sellerId, String buyerId, String itemStatus) {
+    public ItemDao(String itemId, String itemName, String category, String location, String price, String description, String sellerId, String buyerId, String itemStatus) {
         this.itemId = itemId;
         this.itemName = itemName;
         this.category = category;
         this.location = location;
         this.price = price;
         this.description = description;
-        this.pictureUrl = pictureUrl;
         this.sellerId = sellerId;
         this.buyerId = buyerId;
         this.itemStatus = itemStatus;
@@ -56,14 +54,6 @@ public class ItemDao implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public String getPictureUrl() {
-        return pictureUrl;
-    }
-
-    public void setPictureUrl(String pictureUrl) {
-        this.pictureUrl = pictureUrl;
     }
 
     public String getSellerId() {

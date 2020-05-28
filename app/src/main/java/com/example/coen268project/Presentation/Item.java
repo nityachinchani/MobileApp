@@ -22,12 +22,12 @@ public class Item extends FirebaseRepository implements ItemRepository {
     }
 
     @Override
-    public void createItem(String itemName, String category, String location, String price, String description, String pictureUrl, final CallBack callBack) {
+    public void createItem(String itemName, String category, String location, String price, String description, final CallBack callBack) {
         String pushKey = itemDatabaseReference.push().getKey();
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         String sellerId = user.getUid();
         if (!pushKey.isEmpty()) {
-            ItemDao item = new ItemDao(pushKey, itemName, category, location, price, description, pictureUrl, sellerId, "", Utility.ItemStatus.POSTED.toString());
+            ItemDao item = new ItemDao(pushKey, itemName, category, location, price, description, sellerId, "", Utility.ItemStatus.POSTED.toString());
             DatabaseReference databaseReference = itemDatabaseReference.child(pushKey);
             firebaseCreate(databaseReference, item, new CallBack() {
                 @Override
