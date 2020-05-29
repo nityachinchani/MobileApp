@@ -10,7 +10,6 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.Query;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -86,8 +85,8 @@ public class Item extends FirebaseRepository implements ItemRepository {
     }
 
     @Override
-    public ItemDao getItem(String itemId) {
-        final ItemDao[] item = {null};
+    public void getItem(final String itemId, final CallBack callBack) {
+        final ItemDao[] itemDao = new ItemDao[1];
         if (!itemId.isEmpty()) {
             Query query = itemDatabaseReference.child(itemId);
             firebaseReadData(query, new CallBack() {
@@ -96,28 +95,32 @@ public class Item extends FirebaseRepository implements ItemRepository {
                     if (object != null) {
                         DataSnapshot dataSnapshot = (DataSnapshot) object;
                         if (dataSnapshot.getValue() != null && dataSnapshot.hasChildren()) {
-                            ItemDao itemDao = dataSnapshot.getValue(ItemDao.class);
-                            item[0] = itemDao;
-                        } else
-                            item[0] = null;
-                    } else
-                        item[0] = null;
+                            String itemId = dataSnapshot.getKey();
+                            String itemName = dataSnapshot.child("itemName").getValue().toString();
+                            String category = dataSnapshot.child("category").getValue().toString();
+                            //String location = dataSnapshot.child("location").getValue().toString();
+                            String price = dataSnapshot.child("price").getValue().toString();
+                            String description = dataSnapshot.child("description").getValue().toString();
+                            String sellerId = dataSnapshot.child("sellerId").getValue().toString();
+                            String buyerId = dataSnapshot.child("buyerId").getValue().toString();
+                            String itemStatus = dataSnapshot.child("itemStatus").getValue().toString();
+                            //String pictureName = dataSnapshot.child("pictureName").getValue().toString();
+                            itemDao[0] = new ItemDao(itemId, itemName, category, "location", price, description, sellerId, buyerId, itemStatus, "pictureName");
+                        }
+                        callBack.onSuccess(itemDao[0]);
+                    }
                 }
 
                 @Override
                 public void onError(Object object) {
-                    item[0] = null;
+                    callBack.onError(null);
                 }
             });
-        } else {
-            item[0] = null;
         }
-
-        return item[0];
     }
 
     @Override
-    public ArrayList<ItemDao> getSpecificItems(String category, String location) {
+    public void getSpecificItems(String category, String location, final CallBack callBack) {
         final ArrayList<ItemDao> itemArrayList = new ArrayList<>();
         Query query = itemDatabaseReference.orderByChild("category").equalTo(category).orderByChild("location").equalTo(location);
         firebaseReadData(query, new CallBack() {
@@ -127,18 +130,29 @@ public class Item extends FirebaseRepository implements ItemRepository {
                     DataSnapshot dataSnapshot = (DataSnapshot) object;
                     if (dataSnapshot.getValue() != null && dataSnapshot.hasChildren()) {
                         for (DataSnapshot suggestionSnapshot : dataSnapshot.getChildren()) {
-                            itemArrayList.add(suggestionSnapshot.getValue(ItemDao.class));
+                            String itemId = suggestionSnapshot.getKey();
+                            String itemName = suggestionSnapshot.child("itemName").getValue().toString();
+                            String category = suggestionSnapshot.child("category").getValue().toString();
+                            //String location = suggestionSnapshot.child("location").getValue().toString();
+                            String price = suggestionSnapshot.child("price").getValue().toString();
+                            String description = suggestionSnapshot.child("description").getValue().toString();
+                            String sellerId = suggestionSnapshot.child("sellerId").getValue().toString();
+                            String buyerId = suggestionSnapshot.child("buyerId").getValue().toString();
+                            String itemStatus = suggestionSnapshot.child("itemStatus").getValue().toString();
+                            //String pictureName = suggestionSnapshot.child("pictureName").getValue().toString();
+                            ItemDao itemDao = new ItemDao(itemId, itemName, category, "location", price, description, sellerId, buyerId, itemStatus, "pictureName");
+                            itemArrayList.add(itemDao);
                         }
+                        callBack.onSuccess(itemArrayList.toArray());
                     }
                 }
             }
 
             @Override
             public void onError(Object object) {
-                itemArrayList.add(null);
+                callBack.onError(null);
             }
         });
-        return itemArrayList;
     }
 
     @Override
@@ -162,7 +176,7 @@ public class Item extends FirebaseRepository implements ItemRepository {
                             String buyerId = suggestionSnapshot.child("buyerId").getValue().toString();
                             String itemStatus = suggestionSnapshot.child("itemStatus").getValue().toString();
                             //String pictureName = suggestionSnapshot.child("pictureName").getValue().toString();
-                            ItemDao itemDao = new ItemDao(itemId, itemName, category, "location", price, description, sellerId, buyerId, itemStatus, "");
+                            ItemDao itemDao = new ItemDao(itemId, itemName, category, "location", price, description, sellerId, buyerId, itemStatus, "pictureName");
                             itemArrayList.add(itemDao);
                         }
                         callBack.onSuccess(itemArrayList.toArray());
@@ -178,7 +192,7 @@ public class Item extends FirebaseRepository implements ItemRepository {
     }
 
     @Override
-    public ArrayList<String> getAllLocations() {
+    public void getAllLocations(final CallBack callBack) {
         final ArrayList<String> locationList = new ArrayList<>();
         Query query = itemDatabaseReference.orderByKey();
         firebaseReadData(query, new CallBack() {
@@ -190,15 +204,15 @@ public class Item extends FirebaseRepository implements ItemRepository {
                         for (DataSnapshot suggestionSnapshot : dataSnapshot.getChildren()) {
                             locationList.add(suggestionSnapshot.child("location").getValue().toString());
                         }
+                        callBack.onSuccess(locationList.toArray());
                     }
                 }
             }
 
             @Override
             public void onError(Object object) {
-                locationList.add(null);
+                callBack.onError(null);
             }
         });
-        return locationList;
     }
 }
