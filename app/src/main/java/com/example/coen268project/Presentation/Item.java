@@ -3,6 +3,7 @@ import com.example.coen268project.Firebase.CallBack;
 import com.example.coen268project.Firebase.FirebaseConstants;
 import com.example.coen268project.Firebase.FirebaseInstance;
 import com.example.coen268project.Firebase.FirebaseRepository;
+import com.example.coen268project.Model.AccountDao;
 import com.example.coen268project.Model.ItemDao;
 import com.example.coen268project.Model.ItemRepository;
 import com.google.firebase.auth.FirebaseAuth;
@@ -86,7 +87,8 @@ public class Item extends FirebaseRepository implements ItemRepository {
     }
 
     @Override
-    public void getItem(String itemId, final CallBack callBack) {
+    public ItemDao getItem(String itemId) {
+        final ItemDao[] item = {null};
         if (!itemId.isEmpty()) {
             Query query = itemDatabaseReference.child(itemId);
             firebaseReadData(query, new CallBack() {
@@ -96,59 +98,53 @@ public class Item extends FirebaseRepository implements ItemRepository {
                         DataSnapshot dataSnapshot = (DataSnapshot) object;
                         if (dataSnapshot.getValue() != null && dataSnapshot.hasChildren()) {
                             ItemDao itemDao = dataSnapshot.getValue(ItemDao.class);
-                            callBack.onSuccess(itemDao);
+                            item[0] = itemDao;
                         } else
-                            callBack.onSuccess(null);
+                            item[0] = null;
                     } else
-                        callBack.onSuccess(null);
+                        item[0] = null;
                 }
 
                 @Override
                 public void onError(Object object) {
-                    callBack.onError(object);
+                    item[0] = null;
                 }
             });
         } else {
-            callBack.onError(FirebaseConstants.FAIL);
+            item[0] = null;
         }
+
+        return item[0];
     }
 
     @Override
-    public void getSpecificItems(String category, String location, CallBack callBack) {
-
-    }
-
-    @Override
-    public void getAllItems(final CallBack callBack) {
-        Query query = itemDatabaseReference.orderByKey();
+    public ArrayList<ItemDao> getSpecificItems(String category, String location) {
+        final ArrayList<ItemDao> itemArrayList = new ArrayList<>();
+        Query query = itemDatabaseReference.orderByChild("category").equalTo(category).orderByChild("location").equalTo(location);
         firebaseReadData(query, new CallBack() {
             @Override
             public void onSuccess(Object object) {
                 if (object != null) {
                     DataSnapshot dataSnapshot = (DataSnapshot) object;
                     if (dataSnapshot.getValue() != null && dataSnapshot.hasChildren()) {
-                        ArrayList<ItemDao> itemArrayList = new ArrayList<>();
                         for (DataSnapshot suggestionSnapshot : dataSnapshot.getChildren()) {
-                            // itemArrayList.add(suggestionSnapshot.child("itemId").getValue().toString());
-                            ItemDao item = suggestionSnapshot.getValue(ItemDao.class);
-                            itemArrayList.add(item);
+                            itemArrayList.add(suggestionSnapshot.getValue(ItemDao.class));
                         }
-                        callBack.onSuccess(itemArrayList.toArray());
-                    } else
-                        callBack.onSuccess(null);
-                } else
-                    callBack.onSuccess(null);
+                    }
+                }
             }
 
             @Override
             public void onError(Object object) {
-                callBack.onError(object);
+                itemArrayList.add(null);
             }
         });
+        return itemArrayList;
     }
 
     @Override
-    public void getAllLocations(final CallBack callBack) {
+    public ArrayList<ItemDao> getAllItems() {
+        final ArrayList<ItemDao> itemArrayList = new ArrayList<>();
         Query query = itemDatabaseReference.orderByKey();
         firebaseReadData(query, new CallBack() {
             @Override
@@ -156,21 +152,43 @@ public class Item extends FirebaseRepository implements ItemRepository {
                 if (object != null) {
                     DataSnapshot dataSnapshot = (DataSnapshot) object;
                     if (dataSnapshot.getValue() != null && dataSnapshot.hasChildren()) {
-                        ArrayList<String> locationList = new ArrayList<>();
+                        for (DataSnapshot suggestionSnapshot : dataSnapshot.getChildren()) {
+                           itemArrayList.add(suggestionSnapshot.getValue(ItemDao.class));
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onError(Object object) {
+                itemArrayList.add(null);
+            }
+        });
+        return itemArrayList;
+    }
+
+    @Override
+    public ArrayList<String> getAllLocations() {
+        final ArrayList<String> locationList = new ArrayList<>();
+        Query query = itemDatabaseReference.orderByKey();
+        firebaseReadData(query, new CallBack() {
+            @Override
+            public void onSuccess(Object object) {
+                if (object != null) {
+                    DataSnapshot dataSnapshot = (DataSnapshot) object;
+                    if (dataSnapshot.getValue() != null && dataSnapshot.hasChildren()) {
                         for (DataSnapshot suggestionSnapshot : dataSnapshot.getChildren()) {
                             locationList.add(suggestionSnapshot.child("location").getValue().toString());
                         }
-                        callBack.onSuccess(locationList.toArray());
-                    } else
-                        callBack.onSuccess(null);
-                } else
-                    callBack.onSuccess(null);
+                    }
+                }
             }
 
             @Override
             public void onError(Object object) {
-                callBack.onError(object);
+                locationList.add(null);
             }
         });
+        return locationList;
     }
 }
