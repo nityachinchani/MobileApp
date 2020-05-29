@@ -1,18 +1,23 @@
 package com.example.coen268project.View;
+import com.example.coen268project.Presentation.Utility;
 import com.example.coen268project.R;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.GridLayout;
 import android.widget.ListView;
 import android.widget.Spinner;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+
+import java.util.Locale;
 
 public class Explore extends Fragment {
     private static final String[] titles = new String[]{"Item1", "Item2",
@@ -37,6 +42,7 @@ public class Explore extends Fragment {
         locationSpinner = (Spinner)view.findViewById(R.id.locationSpinner);
 
 
+
         ArrayAdapter<String> adapter=new ArrayAdapter<String>(getActivity(), R.layout.activity_row,R.id.text_id,titles);
         exploreListView.setAdapter(adapter);
 
@@ -44,9 +50,9 @@ public class Explore extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-//                Intent intent = new Intent(getActivity(), location_fragment.class);
-//                intent.putExtra("Item", (CharSequence) exploreListView.getItemAtPosition(i+1));
-//                startActivity(intent);
+                Intent intent = new Intent(getActivity(), location_fragment.class);
+                intent.putExtra("Item", (CharSequence) exploreListView.getItemAtPosition(i+1));
+                startActivity(intent);
             }
         });
 
