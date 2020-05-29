@@ -9,6 +9,8 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.ListResult;
 import com.google.firebase.storage.StorageReference;
 
+import java.util.ArrayList;
+
 public class Utility extends FirebaseRepository {
     private StorageReference storageReference;
     private static String currentUserId;
@@ -16,14 +18,6 @@ public class Utility extends FirebaseRepository {
     public Utility()
     {
         storageReference = FirebaseStorage.getInstance().getReference();
-    }
-
-    public static String getCurrentUserId() {
-        return "HShwnTE38jNhhTZTczkfj3CAJmK2";
-    }
-
-    public static void setCurrentUserId(String currentUserId) {
-        Utility.currentUserId = currentUserId;
     }
 
     public static enum ItemStatus
@@ -68,6 +62,23 @@ public class Utility extends FirebaseRepository {
         public String toString() {
             return this.name;
         }
+
+        public static String[] toArray() {
+            ArrayList<String> categoryArray = new ArrayList<>();
+            for (Category category: Category.values()
+                 ) {
+                    categoryArray.add(category.name);
+            }
+            return  categoryArray.toArray(new String[0]);
+        }
+    }
+
+    public static String getCurrentUserId() {
+        return "HShwnTE38jNhhTZTczkfj3CAJmK2";
+    }
+
+    public static void setCurrentUserId(String currentUserId) {
+        Utility.currentUserId = currentUserId;
     }
 
     public void uploadImageToStorage(String name, Uri contentUri, final CallBack callBack){

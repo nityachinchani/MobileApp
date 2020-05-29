@@ -12,13 +12,12 @@ import android.widget.ListView;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import com.example.coen268project.Presentation.Utility;
 import com.example.coen268project.R;
 
 public class Sell_fragment extends Fragment {
 
-    private static final String[] titles = new String[]{"Sofa and Dining", "Bed and Wardrobes",
-            "Home Decor and Garden", "Kids Furniture", "Other Household Items"};
-
+    private static final String[] titles = Utility.Category.toArray();
     private ListView listView;
     private TextView textView;
 
