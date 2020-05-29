@@ -20,7 +20,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
+        <activity android:name=".View.Explore_buy"></activity>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -33,24 +33,26 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-        <activity android:name=".View.FragmentBaseSellActivityController">
-
-        </activity>
+        <activity android:name=".View.FragmentBaseSellActivityController"></activity>
         <activity
             android:name=".View.location_fragment"
             android:label="Choose Location" />
         <activity android:name=".View.Main_Fragment_Controller" />
-        <activity android:name=".View.Sell_fragment"
-            android:label="Choose Furniture"/>
-        <activity android:name=".View.Upload_fragment"
-            android:label="Choose Image"/>
-        <activity android:name=".View.ForgotPassword"
-            android:label="Forgot Password"/>
-        <activity android:name=".View.SignUp"
-            android:label="Sign Up"/>
-        <activity android:name=".View.MainActivity"
+        <activity
+            android:name=".View.Sell_fragment"
+            android:label="Choose Furniture" />
+        <activity
+            android:name=".View.Upload_fragment"
+            android:label="Choose Image" />
+        <activity
+            android:name=".View.ForgotPassword"
+            android:label="Forgot Password" />
+        <activity
+            android:name=".View.SignUp"
+            android:label="Sign Up" />
+        <activity
+            android:name=".View.MainActivity"
             android:label="Buy-Rona">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
