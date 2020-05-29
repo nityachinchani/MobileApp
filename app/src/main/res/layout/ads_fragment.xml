@@ -3,10 +3,8 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/textView"
+    <ListView
+        android:id="@+id/list_view"
         android:layout_width="match_parent"
-        android:layout_height="90dp"
-        android:text="Ads"
-        android:textSize="25sp" />
+        android:layout_height="match_parent" />
 </LinearLayout>

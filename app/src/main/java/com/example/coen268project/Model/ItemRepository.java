@@ -10,6 +10,6 @@ public interface ItemRepository {
     void deleteItem(String itemId, CallBack callBack);
     ItemDao getItem(String itemId);
     ArrayList<ItemDao> getSpecificItems(String category, String location);
-    ArrayList<ItemDao> getAllItems();
+    void getAllItems(final CallBack callBack);
     ArrayList<String> getAllLocations();
 }
