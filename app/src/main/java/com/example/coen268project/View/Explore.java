@@ -2,6 +2,7 @@ package com.example.coen268project.View;
 import com.example.coen268project.Firebase.CallBack;
 import com.example.coen268project.Model.ItemDao;
 import com.example.coen268project.Presentation.Item;
+import com.example.coen268project.Presentation.Utility;
 import com.example.coen268project.R;
 
 import android.content.Intent;
@@ -35,11 +36,12 @@ public class Explore extends Fragment {
             , R.drawable.ic_account_box_black_24dp, R.drawable.ic_camera_alt_black_24dp, R.drawable.ic_chat_bubble_black_24dp, R.drawable.ic_current
             , R.drawable.ic_find_in_page_black_24dp};
 
-    private static final String[] category = new String[]{"Sofa and Dining", "Bed and Wardrobes",
-            "Home Decor and Garden", "Kids Furniture", "Other Household Items"};
+    private static final String[] category = Utility.Category.toArray();
 
-    private static final String[] location = new String[]{"Santa Clara", "San jose",
+    private static String[] location = new String[]{"Santa Clara", "San jose",
             "Mountain View", "Palo Alto"};
+
+
 
    // private ListView exploreListView;
     private Spinner locationSpinner, categorySpinner;
@@ -91,6 +93,24 @@ public class Explore extends Fragment {
             }
         });
 
+//        item.getAllLocations(new CallBack() {
+//            @Override
+//            public void onSuccess(Object object) {
+//                Object[] obj=(Object[]) object;
+//                ArrayList<String> arrayList=new ArrayList<>();
+//                for (Object location: obj
+//                     ) {
+//                    arrayList.add(location.toString());
+//                }
+//
+//                location = arrayList.toArray(new String[0]);
+//            }
+//
+//            @Override
+//            public void onError(Object object) {
+//
+//            }
+//        });
 
         ArrayAdapter<String> locationAdapter = new ArrayAdapter<String>(getActivity(), R.layout.activity_spinner_row, R.id.text_id, location);
         locationSpinner.setAdapter(locationAdapter);
@@ -129,7 +149,7 @@ public class Explore extends Fragment {
 
     public class MainAdapter_explore_screen extends BaseAdapter {
         ArrayList<ItemDao> items;
-        int[] numberImage;
+        int[] numberImage; // remove this parameter
 
         public MainAdapter_explore_screen(ArrayList<ItemDao> items, int[] numberImage) {
             this.items = items;
@@ -159,7 +179,7 @@ public class Explore extends Fragment {
             ImageView imageView = convertView.findViewById(R.id.image_view);
             TextView textView = convertView.findViewById(R.id.text_view);
 
-            imageView.setImageResource(numberImage[position]);
+            imageView.setImageResource(numberImage[position]); // set same as in explore_buy
             textView.setText(this.items.get(position).getItemName());
 
             return convertView;
