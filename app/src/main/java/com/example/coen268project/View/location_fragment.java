@@ -66,15 +66,13 @@ public class location_fragment extends AppCompatActivity implements OnMapReadyCa
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-
+            public void onClick(View v)
+            {
                 Intent intent = new Intent(location_fragment.this, FragmentBaseSellActivityController.class);
                 intent.putExtra("from", Upload_fragment.class.getSimpleName());
                 intent.putExtra("Item_1",item_1);
                 intent.putExtra("Location",location_1);
                 startActivity(intent);
-
-
             }
         });
     }
@@ -213,11 +211,14 @@ public class location_fragment extends AppCompatActivity implements OnMapReadyCa
     /**
      * Method to get the current device location
      */
-    private void getDeviceLocation() {
+    private void getDeviceLocation()
+    {
         Log.d(TAG, "Get the device current location");
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
-        try {
-            if (locationPermissionsGranted) {
+        try
+        {
+            if (locationPermissionsGranted)
+            {
                 final Task location = fusedLocationProviderClient.getLastLocation();
                 location.addOnCompleteListener(new OnCompleteListener() {
                     @Override
@@ -233,7 +234,9 @@ public class location_fragment extends AppCompatActivity implements OnMapReadyCa
                     }
                 });
             }
-        } catch (SecurityException e) {
+        }
+        catch (SecurityException e)
+        {
             Log.e(TAG, "SecurityException: " + e.getMessage());
         }
     }
