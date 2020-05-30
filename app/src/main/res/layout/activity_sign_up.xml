@@ -119,7 +119,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="20dp"
-                android:background="@android:color/holo_blue_dark"
+                android:background="@drawable/button_beautification"
                 android:fontFamily="monospace"
                 android:gravity="center_horizontal|center_vertical"
                 android:text="Sign Up"
