@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.example.coen268project.Firebase.CallBack;
 import com.example.coen268project.Presentation.Item;
+import com.example.coen268project.Presentation.Utility;
 import com.example.coen268project.R;
 
 /**
@@ -67,7 +68,7 @@ public class Sell_Description extends Fragment {
                            p_price.requestFocus();
                            return;
                        }
-                       itemDb.createItem(product_name, item, Location, product_price, product_description, path_1, new CallBack() {
+                       itemDb.createItem(Utility.getCurrentUserId(), product_name, item, Location, product_price, product_description, path_1, new CallBack() {
                            @Override
                            public void onSuccess(Object object) {
                                Toast.makeText(getContext(),"Product uploaded successfully",Toast.LENGTH_LONG).show();

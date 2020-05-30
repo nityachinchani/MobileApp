@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public interface ItemRepository {
-    void createItem(String itemName, String category, String location, String price, String description, String pictureName, CallBack callBack);
+    void createItem(String sellerId, String itemName, String category, String location, String price, String description, String pictureName, CallBack callBack);
     void updateItem(String itemId, HashMap map, CallBack callBack);
     void deleteItem(String itemId, CallBack callBack);
     void getItem(String itemId, CallBack callBack);

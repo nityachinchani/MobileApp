@@ -27,8 +27,8 @@ public class FragmentBaseSellActivityController extends AppCompatActivity {
 
     private void getExtras() {
         Intent intent = getIntent();
-        if (intent.hasExtra("from")){
-           from=intent.getExtras().getString("from");
+        if (intent.hasExtra("from")) {
+            from = intent.getExtras().getString("from");
         }
 
         if (from.equals(Upload_fragment.class.getSimpleName())){
@@ -56,7 +56,15 @@ public class FragmentBaseSellActivityController extends AppCompatActivity {
             fragmentTransaction(sell_description);
         }
 
-
+        if (from.equals(Update_Ads.class.getSimpleName()))
+        {
+            Bundle bundle = new Bundle();
+            final String ItemId = getIntent().getStringExtra("ItemId");
+            bundle.putString("ItemId",ItemId);
+            Update_Ads updateAds = new Update_Ads();
+            updateAds.setArguments(bundle);
+            fragmentTransaction(updateAds);
+        }
     }
     private void fragmentTransaction(Fragment fragment){
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
