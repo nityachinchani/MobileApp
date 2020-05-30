@@ -51,7 +51,7 @@ public class Upload_fragment extends Fragment {
     String currentPhotoPath;
     String imgDecodableString;
     Uri contentUri;
-    File f;
+    File f = null;
 
     @Nullable
     @Override
@@ -89,23 +89,28 @@ public class Upload_fragment extends Fragment {
             @Override
             public void onClick (View v)
             {
-                utility.uploadImageToStorage(f.getName(),contentUri, new CallBack() {
-                    @Override
-                    public void onSuccess(Object object) {
-                        Toast.makeText(getContext(),"Image upload succeeded"+ f.getName(),Toast.LENGTH_LONG).show();
-                        Log.d("tag","Image upload succeeded"+ f.getName());
-                    }
+                String picture_name = "";
+                if(f!= null)
+                {
+                    picture_name = f.getName();
+                    utility.uploadImageToStorage(picture_name, contentUri, new CallBack() {
+                        @Override
+                        public void onSuccess(Object object) {
+                            Toast.makeText(getContext(), "Image upload succeeded" + f.getName(), Toast.LENGTH_LONG).show();
+                            Log.d("tag", "Image upload succeeded" + f.getName());
+                        }
 
-                    @Override
-                    public void onError(Object object) {
-                        Toast.makeText(getContext(),"Image upload failed",Toast.LENGTH_SHORT).show();
-                    }
-                });
+                        @Override
+                        public void onError(Object object) {
+                            Toast.makeText(getContext(), "Image upload failed", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
                 Intent intent = new Intent(getActivity(), FragmentBaseSellActivityController.class);
                 intent.putExtra("from", Sell_Description.class.getSimpleName());
                 intent.putExtra("Item",item);
                 intent.putExtra("Location",Location);
-                intent.putExtra("Path", f.getName());
+                intent.putExtra("Path", picture_name);
                 startActivity(intent);
             }
         });
@@ -147,13 +152,13 @@ public class Upload_fragment extends Fragment {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == CAMERA_REQUEST_CODE)
         {
-              f = new File(currentPhotoPath);
-              imageView.setImageURI(Uri.fromFile(f));
-              Log.d("tag", "Absolute url of image" + Uri.fromFile(f));
-              Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
-              contentUri = Uri.fromFile(f);
-              mediaScanIntent.setData(contentUri);
-              getActivity().sendBroadcast(mediaScanIntent);
+            f = new File(currentPhotoPath);
+            imageView.setImageURI(Uri.fromFile(f));
+            Log.d("tag", "Absolute url of image" + Uri.fromFile(f));
+            Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+            contentUri = Uri.fromFile(f);
+            mediaScanIntent.setData(contentUri);
+            getActivity().sendBroadcast(mediaScanIntent);
 
         }
 
