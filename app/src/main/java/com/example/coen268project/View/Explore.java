@@ -41,7 +41,7 @@ public class Explore extends Fragment {
     private static final String[] location = new String[]{"Santa Clara", "San jose",
             "Mountain View", "Palo Alto"};
 
-    private ListView exploreListView;
+   // private ListView exploreListView;
     private Spinner locationSpinner, categorySpinner;
     private GridView exploreGridView;
     private TextView textView;
@@ -73,9 +73,6 @@ public class Explore extends Fragment {
             public void onError(Object object) {
             }
         });
-
-
-
 
 
         ArrayAdapter<String> categoryAdapter = new ArrayAdapter<String>(getActivity(), R.layout.activity_spinner_row, R.id.text_id, category);

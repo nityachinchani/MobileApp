@@ -32,7 +32,7 @@ import java.util.Date;
 
 public class SignUp extends AppCompatActivity {
     public static final int CAMERA_REQUEST_CODE = 102;
-    EditText fullnameEditText, emailEditText, passwordEditText, confirmPasswordEditText;
+    EditText fullnameEditText, emailEditText, numberEditText, passwordEditText, confirmPasswordEditText;
     Button signUpBtn;
     TextView signInTextView;
     private Account account;
@@ -52,6 +52,7 @@ public class SignUp extends AppCompatActivity {
         setContentView(R.layout.activity_sign_up);
         fullnameEditText=findViewById(R.id.fullnameEditText);
         emailEditText=findViewById(R.id.emailEditText);
+        numberEditText=findViewById(R.id.numberEditText);
         passwordEditText=findViewById(R.id.passwordEditText);
         confirmPasswordEditText=findViewById(R.id.confirmpasswordEditText);
         signUpBtn=findViewById(R.id.signUpBtn);
@@ -63,6 +64,7 @@ public class SignUp extends AppCompatActivity {
             public void onClick(View v) {
                 final String fullName=fullnameEditText.getText().toString();
                 final String email=emailEditText.getText().toString();
+                final String number=numberEditText.getText().toString();
                 final String password=passwordEditText.getText().toString();
                 String confirmPassword=confirmPasswordEditText.getText().toString();
 
@@ -74,6 +76,11 @@ public class SignUp extends AppCompatActivity {
                 else if(fullName.isEmpty() ){
                     fullnameEditText.setError("Please enter fullname");
                     fullnameEditText.requestFocus();
+                }
+
+                else if(number.isEmpty() ){
+                    numberEditText.setError("Please enter number");
+                    numberEditText.requestFocus();
                 }
 
                 else if(password.isEmpty() ){
@@ -108,7 +115,7 @@ public class SignUp extends AppCompatActivity {
                                 }
                             });
 
-                            account.createAccount(object.toString(), fullName, email, "123-456-9696", password, f.getName(), new CallBack() {
+                            account.createAccount(object.toString(), fullName, email, number, password, f.getName(), new CallBack() {
                                 @Override
                                 public void onSuccess(Object object) {
                                     startActivity(new Intent(SignUp.this, MainActivity.class));  //change this class once homescreen is created

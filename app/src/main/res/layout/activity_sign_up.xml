@@ -64,10 +64,27 @@
                 app:layout_constraintTop_toBottomOf="@+id/fullnameEditText" />
 
             <EditText
+                android:id="@+id/numberEditText"
+                android:layout_width="match_parent"
+                android:layout_height="44dp"
+                android:layout_marginTop="24dp"
+                android:ems="10"
+                android:fontFamily="monospace"
+                android:hint="Enter your number"
+                android:inputType="number"
+                android:textAlignment="textStart"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/emailEditText" />
+
+            <EditText
                 android:id="@+id/passwordEditText"
                 android:layout_width="match_parent"
                 android:layout_height="44dp"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="24dp"
                 android:ems="10"
                 android:fontFamily="monospace"
                 android:hint="Password"
