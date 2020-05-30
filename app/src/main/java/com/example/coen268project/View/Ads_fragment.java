@@ -8,12 +8,15 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import com.example.coen268project.Firebase.CallBack;
 import com.example.coen268project.Model.ItemDao;
 import com.example.coen268project.Presentation.Item;
+import com.example.coen268project.Presentation.Utility;
 import com.example.coen268project.R;
 import java.util.ArrayList;
 
@@ -28,9 +31,14 @@ public class Ads_fragment extends Fragment {
         View view = inflater.inflate(R.layout.activity_sell, container, false);
         listView = view.findViewById(R.id.list_view);
         item = new Item();
-        item.getAllItems(new CallBack() {
+        item.getMyItems(Utility.getCurrentUserId(), new CallBack() {
             @Override
             public void onSuccess(Object object) {
+                if(object == null)
+                {
+                    Toast.makeText(getContext(), "You do not have any orders", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 Object[] objectArray = (Object[]) object;
                 for (Object itemElement : objectArray
                 ) {
@@ -53,8 +61,9 @@ public class Ads_fragment extends Fragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent intent = new Intent(getActivity(), location_fragment.class);
-                intent.putExtra("Item", (CharSequence) adapter.getItem(i));
+                Intent intent = new Intent(getActivity(), FragmentBaseSellActivityController.class);
+                intent.putExtra("from", Update_Ads.class.getSimpleName());
+                intent.putExtra("ItemId", (CharSequence) adapter.getItem(i).getItemId());
                 startActivity(intent);
             }
         });

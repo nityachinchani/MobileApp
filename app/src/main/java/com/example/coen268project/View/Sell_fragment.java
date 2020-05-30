@@ -16,7 +16,6 @@ import com.example.coen268project.Presentation.Utility;
 import com.example.coen268project.R;
 
 public class Sell_fragment extends Fragment {
-
     private static final String[] titles = Utility.Category.toArray();
     private ListView listView;
 
@@ -41,7 +40,6 @@ public class Sell_fragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-
     }
 }
 
