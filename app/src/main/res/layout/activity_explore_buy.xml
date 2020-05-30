@@ -6,6 +6,103 @@
     android:layout_height="match_parent"
     tools:context=".View.Explore_buy">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#E5F6F8"
+            android:clickable="false"
+            android:focusable="true"
+            android:orientation="vertical"
+            tools:context=".View.Upload_fragment">
+
+            <TextView
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal|center_vertical"
+                android:text="Product Image"
+                android:textColor="@android:color/holo_blue_dark"
+                android:textSize="25dp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/product_image"
+                android:layout_width="match_parent"
+                android:layout_height="212dp"
+                app:srcCompat="@drawable/profile_image"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="30dp"/>
+
+            <TextView
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal|center_vertical"
+                android:text="Product Name"
+                android:textColor="@android:color/holo_blue_dark"
+                android:textSize="25dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/product_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#76A5CD"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="30dp" />
+
+            <TextView
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal|center_vertical"
+                android:text="Price "
+                android:textSize="25dp"
+                android:textColor="@android:color/holo_blue_dark"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/product_price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#76A5CD"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="30dp" />
+
+            <TextView
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal|center_vertical"
+                android:text="Description"
+                android:textColor="@android:color/holo_blue_dark"
+                android:textSize="25dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/product_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#76A5CD"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="30dp" />
+
+
+        </LinearLayout>
+    </ScrollView>
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigation"
         android:layout_alignParentBottom="true"
@@ -14,7 +111,9 @@
         app:itemTextColor="#76A5CD"
         android:layout_width="match_parent"
         app:menu="@menu/explore_buy"
-        android:layout_height="wrap_content"></com.google.android.material.bottomnavigation.BottomNavigationView>
+        android:layout_height="wrap_content">
+
+    </com.google.android.material.bottomnavigation.BottomNavigationView>
 
 
 </RelativeLayout>
