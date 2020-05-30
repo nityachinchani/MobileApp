@@ -122,8 +122,7 @@ public class Utility extends FirebaseRepository {
             return reference[0];
     }
 
-    public StorageReference getItemPicture(final String pictureName)
-    {
+    public void getItemPicture(final String pictureName, final CallBack callback) {
         StorageReference images = storageReference.child("images/");
         final StorageReference[] reference = new StorageReference[1];
         images.listAll()
@@ -131,21 +130,22 @@ public class Utility extends FirebaseRepository {
                     @Override
                     public void onSuccess(ListResult listResult) {
                         for (StorageReference item : listResult.getItems()) {
-                            if(item.getName().equals(pictureName)) {
+                            if (item.getName().equals(pictureName)) {
                                 reference[0] = FirebaseStorage.getInstance().getReference().child(item.getPath());
                             }
                         }
+                        callback.onSuccess(reference[0]);
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
+                        callback.onError(null);
                     }
                 });
 
                 /*Glide.with(this)
                 .load(storageReference)
                 .into(image);*/
-        return reference[0];
     }
 }

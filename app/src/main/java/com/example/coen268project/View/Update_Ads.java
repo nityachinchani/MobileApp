@@ -1,4 +1,5 @@
 package com.example.coen268project.View;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
@@ -7,15 +8,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
+import com.bumptech.glide.Glide;
 import com.example.coen268project.Firebase.CallBack;
 import com.example.coen268project.Model.ItemDao;
 import com.example.coen268project.Presentation.Item;
 import com.example.coen268project.Presentation.Utility;
 import com.example.coen268project.R;
-
+import com.google.firebase.storage.StorageReference;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -23,13 +25,13 @@ import java.util.Map;
  * create an instance of this fragment.
  */
 public class Update_Ads extends Fragment {
-
     Button btnUpdate;
     Button btnDelete;
     private EditText et_ProductName;
     private EditText et_Price;
     private TextView et_Description;
     private Item item;
+    private ImageView img_ProductPicture;
 
     public Update_Ads() {
         // Required empty public constructor
@@ -49,6 +51,7 @@ public class Update_Ads extends Fragment {
         et_ProductName = view.findViewById(R.id.et_ProductName);
         et_Price = view.findViewById(R.id.et_Price);
         et_Description = view.findViewById(R.id.et_Description);
+        img_ProductPicture = view.findViewById(R.id.product_image);
         btnUpdate = view.findViewById(R.id.btnUpdate);
         btnDelete = view.findViewById(R.id.btnDelete);
         Bundle bundle = getArguments();
@@ -117,8 +120,29 @@ public class Update_Ads extends Fragment {
     }
 
     private void BindItems(ItemDao itemDao) {
+/*Glide.with(this)
+                .load(storageReference)
+                .into(image);*/
+        Utility utility = new Utility();
+        utility.getItemPicture(itemDao.getPictureName(), new CallBack() {
+            @Override
+            public void onSuccess(Object object) {
+                BindImage(object);
+            }
+
+            @Override
+            public void onError(Object object) {
+
+            }
+        });
         et_ProductName.setText(itemDao.getItemName());
         et_Description.setText(itemDao.getDescription());
         et_Price.setText(itemDao.getPrice());
+    }
+
+    private void BindImage(Object object) {
+        StorageReference storageReference = (StorageReference) object;
+        //img_ProductPicture.setImageURI();
+        Glide.with(getActivity()).load(storageReference.toString()).into(img_ProductPicture);
     }
 }
