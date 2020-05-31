@@ -81,6 +81,6 @@ public class Explore_buy extends AppCompatActivity {
     private void BindImage(Object object) {
         StorageReference storageReference = (StorageReference) object;
         //img_ProductPicture.setImageURI();
-        Glide.with(this).load(storageReference).into(productImage);
+        Glide.with(this).load(storageReference.toString()).into(productImage);
     }
 }

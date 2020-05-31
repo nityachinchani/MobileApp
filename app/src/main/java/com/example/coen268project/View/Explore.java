@@ -38,8 +38,8 @@ public class Explore extends Fragment {
 
     private static final String[] category = Utility.Category.toArray();
 
-    private static String[] location = new String[]{"Santa Clara", "San jose",
-            "Mountain View", "Palo Alto"};
+    private static String[] location = null;
+
 
 
 
@@ -93,33 +93,40 @@ public class Explore extends Fragment {
             }
         });
 
-//        item.getAllLocations(new CallBack() {
-//            @Override
-//            public void onSuccess(Object object) {
-//                Object[] obj=(Object[]) object;
-//                ArrayList<String> arrayList=new ArrayList<>();
-//                for (Object location: obj
-//                     ) {
-//                    arrayList.add(location.toString());
-//                }
-//
-//                location = arrayList.toArray(new String[0]);
-//            }
-//
-//            @Override
-//            public void onError(Object object) {
-//
-//            }
-//        });
+        item.getAllLocations(new CallBack() {
+            @Override
+            public void onSuccess(Object object) {
+                Object[] obj=(Object[]) object;
+                ArrayList<String> arrayList=new ArrayList<>();
+                for (Object location: obj
+                     ) {
+                    arrayList.add(location.toString());
+                }
 
+                location = arrayList.toArray(new String[0]);
+
+                bindLocation();
+            }
+
+            @Override
+            public void onError(Object object) {
+
+            }
+        });
+
+
+
+
+        return view;
+    }
+
+    private void bindLocation() {
         ArrayAdapter<String> locationAdapter = new ArrayAdapter<String>(getActivity(), R.layout.activity_spinner_row, R.id.text_id, location);
         locationSpinner.setAdapter(locationAdapter);
         locationSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-//                Intent intent = new Intent(getActivity(), location_fragment.class);
-//                intent.putExtra("Item", (CharSequence) locationSpinner.getItemAtPosition(position+1));
-//                startActivity(intent);
+
             }
 
             @Override
@@ -128,8 +135,6 @@ public class Explore extends Fragment {
             }
         });
 
-
-        return view;
     }
 
 

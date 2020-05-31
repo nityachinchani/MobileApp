@@ -1,4 +1,8 @@
 package com.example.coen268project.Presentation;
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
+
 import com.example.coen268project.Firebase.CallBack;
 import com.example.coen268project.Firebase.FirebaseConstants;
 import com.example.coen268project.Firebase.FirebaseInstance;
@@ -241,6 +245,7 @@ public class Item extends FirebaseRepository implements ItemRepository {
         final ArrayList<String> locationList = new ArrayList<>();
         Query query = itemDatabaseReference.orderByKey();
         firebaseReadData(query, new CallBack() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onSuccess(Object object) {
                 if (object != null) {
@@ -249,7 +254,7 @@ public class Item extends FirebaseRepository implements ItemRepository {
                         for (DataSnapshot suggestionSnapshot : dataSnapshot.getChildren()) {
                             locationList.add(suggestionSnapshot.child("location").getValue().toString());
                         }
-                        callBack.onSuccess(locationList.toArray());
+                        callBack.onSuccess(locationList.stream().distinct().toArray());
                     } else {
                         callBack.onSuccess(null);
                     }
