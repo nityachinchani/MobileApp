@@ -61,10 +61,26 @@ public class Explore_buy extends AppCompatActivity {
     }
 
     private void BindItems(ItemDao itemDao) {
-        storageReference=utility.getItemPicture(itemDao.getPictureName());
+        utility.getItemPicture(itemDao.getPictureName(),new CallBack() {
+            @Override
+            public void onSuccess(Object object) {
+                BindImage(object);
+            }
+
+            @Override
+            public void onError(Object object) {
+
+            }
+        });
         productTitle.setText(itemDao.getItemName());
         productPrice.setText(itemDao.getPrice());
         productDescription.setText(itemDao.getDescription());
+
+    }
+
+    private void BindImage(Object object) {
+        StorageReference storageReference = (StorageReference) object;
+        //img_ProductPicture.setImageURI();
         Glide.with(this).load(storageReference).into(productImage);
     }
 }
