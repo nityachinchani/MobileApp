@@ -1,15 +1,20 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:clickable="true"
+    android:clipToPadding="false"
+    tools:context=".View.Update_Ads">
+    <!--  android:clickable="true"
     android:focusable="true"
-    tools:context=".View.Update_Ads"
+
     android:orientation="vertical"
-    android:background="@color/color_blue">
+    android:background="@color/color_blue"> -->
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -18,95 +23,133 @@
             android:focusable="true"
             android:orientation="vertical"
             tools:context=".View.Update_Ads">
-    <TextView
-        android:id="@+id/tv_ProductName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:text="Product Name"
-        android:textSize="25dp"
-        android:textStyle="bold" />
 
-    <EditText
-        android:id="@+id/et_ProductName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:hint="Enter Product name"
-        android:maxLength="55"
-        android:maxLines="1"
-        android:singleLine="true" />
-
-    <TextView
-        android:id="@+id/tv_Price"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="2dp"
-        android:text="Price "
-        android:textSize="25dp"
-        android:textStyle="bold" />
-
-    <EditText
-        android:id="@+id/et_Price"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="60dp"
-        android:hint="Enter Price"
-        android:inputType="number"
-        android:maxLength="4"
-        android:maxLines="1" />
-
-    <TextView
-        android:id="@+id/tv_Description"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="20dp"
-        android:text="Description (optional) "
-        android:textSize="25dp"
-        android:textStyle="bold" />
-
-    <EditText
-        android:id="@+id/et_Description"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="10dp"
-        android:hint="Short Description"
-        android:lines="2"
-        android:maxLength="400" />
-
-
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal|center_vertical"
+                android:text="Product Image"
+                android:textColor="@android:color/holo_blue_dark"
+                android:textSize="25dp"
+                android:textStyle="bold" />
 
             <ImageView
-            android:id="@+id/product_image"
-            android:layout_width="match_parent"
-            android:layout_height="212dp"
-                android:src="@drawable/profile_image"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginBottom="30dp"/>
-    <LinearLayout
-        android:id="@+id/buttonLayout"
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:layout_alignParentBottom="true">
-        <Button
-            android:id="@+id/btnUpdate"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" android:text="Update">
-        </Button>
-        <Button
-            android:id="@+id/btnDelete"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Delete">
-        </Button>
-    </LinearLayout>
+                android:id="@+id/product_image"
+                android:layout_width="match_parent"
+                android:layout_height="212dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="30dp"
+                android:src="@drawable/profile_image" />
+
+            <TextView
+                android:id="@+id/tv_ProductName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal|center_vertical"
+                android:text="Product Name"
+                android:textColor="@android:color/holo_blue_dark"
+                android:textSize="25dp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/et_ProductName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="30dp"
+                android:hint="Enter Product name"
+                android:maxLength="55"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:textColor="#76A5CD" />
+
+            <TextView
+                android:id="@+id/tv_Price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal|center_vertical"
+                android:text="Price "
+                android:textColor="@android:color/holo_blue_dark"
+                android:textSize="25dp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/et_Price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="30dp"
+                android:hint="Enter Price"
+                android:inputType="number"
+                android:maxLength="4"
+                android:maxLines="1"
+                android:textColor="#76A5CD" />
+
+            <TextView
+                android:id="@+id/tv_Description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal|center_vertical"
+                android:text="Description (optional) "
+                android:textColor="@android:color/holo_blue_dark"
+                android:textSize="25dp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/et_Description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="30dp"
+                android:hint="Short Description"
+                android:lines="2"
+                android:maxLength="400"
+                android:textColor="#76A5CD" />
+
+
+            <LinearLayout
+                android:id="@+id/buttonLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true">
+
+                <Button
+                    android:id="@+id/btnUpdate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/button_beautification"
+                    android:fontFamily="monospace"
+                    android:text="Update"
+                    android:textAlignment="center"
+                    android:textAllCaps="false"
+                    android:textColor="@android:color/background_light"
+                    android:textSize="20sp"
+                    android:textStyle="bold"></Button>
+
+                <Button
+                    android:id="@+id/btnDelete"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/button_beautification"
+                    android:fontFamily="monospace"
+                    android:text="Delete"
+                    android:textAlignment="center"
+                    android:textAllCaps="false"
+                    android:textColor="@android:color/background_light"
+                    android:textSize="20sp"
+                    android:textStyle="bold"></Button>
+            </LinearLayout>
+
         </LinearLayout>
     </ScrollView>
-</LinearLayout>
+</RelativeLayout>

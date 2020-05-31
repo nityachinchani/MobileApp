@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
                     account.authenticateAccount(email, password, new CallBack() {
                         @Override
                         public void onSuccess(Object object) {
-                            startActivity(new Intent(MainActivity.this, SignUp.class));  //change this class once homescreen is created
+                            startActivity(new Intent(MainActivity.this, Main_Fragment_Controller.class));  //change this class once homescreen is created
                         }
 
                         @Override

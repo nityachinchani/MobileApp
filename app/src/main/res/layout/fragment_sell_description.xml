@@ -1,19 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:clickable="true"
+    tools:context=".View.Upload_fragment">
+    <!--android:clickable="true"
     android:focusable="true"
-    tools:context=".View.Upload_fragment"
+
     android:orientation="vertical"
-    android:background="@color/color_blue">
+    android:background="@color/color_blue">-->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#E5F6F8"
+            android:clickable="false"
+            android:focusable="true"
+            android:orientation="vertical"
+            tools:context=".View.Upload_fragment">
 
     <TextView
         android:id="@+id/Product_tag"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
+        android:gravity="center_horizontal|center_vertical"
+        android:textColor="@android:color/holo_blue_dark"
         android:text="Product Name"
         android:textSize="25dp"
         android:textStyle="bold" />
@@ -22,7 +37,11 @@
         android:id="@+id/edit_text_file_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="30dp"
+        android:textColor="#76A5CD"
         android:hint="Enter Product name"
         android:maxLength="55"
         android:maxLines="1"
@@ -32,9 +51,9 @@
         android:id="@+id/Price_tag"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="2dp"
+        android:gravity="center_horizontal|center_vertical"
         android:text="Price "
+        android:textColor="@android:color/holo_blue_dark"
         android:textSize="25dp"
         android:textStyle="bold" />
 
@@ -42,7 +61,11 @@
         android:id="@+id/edit_text_file_price"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="60dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="30dp"
+        android:textColor="#76A5CD"
         android:hint="Enter Price"
         android:inputType="number"
         android:maxLength="4"
@@ -52,18 +75,21 @@
         android:id="@+id/Description_tag"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="20dp"
+        android:gravity="center_horizontal|center_vertical"
         android:text="Description (optional) "
         android:textSize="25dp"
+        android:textColor="@android:color/holo_blue_dark"
         android:textStyle="bold" />
 
     <EditText
         android:id="@+id/Description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="30dp"
+        android:textColor="#76A5CD"
         android:hint="Short Description"
         android:lines="2"
         android:maxLength="400" />
@@ -73,7 +99,17 @@
         android:id="@+id/button_post"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/button_beautification"
         android:text="Post"
+        android:fontFamily="monospace"
+        android:textColor="@android:color/background_light"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textSize="20sp"
+        android:textStyle="bold"
         android:layout_marginTop="20dp"/>
 
-</LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>

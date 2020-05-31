@@ -9,8 +9,12 @@ import com.example.coen268project.Presentation.Item;
 import com.example.coen268project.Presentation.Utility;
 import com.example.coen268project.R;
 import com.google.firebase.storage.StorageReference;
+import com.squareup.picasso.Callback;
+import com.squareup.picasso.Picasso;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,6 +22,7 @@ import android.widget.Toast;
 public class Explore_buy extends AppCompatActivity {
     private ImageView productImage;
     private TextView productPrice,productDescription,productTitle;
+    private Button exploreBuyBtn;
     private Item item;
     private Utility utility;
     private StorageReference storageReference;
@@ -34,6 +39,7 @@ public class Explore_buy extends AppCompatActivity {
         productImage=findViewById(R.id.product_image);
         productTitle=findViewById(R.id.product_title);
         productPrice=findViewById(R.id.product_price);
+        exploreBuyBtn=findViewById(R.id.exploreBuyBtn);
         productDescription=findViewById(R.id.product_description);
 
 
@@ -58,6 +64,13 @@ public class Explore_buy extends AppCompatActivity {
 
         }
 
+        exploreBuyBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
     }
 
     private void BindItems(ItemDao itemDao) {
@@ -81,6 +94,10 @@ public class Explore_buy extends AppCompatActivity {
     private void BindImage(Object object) {
         StorageReference storageReference = (StorageReference) object;
         //img_ProductPicture.setImageURI();
-        Glide.with(this).load(storageReference.toString()).into(productImage);
+       // String s= "https://firebasestorage.googleapis."+storageReference.toString();
+        //String s= "gs://coen268project-c7554.appspot.com/images/JPEG_20200527_201252_2758848949909595449.jpg";
+       // Glide.with(this).load(storageReference.toString()).into(productImage);
+        Picasso.with(this).load(storageReference.toString()).into(productImage);
+
     }
 }
