@@ -34,7 +34,7 @@ public class Sell_Description extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-       View view = inflater.inflate(R.layout.fragment_sell__description, container, false);
+       View view = inflater.inflate(R.layout.fragment_sell_description, container, false);
         itemDb = new Item();
         p_name = view.findViewById(R.id.edit_text_file_name);
         p_price = view.findViewById(R.id.edit_text_file_price);

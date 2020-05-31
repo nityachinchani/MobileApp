@@ -17,7 +17,7 @@ public class Main_Fragment_Controller extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main__fragment__controller);
+        setContentView(R.layout.activity_main_fragment_controller);
 
         bottomNavigationView=findViewById(R.id.bottomNavigation);
         f=findViewById(R.id.fragmentContainer);
