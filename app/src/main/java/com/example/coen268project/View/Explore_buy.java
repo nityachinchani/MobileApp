@@ -74,30 +74,12 @@ public class Explore_buy extends AppCompatActivity {
     }
 
     private void BindItems(ItemDao itemDao) {
-        utility.getItemPicture(itemDao.getPictureName(),new CallBack() {
-            @Override
-            public void onSuccess(Object object) {
-                BindImage(object);
-            }
-
-            @Override
-            public void onError(Object object) {
-
-            }
-        });
         productTitle.setText(itemDao.getItemName());
         productPrice.setText(itemDao.getPrice());
         productDescription.setText(itemDao.getDescription());
+        Glide.with(this).load(itemDao.getPictureName()).into(productImage);
 
     }
 
-    private void BindImage(Object object) {
-        StorageReference storageReference = (StorageReference) object;
-        //img_ProductPicture.setImageURI();
-       // String s= "https://firebasestorage.googleapis."+storageReference.toString();
-        //String s= "gs://coen268project-c7554.appspot.com/images/JPEG_20200527_201252_2758848949909595449.jpg";
-       // Glide.with(this).load(storageReference.toString()).into(productImage);
-        Picasso.with(this).load(storageReference.toString()).into(productImage);
 
-    }
 }

@@ -14,9 +14,9 @@ import com.bumptech.glide.Glide;
 import com.example.coen268project.Firebase.CallBack;
 import com.example.coen268project.Model.ItemDao;
 import com.example.coen268project.Presentation.Item;
-import com.example.coen268project.Presentation.Utility;
+
 import com.example.coen268project.R;
-import com.google.firebase.storage.StorageReference;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -119,25 +119,10 @@ public class Update_Ads extends Fragment {
     }
 
     private void BindItems(ItemDao itemDao) {
-        Utility utility = new Utility();
-        utility.getItemPicture(itemDao.getPictureName(), new CallBack() {
-            @Override
-            public void onSuccess(Object object) {
-                BindImage(object);
-            }
-
-            @Override
-            public void onError(Object object) {
-
-            }
-        });
         et_ProductName.setText(itemDao.getItemName());
         et_Description.setText(itemDao.getDescription());
         et_Price.setText(itemDao.getPrice());
+        Glide.with(getActivity()).load(itemDao.getPictureName()).into(img_ProductPicture);
     }
 
-    private void BindImage(Object object) {
-        StorageReference storageReference = (StorageReference) object;
-        Glide.with(getActivity()).load(storageReference.toString()).into(img_ProductPicture);
-    }
 }
