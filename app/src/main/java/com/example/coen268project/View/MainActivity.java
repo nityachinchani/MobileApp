@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         signUpTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, SignUp.class));
+                startActivity(new Intent(MainActivity.this, SignUpActivity.class));
             }
         });
 
@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
                     account.authenticateAccount(email, password, new CallBack() {
                         @Override
                         public void onSuccess(Object object) {
-                            startActivity(new Intent(MainActivity.this, Main_Fragment_Controller.class));  //change this class once homescreen is created
+                            startActivity(new Intent(MainActivity.this, HomeActivity.class));  //change this class once homescreen is created
                         }
 
                         @Override
@@ -68,14 +68,14 @@ public class MainActivity extends AppCompatActivity {
         guestLoginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, Main_Fragment_Controller.class));
+                startActivity(new Intent(MainActivity.this, HomeActivity.class));
             }
         });
 
         forgotPasswordTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, ForgotPassword.class));
+                startActivity(new Intent(MainActivity.this, ForgotPasswordActivity.class));
             }
         });
     }

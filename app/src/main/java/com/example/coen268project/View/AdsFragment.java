@@ -19,7 +19,7 @@ import com.example.coen268project.Presentation.Utility;
 import com.example.coen268project.R;
 import java.util.ArrayList;
 
-public class Ads_fragment extends Fragment {
+public class AdsFragment extends Fragment {
     private ListView listView;
     private TextView textView;
     private Item item;

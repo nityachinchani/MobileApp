@@ -23,14 +23,13 @@ import com.example.coen268project.Firebase.CallBack;
 import com.example.coen268project.Presentation.Account;
 import com.example.coen268project.Presentation.Utility;
 import com.example.coen268project.R;
-import com.google.firebase.storage.StorageReference;
 
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class SignUp extends AppCompatActivity {
+public class SignUpActivity extends AppCompatActivity {
     public static final int CAMERA_REQUEST_CODE = 102;
     EditText fullnameEditText, emailEditText, numberEditText, passwordEditText, confirmPasswordEditText;
     Button signUpBtn;
@@ -94,7 +93,7 @@ public class SignUp extends AppCompatActivity {
                 }
 
                 else if(!password.equals(confirmPassword) ){
-                    Toast.makeText(SignUp.this,"Passwords dont match",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SignUpActivity.this,"Passwords dont match",Toast.LENGTH_SHORT).show();
                 }
 
 
@@ -106,25 +105,25 @@ public class SignUp extends AppCompatActivity {
                             utility.uploadImageToStorage(f.getName(), contentUri, new CallBack() {
                                 @Override
                                 public void onSuccess(Object object) {
-                                    Toast.makeText(SignUp.this,"Image upload succeeded",Toast.LENGTH_LONG).show();
+                                    Toast.makeText(SignUpActivity.this,"Image upload succeeded",Toast.LENGTH_LONG).show();
                                 }
 
                                 @Override
                                 public void onError(Object object) {
-                                    Toast.makeText(SignUp.this,"Image upload failed",Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(SignUpActivity.this,"Image upload failed",Toast.LENGTH_SHORT).show();
                                 }
                             });
 
                             account.createAccount(object.toString(), fullName, email, number, password, f.getName(), new CallBack() {
                                 @Override
                                 public void onSuccess(Object object) {
-                                    startActivity(new Intent(SignUp.this, MainActivity.class));  //change this class once homescreen is created
+                                    startActivity(new Intent(SignUpActivity.this, HomeActivity.class));  //change this class once homescreen is created
                                 }
 
                                 @Override
                                 public void onError(Object object) {
                                     // TO Do: Delete authentication entry on user creation failure
-                                    Toast.makeText(SignUp.this,"User creation unsuccessful, try again",Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(SignUpActivity.this,"User creation unsuccessful, try again",Toast.LENGTH_SHORT).show();
                                 }
                             });
 
@@ -132,7 +131,7 @@ public class SignUp extends AppCompatActivity {
 
                         @Override
                         public void onError(Object object) {
-                            Toast.makeText(SignUp.this,"Signup unsuccessful, try again",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(SignUpActivity.this,"Signup unsuccessful, try again",Toast.LENGTH_SHORT).show();
                         }
                     });
                 }
@@ -142,7 +141,7 @@ public class SignUp extends AppCompatActivity {
         signInTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(SignUp.this,MainActivity.class));
+                startActivity(new Intent(SignUpActivity.this,MainActivity.class));
             }
         });
 

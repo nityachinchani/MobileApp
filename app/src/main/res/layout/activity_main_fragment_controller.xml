@@ -5,21 +5,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#BDE4E8"
-    tools:context=".View.Main_Fragment_Controller">
+    tools:context=".View.HomeActivity">
 
     <FrameLayout
         android:id="@+id/fragmentContainer"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></FrameLayout>
+        android:layout_height="match_parent"
+        android:layout_weight="0.8"></FrameLayout>
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomNavigation"
-        android:layout_alignParentBottom="true"
-        android:background="#FCFFFF"
-        app:itemIconTint="@android:color/holo_blue_dark"
-        app:itemTextColor="#76A5CD"
+    <FrameLayout
+        android:id="@+id/bottomContainer"
         android:layout_width="match_parent"
-        app:menu="@menu/menu"
-        android:layout_height="wrap_content"></com.google.android.material.bottomnavigation.BottomNavigationView>
+        android:layout_height="match_parent"
+        android:layout_weight="0.2"></FrameLayout>
 
 </RelativeLayout>

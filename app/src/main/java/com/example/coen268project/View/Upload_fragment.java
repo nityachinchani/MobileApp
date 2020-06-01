@@ -4,8 +4,6 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -31,9 +29,7 @@ import com.example.coen268project.Presentation.Utility;
 import com.example.coen268project.R;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -57,7 +53,7 @@ public class Upload_fragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
     {
-        View view = inflater.inflate(R.layout.upload_fragment, container, false);
+        View view = inflater.inflate(R.layout.fragment_upload, container, false);
         button = (Button) view.findViewById(R.id.button_con);
         butcam = (Button) view.findViewById(R.id.button_camera);
         butupload = (Button) view.findViewById(R.id.button_choose);

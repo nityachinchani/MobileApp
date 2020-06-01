@@ -37,18 +37,18 @@
         <activity
             android:name=".View.location_fragment"
             android:label="Choose Location" />
-        <activity android:name=".View.Main_Fragment_Controller" />
+        <activity android:name=".View.HomeActivity" />
         <activity
-            android:name=".View.Sell_fragment"
+            android:name=".View.SellFragment"
             android:label="Choose Furniture" />
         <activity
             android:name=".View.Upload_fragment"
             android:label="Choose Image" />
         <activity
-            android:name=".View.ForgotPassword"
+            android:name=".View.ForgotPasswordActivity"
             android:label="Forgot Password" />
         <activity
-            android:name=".View.SignUp"
+            android:name=".View.SignUpActivity"
             android:label="Sign Up" />
         <activity
             android:name=".View.MainActivity"

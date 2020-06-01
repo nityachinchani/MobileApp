@@ -1,5 +1,4 @@
 package com.example.coen268project.View;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
@@ -92,7 +91,7 @@ public class Update_Ads extends Fragment {
                         Toast.makeText(getContext(),"Order update failed",Toast.LENGTH_LONG).show();
                     }
                 });
-                Intent intent = new Intent(getActivity(), Main_Fragment_Controller.class);
+                Intent intent = new Intent(getActivity(), HomeActivity.class);
                 startActivity(intent);
             }
         });
@@ -112,7 +111,7 @@ public class Update_Ads extends Fragment {
                         Toast.makeText(getContext(),"Order update failed",Toast.LENGTH_LONG).show();
                     }
                 });
-                Intent intent = new Intent(getActivity(), Main_Fragment_Controller.class);
+                Intent intent = new Intent(getActivity(), HomeActivity.class);
                 startActivity(intent);
             }
         });
@@ -120,9 +119,6 @@ public class Update_Ads extends Fragment {
     }
 
     private void BindItems(ItemDao itemDao) {
-/*Glide.with(this)
-                .load(storageReference)
-                .into(image);*/
         Utility utility = new Utility();
         utility.getItemPicture(itemDao.getPictureName(), new CallBack() {
             @Override
@@ -142,7 +138,6 @@ public class Update_Ads extends Fragment {
 
     private void BindImage(Object object) {
         StorageReference storageReference = (StorageReference) object;
-        //img_ProductPicture.setImageURI();
         Glide.with(getActivity()).load(storageReference.toString()).into(img_ProductPicture);
     }
 }

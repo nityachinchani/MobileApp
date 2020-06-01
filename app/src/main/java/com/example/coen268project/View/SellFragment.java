@@ -15,7 +15,7 @@ import android.widget.TextView;
 import com.example.coen268project.Presentation.Utility;
 import com.example.coen268project.R;
 
-public class Sell_fragment extends Fragment {
+public class SellFragment extends Fragment {
     private static final String[] titles = Utility.Category.toArray();
     private ListView listView;
 

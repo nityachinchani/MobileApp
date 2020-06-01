@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.coen268project.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 import android.content.Intent;
@@ -15,7 +14,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class ForgotPassword extends AppCompatActivity {
+public class ForgotPasswordActivity extends AppCompatActivity {
     Button forgotPasswordBtn;
     TextView forgotEmailTextView;
     FirebaseAuth mFirebaseAuth;
@@ -37,13 +36,13 @@ public class ForgotPassword extends AppCompatActivity {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 if (task.isSuccessful()) {
-                                    Toast.makeText(ForgotPassword.this,"Password sent to your email",Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(ForgotPasswordActivity.this,"Password sent to your email",Toast.LENGTH_SHORT).show();
                                 }
                                 else {
-                                    Toast.makeText(ForgotPassword.this,"Email doesnt exist",Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(ForgotPasswordActivity.this,"Email doesnt exist",Toast.LENGTH_SHORT).show();
                                 }
 
-                                startActivity(new Intent(ForgotPassword.this,MainActivity.class));
+                                startActivity(new Intent(ForgotPasswordActivity.this,MainActivity.class));
                             }
                         });
 

@@ -15,7 +15,6 @@ import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -25,7 +24,7 @@ import androidx.fragment.app.Fragment;
 
 import java.util.ArrayList;
 
-public class Explore extends Fragment {
+public class ExploreFragment extends Fragment {
 //    private static final String[] titles = new String[]{"Item1", "Item2",
 //            "Item3", "Item4", "Item5","Item6", "Item7", "Item8","Item9", "Item10"};
 
@@ -52,7 +51,7 @@ public class Explore extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.explore_fragment, container, false);
+        View view = inflater.inflate(R.layout.fragment_explore, container, false);
 
         item = new Item();
         //exploreListView = (ListView) view.findViewById(R.id.explore_List_View);

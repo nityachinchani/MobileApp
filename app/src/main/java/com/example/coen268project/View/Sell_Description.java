@@ -79,7 +79,7 @@ public class Sell_Description extends Fragment {
                                Toast.makeText(getContext(),"Product uploaded failed",Toast.LENGTH_LONG).show();
                            }
                        });
-                       Intent intent = new Intent(getActivity(), Main_Fragment_Controller.class);
+                       Intent intent = new Intent(getActivity(), HomeActivity.class);
                        startActivity(intent);
                    }
                });
