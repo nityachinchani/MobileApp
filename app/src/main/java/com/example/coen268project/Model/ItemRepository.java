@@ -9,7 +9,8 @@ public interface ItemRepository {
     void updateItem(String itemId, HashMap map, CallBack callBack);
     void deleteItem(String itemId, CallBack callBack);
     void getItem(String itemId, CallBack callBack);
-    void getSpecificItems(String category, String location, CallBack callBack);
+    void getItemsByCategory(String category,CallBack callBack);
+    void getItemsByLocation(String location,CallBack callBack);
     void getAllItems(CallBack callBack);
     void getAllLocations(CallBack callBack);
 }
