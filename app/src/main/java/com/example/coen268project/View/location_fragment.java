@@ -71,7 +71,7 @@ public class location_fragment extends AppCompatActivity implements OnMapReadyCa
                 Intent intent = new Intent(location_fragment.this, FragmentBaseSellActivityController.class);
                 intent.putExtra("from", Upload_fragment.class.getSimpleName());
                 intent.putExtra("Item_1",item_1);
-                intent.putExtra("Location",location_1);
+                intent.putExtra("Location","south sanfrancisco");
                 startActivity(intent);
             }
         });

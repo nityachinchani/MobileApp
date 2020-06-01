@@ -60,11 +60,13 @@ public class ExploreFragment extends Fragment {
         goBtn=(Button) view.findViewById(R.id.goBtn);
 
         getAllItems();
-
-        ArrayList<String> tempArray= new ArrayList<>();
-        tempArray.add("All");
-        tempArray.addAll(Arrays.asList(category));
-        category=tempArray.toArray(new String[0]);
+        if(!category[0].equals("All")) {
+            ArrayList<String> tempArray = new ArrayList<>();
+            tempArray.clear();
+            tempArray.add("All");
+            tempArray.addAll(Arrays.asList(category));
+            category = tempArray.toArray(new String[0]);
+        }
         ArrayAdapter<String> categoryAdapter = new ArrayAdapter<String>(getActivity(), R.layout.activity_spinner_row, R.id.text_id, category);
         categorySpinner.setAdapter(categoryAdapter);
         categorySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -85,6 +87,7 @@ public class ExploreFragment extends Fragment {
             public void onSuccess(Object object) {
                 Object[] obj=(Object[]) object;
                 ArrayList<String> arrayList=new ArrayList<>();
+                arrayList.clear();
                 arrayList.add("All");
 
                 for (Object location: obj
