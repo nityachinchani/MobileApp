@@ -59,19 +59,18 @@ public class location_fragment extends AppCompatActivity implements OnMapReadyCa
         findHomeLocation = findViewById(R.id.ic_go);
         button = findViewById(R.id.button_continue);
         final String item_1 = getIntent().getCharSequenceExtra("Item").toString();
-        final String location_1 = searchText.getText().toString();
         getLocationPermission();
 
-        //location_fragment.this.getActionBar().setTitle("Choose Location");
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v)
             {
+                final String location_1 = searchText.getText().toString();
                 Intent intent = new Intent(location_fragment.this, FragmentBaseSellActivityController.class);
                 intent.putExtra("from", Upload_fragment.class.getSimpleName());
                 intent.putExtra("Item_1",item_1);
-                intent.putExtra("Location","south sanfrancisco");
+                intent.putExtra("Location",location_1);
                 startActivity(intent);
             }
         });

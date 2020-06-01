@@ -9,8 +9,6 @@ import com.example.coen268project.Presentation.Item;
 import com.example.coen268project.Presentation.Utility;
 import com.example.coen268project.R;
 import com.google.firebase.storage.StorageReference;
-import com.squareup.picasso.Callback;
-import com.squareup.picasso.Picasso;
 
 import android.os.Bundle;
 import android.view.View;
