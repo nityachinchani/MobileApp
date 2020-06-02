@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".View.Account_Profile">
+
+
+    <TextView
+android:id="@+id/profileName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:fontFamily="monospace"
+
+        android:textSize="18sp"
+        android:textStyle="bold"
+        tools:text="Name will be displayed here" />
+
+    <TextView
+        android:id="@+id/profileEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:fontFamily="monospace"
+
+        android:textSize="18sp"
+        android:textStyle="bold"
+        tools:text="Email will be displayed here" />
+
+    <TextView
+        android:id="@+id/profilePhone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:fontFamily="monospace"
+
+        android:textSize="18sp"
+        android:textStyle="bold"
+        tools:text="Phone no will be displayed here" />
+
+</LinearLayout>

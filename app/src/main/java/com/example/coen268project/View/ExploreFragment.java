@@ -108,7 +108,6 @@ public class ExploreFragment extends Fragment {
 
 
 
-
         goBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
