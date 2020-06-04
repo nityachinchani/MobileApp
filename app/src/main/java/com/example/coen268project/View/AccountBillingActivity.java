@@ -116,9 +116,6 @@ public class AccountBillingActivity extends AppCompatActivity {
             statusText.setText("Sold");
             return convertView;
         }
-
-
-
     }
 }
 

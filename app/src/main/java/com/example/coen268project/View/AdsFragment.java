@@ -60,8 +60,7 @@ public class AdsFragment extends Fragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent intent = new Intent(getActivity(), HomeActivity.class);
-                intent.putExtra("from", UpdateAdsActivity.class.getSimpleName());
+                Intent intent = new Intent(getActivity(), UpdateAdsActivity.class);
                 intent.putExtra("ItemId", (CharSequence) adapter.getItem(i).getItemId());
                 startActivity(intent);
             }
