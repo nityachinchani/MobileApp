@@ -19,7 +19,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class AccountMyOrders extends AppCompatActivity {
+public class AccountMyOrdersActivity extends AppCompatActivity {
     int[] numberImage = {R.drawable.test1, R.drawable.test2, R.drawable.test3, R.drawable.test4, R.drawable.test5, R.drawable.test6
             , R.drawable.ic_account_box_black_24dp, R.drawable.ic_camera_alt_black_24dp, R.drawable.ic_chat_bubble_black_24dp, R.drawable.ic_current
             , R.drawable.ic_find_in_page_black_24dp};
@@ -62,7 +62,7 @@ public class AccountMyOrders extends AppCompatActivity {
         myOrdersGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(AccountMyOrders.this,adapter.getItem(i).getItemName(),Toast.LENGTH_SHORT).show();
+                Toast.makeText(AccountMyOrdersActivity.this,adapter.getItem(i).getItemName(),Toast.LENGTH_SHORT).show();
 //                Intent intent = new Intent(AccountBilling.this, Explore_buy.class);
 //                intent.putExtra("Item", (CharSequence) adapter.getItem(i).getItemId());
 //                startActivity(intent);

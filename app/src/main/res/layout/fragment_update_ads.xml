@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:clipToPadding="false"
-    tools:context=".View.UpdateAdsFragment">
+    tools:context=".View.UpdateAdsActivity">
     <!--  android:clickable="true"
     android:focusable="true"
 
@@ -22,7 +22,7 @@
             android:clickable="false"
             android:focusable="true"
             android:orientation="vertical"
-            tools:context=".View.UpdateAdsFragment">
+            tools:context=".View.UpdateAdsActivity">
 
             <TextView
                 android:layout_width="match_parent"

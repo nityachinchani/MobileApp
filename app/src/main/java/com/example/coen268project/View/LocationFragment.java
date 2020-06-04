@@ -53,7 +53,7 @@ public class LocationFragment extends AppCompatActivity implements OnMapReadyCal
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_location_fragment);
+        setContentView(R.layout.activity_location);
         searchText = findViewById(R.id.edit_search);
         currentLocation = findViewById(R.id.ic_current);
         findHomeLocation = findViewById(R.id.ic_go);

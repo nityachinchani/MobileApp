@@ -5,7 +5,7 @@ import com.example.coen268project.R;
 import android.os.Bundle;
 import android.widget.TextView;
 
-public class Account_Profile extends AppCompatActivity {
+public class AccountProfileActivity extends AppCompatActivity {
     private TextView profileName,profileEmail,profilePhone;
 
     @Override

@@ -10,7 +10,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -47,13 +46,13 @@ private ImageView accountImage;
                 Intent intent;
                 switch (accountListView.getItemAtPosition(i).toString()){
                     case "MyProfile":
-                        intent = new Intent(getActivity(), Account_Profile.class);
+                        intent = new Intent(getActivity(), AccountProfileActivity.class);
                         break;
                     case "MyBillings":
-                        intent = new Intent(getActivity(), AccountBilling.class);
+                        intent = new Intent(getActivity(), AccountBillingActivity.class);
                         break;
                     case "MyOrders":
-                        intent = new Intent(getActivity(), AccountMyOrders.class);
+                        intent = new Intent(getActivity(), AccountMyOrdersActivity.class);
                         break;
                     default:
                         throw new IllegalStateException("Unexpected value: " + accountListView.getItemAtPosition(i).toString());

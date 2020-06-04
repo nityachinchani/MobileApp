@@ -77,16 +77,6 @@ public class HomeActivity extends AppCompatActivity implements BottomFragment.On
             sell_descriptionFragment.setArguments(bundle);
             fragmentTransaction(sell_descriptionFragment);
         }
-
-        if (from.equals(UpdateAdsFragment.class.getSimpleName()))
-        {
-            Bundle bundle = new Bundle();
-            final String ItemId = getIntent().getStringExtra("ItemId");
-            bundle.putString("ItemId",ItemId);
-            UpdateAdsFragment updateAds = new UpdateAdsFragment();
-            updateAds.setArguments(bundle);
-            fragmentTransaction(updateAds);
-        }
     }
 
     private void fragmentTransaction(Fragment fragment){

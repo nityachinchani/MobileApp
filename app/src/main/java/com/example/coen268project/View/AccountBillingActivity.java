@@ -7,7 +7,6 @@ import com.example.coen268project.Model.ItemDao;
 import com.example.coen268project.Presentation.Item;
 import com.example.coen268project.R;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,7 +21,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 
-public class AccountBilling extends AppCompatActivity {
+public class AccountBillingActivity extends AppCompatActivity {
     int[] numberImage = {R.drawable.test1, R.drawable.test2, R.drawable.test3, R.drawable.test4, R.drawable.test5, R.drawable.test6
             , R.drawable.ic_account_box_black_24dp, R.drawable.ic_camera_alt_black_24dp, R.drawable.ic_chat_bubble_black_24dp, R.drawable.ic_current
             , R.drawable.ic_find_in_page_black_24dp};
@@ -66,7 +65,7 @@ public class AccountBilling extends AppCompatActivity {
         billingGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(AccountBilling.this,adapter.getItem(i).getItemName(),Toast.LENGTH_SHORT).show();
+                Toast.makeText(AccountBillingActivity.this,adapter.getItem(i).getItemName(),Toast.LENGTH_SHORT).show();
 //                Intent intent = new Intent(AccountBilling.this, Explore_buy.class);
 //                intent.putExtra("Item", (CharSequence) adapter.getItem(i).getItemId());
 //                startActivity(intent);

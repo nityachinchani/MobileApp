@@ -21,9 +21,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".View.ExploreBuyActivity"></activity>
-        <activity android:name=".View.AccountMyOrders"></activity>
-        <activity android:name=".View.AccountBilling" />
-        <activity android:name=".View.Account_Profile" />
+        <activity android:name=".View.AccountMyOrdersActivity"></activity>
+        <activity android:name=".View.AccountBillingActivity" />
+        <activity android:name=".View.AccountProfileActivity" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
