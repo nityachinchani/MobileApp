@@ -21,6 +21,9 @@ import com.google.firebase.storage.UploadTask;
 
 public abstract class FirebaseRepository {
 
+    private String imageUrl = "";
+
+
     protected final void firebaseAuthentication(final FirebaseAuth mFirebaseAuth, String email, String password, final CallBack callback)
     {
         mFirebaseAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -62,10 +65,7 @@ public abstract class FirebaseRepository {
                     @Override
                     public void onSuccess(Uri uri) {
                         Task<Uri> urlTask = taskSnapshot.getStorage().getDownloadUrl();
-                        //callback.onSuccess(urlTask.getResult().toString());
-                        final Map<String, String> updates = new HashMap<>();
-                        updates.put("pictureName", urlTask.getResult().toString());
-                        update(itemId, (HashMap) updates,callback);
+                        setImageUrl(urlTask.getResult().toString());
                     }
                 });
             }
@@ -77,10 +77,9 @@ public abstract class FirebaseRepository {
         });
     }
 
-
-
-    protected  void update(String itemId, HashMap map, final CallBack callBack){
-
+    /*protected  void updateField(String itemId, HashMap map, final CallBack callBack){
+        final Map<String, String> updates = new HashMap<>();
+        updates.put("pictureName", this.getImageUrl());
         if (!itemId.isEmpty()) {
             DatabaseReference databaseReference = FirebaseInstance.DATABASE.getReference(FirebaseConstants.DATABASE_ROOT).child("itemTable").child(itemId);
             firebaseUpdateChildren(databaseReference, map, new CallBack() {
@@ -97,7 +96,7 @@ public abstract class FirebaseRepository {
         } else {
             callBack.onError(FirebaseConstants.FAIL);
         }
-    }
+    }*/
 
     protected final void firebaseCreate(final DatabaseReference databaseReference, final Object model, final CallBack callback) {
         databaseReference.keepSynced(true);
@@ -154,5 +153,13 @@ public abstract class FirebaseRepository {
                 callback.onError(databaseError);
             }
         });
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }

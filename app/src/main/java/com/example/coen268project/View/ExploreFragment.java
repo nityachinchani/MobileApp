@@ -1,4 +1,5 @@
 package com.example.coen268project.View;
+import com.bumptech.glide.Glide;
 import com.example.coen268project.Firebase.CallBack;
 import com.example.coen268project.Model.ItemDao;
 import com.example.coen268project.Presentation.Item;
@@ -28,15 +29,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class ExploreFragment extends Fragment {
-//    private static final String[] titles = new String[]{"Item1", "Item2",
-//            "Item3", "Item4", "Item5","Item6", "Item7", "Item8","Item9", "Item10"};
-
     private ArrayList<ItemDao> itemList = new ArrayList<>();
     private Item item;
-
-    int[] numberImage = {R.drawable.test1, R.drawable.test2, R.drawable.test3, R.drawable.test4, R.drawable.test5, R.drawable.test6
-            , R.drawable.ic_account_box_black_24dp, R.drawable.ic_camera_alt_black_24dp, R.drawable.ic_chat_bubble_black_24dp, R.drawable.ic_current
-            , R.drawable.ic_find_in_page_black_24dp};
 
     private static String[] category = Utility.Category.toArray();
 
@@ -69,18 +63,6 @@ public class ExploreFragment extends Fragment {
         }
         ArrayAdapter<String> categoryAdapter = new ArrayAdapter<String>(getActivity(), R.layout.activity_spinner_row, R.id.text_id, category);
         categorySpinner.setAdapter(categoryAdapter);
-        categorySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-               //Toast.makeText(getActivity(),"The item is "+categorySpinner.getSelectedItem().toString(),Toast.LENGTH_SHORT).show();
-               // getSpecificItem();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
 
         item.getAllLocations(new CallBack() {
             @Override
@@ -191,23 +173,11 @@ public class ExploreFragment extends Fragment {
     private void bindLocation() {
         ArrayAdapter<String> locationAdapter = new ArrayAdapter<String>(getActivity(), R.layout.activity_spinner_row, R.id.text_id, location);
         locationSpinner.setAdapter(locationAdapter);
-        locationSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-               // Toast.makeText(getActivity(),"The item is "+locationSpinner.getSelectedItem().toString(),Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-
     }
 
 
     public void BindItems() {
-        final MainAdapter_explore_screen adapter = new MainAdapter_explore_screen(itemList, numberImage);
+        final MainAdapter_explore_screen adapter = new MainAdapter_explore_screen(itemList);
         exploreGridView.setAdapter(adapter);
         exploreGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -222,11 +192,9 @@ public class ExploreFragment extends Fragment {
 
     public class MainAdapter_explore_screen extends BaseAdapter {
         ArrayList<ItemDao> items;
-        int[] numberImage; // remove this parameter
 
-        public MainAdapter_explore_screen(ArrayList<ItemDao> items, int[] numberImage) {
+        public MainAdapter_explore_screen(ArrayList<ItemDao> items) {
             this.items = items;
-            this.numberImage = numberImage;
         }
 
         @Override
@@ -247,14 +215,11 @@ public class ExploreFragment extends Fragment {
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             LayoutInflater inflater = getLayoutInflater();
-
             convertView=inflater.inflate(R.layout.activity_card_view, null);
             ImageView imageView = convertView.findViewById(R.id.image_view);
             TextView textView = convertView.findViewById(R.id.text_view);
-
-            imageView.setImageResource(numberImage[position]); // set same as in explore_buy
+            Glide.with(getActivity()).load(this.items.get(position).getPictureName()).into(imageView);
             textView.setText(this.items.get(position).getItemName());
-
             return convertView;
         }
 
