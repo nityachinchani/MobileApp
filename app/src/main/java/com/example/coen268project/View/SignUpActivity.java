@@ -43,6 +43,7 @@ public class SignUpActivity extends AppCompatActivity {
     Uri imageUri;
     Uri contentUri;
     File f;
+    final String[] picture_name = {""};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,19 +106,7 @@ public class SignUpActivity extends AppCompatActivity {
                         @Override
                         public void onSuccess(Object object) {
                             utility.setCurrentUserId(object.toString());
-                            utility.uploadImageToStorage(f.getName(), contentUri, new CallBack() {
-                                @Override
-                                public void onSuccess(Object object) {
-                                    Toast.makeText(SignUpActivity.this,"Image upload succeeded",Toast.LENGTH_LONG).show();
-                                }
-
-                                @Override
-                                public void onError(Object object) {
-                                    Toast.makeText(SignUpActivity.this,"Image upload failed",Toast.LENGTH_SHORT).show();
-                                }
-                            });
-
-                            account.createAccount(object.toString(), fullName, email, number, password, f.getName(), new CallBack() {
+                            account.createAccount(object.toString(), fullName, email, number, password, picture_name[0], new CallBack() {
                                 @Override
                                 public void onSuccess(Object object) {
                                     startActivity(new Intent(SignUpActivity.this, HomeActivity.class));  //change this class once homescreen is created
@@ -157,6 +146,26 @@ public class SignUpActivity extends AppCompatActivity {
 
     }
 
+    private void uploadPictureToFirebase() {
+        if(f!= null)
+        {
+            picture_name[0] = f.getName();
+            utility.uploadImageToStorage(picture_name[0], contentUri, new CallBack() {
+                @Override
+                public void onSuccess(Object object) {
+                    picture_name[0] = object.toString();
+                    Toast.makeText(SignUpActivity.this, "Image upload succeeded" + picture_name[0], Toast.LENGTH_LONG).show();
+                    Log.d("tag", "Image upload succeeded" + picture_name[0]);
+                }
+
+                @Override
+                public void onError(Object object) {
+                    Toast.makeText(SignUpActivity.this, "Image upload failed", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+    }
+
     private void askCameraPermission() {
         if(ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)!= PackageManager.PERMISSION_GRANTED){
             ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.CAMERA},CAMERA_PERMISSION_CODE);
@@ -193,8 +202,8 @@ public class SignUpActivity extends AppCompatActivity {
 
             mediaScanIntent.setData(contentUri);
             this.sendBroadcast(mediaScanIntent);
-
         }
+        uploadPictureToFirebase();
     }
 
     private File createImageFile() throws IOException {

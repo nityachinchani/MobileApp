@@ -169,6 +169,7 @@ public class UploadFragment extends Fragment {
             utility.uploadImageToStorage(picture_name[0], contentUri, new CallBack() {
                 @Override
                 public void onSuccess(Object object) {
+                    button.setEnabled(true);
                     picture_name[0] = object.toString();
                     Toast.makeText(getContext(), "Image upload succeeded" + picture_name[0], Toast.LENGTH_LONG).show();
                     Log.d("tag", "Image upload succeeded" + picture_name[0]);
@@ -176,7 +177,7 @@ public class UploadFragment extends Fragment {
 
                 @Override
                 public void onError(Object object) {
-                    Toast.makeText(getContext(), "Image upload failed", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Image upload in progresss" + (double) object, Toast.LENGTH_SHORT).show();
                 }
             });
         }

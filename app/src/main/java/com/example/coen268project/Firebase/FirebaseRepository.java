@@ -61,7 +61,27 @@ public abstract class FirebaseRepository {
                 Task<Uri> urlTask = taskSnapshot.getStorage().getDownloadUrl();
                 callback.onSuccess(urlTask.getResult().toString());
             }
-        });
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e)
+            {
+                callback.onError(e.getMessage());
+            }
+        }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+
+                            // Progress Listener for loading
+                            // percentage on the dialog box
+                            @Override
+                            public void onProgress(
+                                    UploadTask.TaskSnapshot taskSnapshot)
+                            {
+                                double progress
+                                        = (100.0
+                                        * taskSnapshot.getBytesTransferred()
+                                        / taskSnapshot.getTotalByteCount());
+                                callback.onError(progress);
+                            }
+                        });
     }
 
     protected final void firebaseCreate(final DatabaseReference databaseReference, final Object model, final CallBack callback) {

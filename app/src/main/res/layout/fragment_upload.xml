@@ -89,7 +89,8 @@
         android:textAlignment="center"
         android:textAllCaps="false"
         android:textSize="20sp"
-        android:textStyle="bold"/>
+        android:textStyle="bold"
+        android:enabled="false"/>
 
         </LinearLayout>
     </ScrollView>
