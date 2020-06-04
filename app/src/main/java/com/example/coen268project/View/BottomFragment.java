@@ -17,6 +17,7 @@ public class BottomFragment extends Fragment implements BottomNavigationView.OnN
     OnFragmentInteractionListener listener;
 
     public BottomFragment() {
+
         // Required empty public constructor
     }
 

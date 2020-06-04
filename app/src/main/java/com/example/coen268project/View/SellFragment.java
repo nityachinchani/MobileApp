@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ArrayAdapter;
-import android.widget.TextView;
 
 import com.example.coen268project.Presentation.Utility;
 import com.example.coen268project.R;
@@ -29,7 +28,7 @@ public class SellFragment extends Fragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent intent = new Intent(getActivity(), location_fragment.class);
+                Intent intent = new Intent(getActivity(), LocationFragment.class);
                 intent.putExtra("Item", (CharSequence) listView.getItemAtPosition(i));
                 startActivity(intent);
             }

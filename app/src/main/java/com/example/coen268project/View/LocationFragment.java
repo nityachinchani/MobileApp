@@ -36,7 +36,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class location_fragment extends AppCompatActivity implements OnMapReadyCallback {
+public class LocationFragment extends AppCompatActivity implements OnMapReadyCallback {
     private static final String TAG = "location";
     private static final String FINE_LOCATION = Manifest.permission.ACCESS_FINE_LOCATION;
     private static final String COURSE_LOCATION = Manifest.permission.ACCESS_COARSE_LOCATION;
@@ -68,8 +68,8 @@ public class location_fragment extends AppCompatActivity implements OnMapReadyCa
             @Override
             public void onClick(View v)
             {
-                Intent intent = new Intent(location_fragment.this, FragmentBaseSellActivityController.class);
-                intent.putExtra("from", Upload_fragment.class.getSimpleName());
+                Intent intent = new Intent(LocationFragment.this, HomeActivity.class);
+                intent.putExtra("from", UploadFragment.class.getSimpleName());
                 intent.putExtra("Item_1",item_1);
                 intent.putExtra("Location",location_1);
                 startActivity(intent);
@@ -184,7 +184,7 @@ public class location_fragment extends AppCompatActivity implements OnMapReadyCa
     private void initializeMap() {
         Log.d(TAG, "initializing map");
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
-        mapFragment.getMapAsync(location_fragment.this);
+        mapFragment.getMapAsync(LocationFragment.this);
     }
 
     /**
@@ -193,7 +193,7 @@ public class location_fragment extends AppCompatActivity implements OnMapReadyCa
     private void geoLocate() {
         Log.d(TAG, "geoLocate the current position");
         String searchString = searchText.getText().toString();
-        Geocoder geocoder = new Geocoder(location_fragment.this);
+        Geocoder geocoder = new Geocoder(LocationFragment.this);
         List<Address> addressList = new ArrayList<>();
         try {
             addressList = geocoder.getFromLocationName(searchString, 1);
@@ -229,7 +229,7 @@ public class location_fragment extends AppCompatActivity implements OnMapReadyCa
                             moveCamera(new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude()), DEFAULT_ZOOM, "Current Location");
                         } else {
                             Log.d(TAG, "Location not found");
-                            Toast.makeText(location_fragment.this, "unable to get current location", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LocationFragment.this, "unable to get current location", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });

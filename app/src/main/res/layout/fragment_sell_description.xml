@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".View.Upload_fragment">
+    tools:context=".View.UploadFragment">
     <!--android:clickable="true"
     android:focusable="true"
 
@@ -21,7 +21,7 @@
             android:clickable="false"
             android:focusable="true"
             android:orientation="vertical"
-            tools:context=".View.Upload_fragment">
+            tools:context=".View.UploadFragment">
 
     <TextView
         android:id="@+id/Product_tag"

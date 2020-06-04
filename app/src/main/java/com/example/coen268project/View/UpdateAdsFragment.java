@@ -23,7 +23,7 @@ import java.util.Map;
 /**
  * create an instance of this fragment.
  */
-public class Update_Ads extends Fragment {
+public class UpdateAdsFragment extends Fragment {
     Button btnUpdate;
     Button btnDelete;
     private EditText et_ProductName;
@@ -32,7 +32,7 @@ public class Update_Ads extends Fragment {
     private Item item;
     private ImageView img_ProductPicture;
 
-    public Update_Ads() {
+    public UpdateAdsFragment() {
         // Required empty public constructor
     }
 

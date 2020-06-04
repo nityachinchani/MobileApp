@@ -143,7 +143,7 @@ public class ExploreFragment extends Fragment {
         exploreGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent intent = new Intent(getActivity(), Explore_buy.class);
+                Intent intent = new Intent(getActivity(), ExploreBuyActivity.class);
                 intent.putExtra("Item", (CharSequence) adapter.getItem(i).getItemId());
                 startActivity(intent);
             }
@@ -179,7 +179,7 @@ public class ExploreFragment extends Fragment {
         public View getView(int position, View convertView, ViewGroup parent) {
             LayoutInflater inflater = getLayoutInflater();
 
-            convertView=inflater.inflate(R.layout.explore_screen_adapter_element, null);
+            convertView=inflater.inflate(R.layout.activity_card_view, null);
             ImageView imageView = convertView.findViewById(R.id.image_view);
             TextView textView = convertView.findViewById(R.id.text_view);
 

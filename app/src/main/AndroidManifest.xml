@@ -20,7 +20,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".View.Explore_buy"></activity>
+        <activity android:name=".View.ExploreBuyActivity"></activity>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -33,16 +33,15 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyAu_oDSThjxtfDKk8-O-WqZDLmxtU2w19Q" />
 
-        <activity android:name=".View.FragmentBaseSellActivityController"></activity>
         <activity
-            android:name=".View.location_fragment"
+            android:name=".View.LocationFragment"
             android:label="Choose Location" />
         <activity android:name=".View.HomeActivity" />
         <activity
             android:name=".View.SellFragment"
             android:label="Choose Furniture" />
         <activity
-            android:name=".View.Upload_fragment"
+            android:name=".View.UploadFragment"
             android:label="Choose Image" />
         <activity
             android:name=".View.ForgotPasswordActivity"

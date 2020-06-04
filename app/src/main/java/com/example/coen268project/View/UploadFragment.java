@@ -35,7 +35,7 @@ import java.util.Date;
 
 import static android.app.Activity.RESULT_OK;
 
-public class Upload_fragment extends Fragment {
+public class UploadFragment extends Fragment {
 
     Button button, butcam, butupload;
     private static final int CAMERA_REQUEST_CODE = 102;
@@ -102,8 +102,8 @@ public class Upload_fragment extends Fragment {
                         }
                     });
                 }
-                Intent intent = new Intent(getActivity(), FragmentBaseSellActivityController.class);
-                intent.putExtra("from", Sell_Description.class.getSimpleName());
+                Intent intent = new Intent(getActivity(), HomeActivity.class);
+                intent.putExtra("from", SellDescriptionFragment.class.getSimpleName());
                 intent.putExtra("Item",item);
                 intent.putExtra("Location",Location);
                 intent.putExtra("Path", picture_name);

@@ -20,10 +20,10 @@ import com.example.coen268project.R;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link Sell_Description} factory method to
+ * Use the {@link SellDescriptionFragment} factory method to
  * create an instance of this fragment.
  */
-public class Sell_Description extends Fragment {
+public class SellDescriptionFragment extends Fragment {
     Button button_post;
     private EditText p_name;
     private EditText p_price;

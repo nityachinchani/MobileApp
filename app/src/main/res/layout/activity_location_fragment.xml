@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     style="@style/Theme.AppCompat.DayNight.DarkActionBar"
-    tools:context=".View.location_fragment"
+    tools:context=".View.LocationFragment"
     android:id="@+id/loc"
     android:background="@color/color_blue">
 
