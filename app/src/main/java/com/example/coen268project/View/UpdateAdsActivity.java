@@ -5,9 +5,12 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.bumptech.glide.Glide;
@@ -15,6 +18,7 @@ import com.example.coen268project.Firebase.CallBack;
 import com.example.coen268project.Model.ItemDao;
 import com.example.coen268project.Presentation.Item;
 
+import com.example.coen268project.Presentation.Utility;
 import com.example.coen268project.R;
 
 import java.util.HashMap;
@@ -29,8 +33,10 @@ public class UpdateAdsActivity extends AppCompatActivity {
     private EditText et_ProductName;
     private EditText et_Price;
     private TextView et_Description;
+    private Spinner statusSpinner;
     private Item item;
     private ImageView img_ProductPicture;
+    private static String[] itemStatus = Utility.ItemStatus.toArray();
 
     public UpdateAdsActivity() {
         // Required empty public constructor
@@ -48,9 +54,12 @@ public class UpdateAdsActivity extends AppCompatActivity {
         img_ProductPicture = findViewById(R.id.product_image);
         btnUpdate = findViewById(R.id.btnUpdate);
         btnDelete = findViewById(R.id.btnDelete);
+        statusSpinner = findViewById(R.id.itemStatusSpinner);
+
+        ArrayAdapter<String> categoryAdapter = new ArrayAdapter<String>(UpdateAdsActivity.this, R.layout.activity_spinner_row, R.id.text_id, itemStatus);
+        statusSpinner.setAdapter(categoryAdapter);
         final String itemId = bundle.getString("ItemId");
         final Map<String, String> updates = new HashMap<>();
-
         item.getItem(itemId, new CallBack() {
             @Override
             public void onSuccess(Object object) {
@@ -74,6 +83,7 @@ public class UpdateAdsActivity extends AppCompatActivity {
                 updates.put("itemName", product_name);
                 updates.put("description", product_description);
                 updates.put("price", product_price);
+                updates.put("itemStatus", statusSpinner.getSelectedItem().toString());
                 item.updateItem(itemId, (HashMap) updates, new CallBack() {
                     @Override
                     public void onSuccess(Object object) {
@@ -115,6 +125,7 @@ public class UpdateAdsActivity extends AppCompatActivity {
         et_ProductName.setText(itemDao.getItemName());
         et_Description.setText(itemDao.getDescription());
         et_Price.setText(itemDao.getPrice());
+        statusSpinner.setSelection(Utility.ItemStatus.getIndex(itemDao.getItemStatus()));
         Glide.with(UpdateAdsActivity.this).load(itemDao.getPictureName()).into(img_ProductPicture);
     }
 

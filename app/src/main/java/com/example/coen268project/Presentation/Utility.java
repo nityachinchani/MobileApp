@@ -23,9 +23,32 @@ public class Utility extends FirebaseRepository {
 
     public static enum ItemStatus
     {
-        POSTED,
-        SOLD,
-        BOOKED
+        POSTED("Posted"),
+        SOLD("Sold"),
+        BOOKED("Booked");
+
+        private final String name;
+
+        ItemStatus(String s) {
+            name = s;
+        }
+
+        public String toString() {
+            return this.name;
+        }
+
+        public static int getIndex(String name) {
+            return ItemStatus.valueOf(name.toUpperCase()).ordinal();
+        }
+
+        public static String[] toArray() {
+            ArrayList<String> itemStatusArray = new ArrayList<>();
+            for (ItemStatus status: ItemStatus.values()
+            ) {
+                itemStatusArray.add(status.name);
+            }
+            return  itemStatusArray.toArray(new String[0]);
+        }
     }
 
     public static enum CommunicationType
@@ -37,9 +60,28 @@ public class Utility extends FirebaseRepository {
 
     public static enum BillingStatus
     {
-        PENDING,
-        DELIVERED,
-        RECEIVED
+        PENDING("PENDING"),
+        DELIVERED("DELIVERED"),
+        RECEIVED("RECEIVED");
+
+        private final String name;
+
+        BillingStatus(String s) {
+            name = s;
+        }
+
+        public String toString() {
+            return this.name;
+        }
+
+        public static String[] toArray() {
+            ArrayList<String> billingStatusArray = new ArrayList<>();
+            for (BillingStatus status: BillingStatus.values()
+            ) {
+                billingStatusArray.add(status.name);
+            }
+            return  billingStatusArray.toArray(new String[0]);
+        }
     }
 
     public static enum Category
@@ -54,10 +96,6 @@ public class Utility extends FirebaseRepository {
 
         Category(String s) {
             name = s;
-        }
-
-        public boolean equalsName(String otherName) {
-            return name.equals(otherName);
         }
 
         public String toString() {

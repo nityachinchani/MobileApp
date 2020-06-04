@@ -114,13 +114,30 @@
                 android:maxLength="400"
                 android:textColor="#76A5CD" />
 
+            <TextView
+                android:id="@+id/tv_Status"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal|center_vertical"
+                android:text="Status"
+                android:textColor="@android:color/holo_blue_dark"
+                android:textSize="25dp"
+                android:textStyle="bold" />
+
+            <Spinner
+                android:id="@+id/itemStatusSpinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:gravity="center_horizontal|center_vertical"
+                android:spinnerMode="dialog" />
 
             <LinearLayout
                 android:id="@+id/buttonLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true">
-
+                android:layout_alignParentBottom="true" android:padding="25dp">
                 <Button
                     android:id="@+id/btnUpdate"
                     android:layout_width="match_parent"
@@ -149,6 +166,7 @@
                     android:textSize="20sp"
                     android:textStyle="bold"></Button>
             </LinearLayout>
+
 
         </LinearLayout>
     </ScrollView>
