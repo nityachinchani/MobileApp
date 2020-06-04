@@ -13,16 +13,19 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class ExploreFragment extends Fragment {
 //    private static final String[] titles = new String[]{"Item1", "Item2",
@@ -35,17 +38,14 @@ public class ExploreFragment extends Fragment {
             , R.drawable.ic_account_box_black_24dp, R.drawable.ic_camera_alt_black_24dp, R.drawable.ic_chat_bubble_black_24dp, R.drawable.ic_current
             , R.drawable.ic_find_in_page_black_24dp};
 
-    private static final String[] category = Utility.Category.toArray();
+    private static String[] category = Utility.Category.toArray();
 
     private static String[] location = null;
 
-
-
-
-   // private ListView exploreListView;
     private Spinner locationSpinner, categorySpinner;
     private GridView exploreGridView;
     private TextView textView;
+    Button goBtn;
 
 
     @Nullable
@@ -54,36 +54,26 @@ public class ExploreFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_explore, container, false);
 
         item = new Item();
-        //exploreListView = (ListView) view.findViewById(R.id.explore_List_View);
         categorySpinner = (Spinner) view.findViewById(R.id.categorySpinner);
         locationSpinner = (Spinner) view.findViewById(R.id.locationSpinner);
         exploreGridView = (GridView) view.findViewById(R.id.exploreGridView);
+        goBtn=(Button) view.findViewById(R.id.goBtn);
 
-        item.getAllItems(new CallBack() {
-            @Override
-            public void onSuccess(Object object) {
-                Object[] objectArray = (Object[]) object;
-                for (Object itemElement : objectArray
-                ) {
-                    itemList.add((ItemDao) itemElement);
-                }
-                BindItems();
-            }
-
-            @Override
-            public void onError(Object object) {
-            }
-        });
-
-
+        getAllItems();
+        if(!category[0].equals("All")) {
+            ArrayList<String> tempArray = new ArrayList<>();
+            tempArray.clear();
+            tempArray.add("All");
+            tempArray.addAll(Arrays.asList(category));
+            category = tempArray.toArray(new String[0]);
+        }
         ArrayAdapter<String> categoryAdapter = new ArrayAdapter<String>(getActivity(), R.layout.activity_spinner_row, R.id.text_id, category);
         categorySpinner.setAdapter(categoryAdapter);
         categorySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-//                Intent intent = new Intent(getActivity(), location_fragment.class);
-//                intent.putExtra("Item", (CharSequence) categorySpinner.getItemAtPosition(position+1));
-//                startActivity(intent);
+               //Toast.makeText(getActivity(),"The item is "+categorySpinner.getSelectedItem().toString(),Toast.LENGTH_SHORT).show();
+               // getSpecificItem();
             }
 
             @Override
@@ -97,6 +87,9 @@ public class ExploreFragment extends Fragment {
             public void onSuccess(Object object) {
                 Object[] obj=(Object[]) object;
                 ArrayList<String> arrayList=new ArrayList<>();
+                arrayList.clear();
+                arrayList.add("All");
+
                 for (Object location: obj
                      ) {
                     arrayList.add(location.toString());
@@ -115,9 +108,85 @@ public class ExploreFragment extends Fragment {
 
 
 
-
+        goBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getSpecificItem();
+            }
+        });
         return view;
     }
+
+    private void getAllItems(){
+        item.getAllItems(new CallBack() {
+            @Override
+            public void onSuccess(Object object) {
+                Object[] objectArray = (Object[]) object;
+                itemList.clear();
+                for (Object itemElement : objectArray
+                ) {
+                    itemList.add((ItemDao) itemElement);
+                }
+                BindItems();
+            }
+
+            @Override
+            public void onError(Object object) {
+            }
+        });
+    }
+
+    private void getSpecificItem() {
+        String selectedCategory= categorySpinner.getSelectedItem().toString();
+        if(!selectedCategory.equals("All")) {
+            item.getItemsByCategory(selectedCategory, new CallBack() {
+                @Override
+                public void onSuccess(Object object) {
+                    Object[] objectArray = (Object[]) object;
+                    itemList.clear();
+                    for (Object itemElement : objectArray
+                    ) {
+                        itemList.add((ItemDao) itemElement);
+                    }
+
+                    BindItems();
+                }
+
+                @Override
+                public void onError(Object object) {
+
+                }
+            });
+
+
+            String selectedLocation = locationSpinner.getSelectedItem().toString();
+            if (!selectedLocation.equals("All")) {
+                item.getItemsByLocation(selectedLocation, new CallBack() {
+                    @Override
+                    public void onSuccess(Object object) {
+                        Object[] objectArray = (Object[]) object;
+                        itemList.clear();
+                        for (Object itemElement : objectArray
+                        ) {
+                            itemList.add((ItemDao) itemElement);
+                        }
+
+                        BindItems();
+                    }
+
+                    @Override
+                    public void onError(Object object) {
+
+                    }
+                });
+            }
+        }
+        else {
+            locationSpinner.setSelection(0);
+            getAllItems();
+        }
+    }
+
 
     private void bindLocation() {
         ArrayAdapter<String> locationAdapter = new ArrayAdapter<String>(getActivity(), R.layout.activity_spinner_row, R.id.text_id, location);
@@ -125,7 +194,7 @@ public class ExploreFragment extends Fragment {
         locationSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
+               // Toast.makeText(getActivity(),"The item is "+locationSpinner.getSelectedItem().toString(),Toast.LENGTH_SHORT).show();
             }
 
             @Override

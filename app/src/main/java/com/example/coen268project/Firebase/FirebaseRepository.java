@@ -13,6 +13,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.HashMap;
 import java.util.Map;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -49,16 +51,21 @@ public abstract class FirebaseRepository {
         });
     }
 
-    protected void firebaseUploadImageToStorage(final StorageReference storageReference, String name, Uri contentUri, final CallBack callback){
+    protected void firebaseUploadImageToStorage(final StorageReference storageReference, String name, Uri contentUri, final CallBack callback,
+                                                final String itemId){
         StorageReference image = storageReference.child("images/"+name);
         final StorageReference imageFilePath = image.child(contentUri.getLastPathSegment());
         image.putFile(contentUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+            public void onSuccess(final UploadTask.TaskSnapshot taskSnapshot) {
                 imageFilePath.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                     @Override
                     public void onSuccess(Uri uri) {
-                        callback.onSuccess(imageFilePath.getDownloadUrl().getResult().getPath());
+                        Task<Uri> urlTask = taskSnapshot.getStorage().getDownloadUrl();
+                        //callback.onSuccess(urlTask.getResult().toString());
+                        final Map<String, String> updates = new HashMap<>();
+                        updates.put("pictureName", urlTask.getResult().toString());
+                        update(itemId, (HashMap) updates,callback);
                     }
                 });
             }
@@ -68,6 +75,28 @@ public abstract class FirebaseRepository {
                 callback.onError(e.getMessage());
             }
         });
+    }
+
+
+
+    protected  void update(String itemId, HashMap map, final CallBack callBack){
+
+        if (!itemId.isEmpty()) {
+            DatabaseReference databaseReference = FirebaseInstance.DATABASE.getReference(FirebaseConstants.DATABASE_ROOT).child("itemTable").child(itemId);
+            firebaseUpdateChildren(databaseReference, map, new CallBack() {
+                @Override
+                public void onSuccess(Object object) {
+                    callBack.onSuccess(FirebaseConstants.SUCCESS);
+                }
+
+                @Override
+                public void onError(Object object) {
+                    callBack.onError(object);
+                }
+            });
+        } else {
+            callBack.onError(FirebaseConstants.FAIL);
+        }
     }
 
     protected final void firebaseCreate(final DatabaseReference databaseReference, final Object model, final CallBack callback) {

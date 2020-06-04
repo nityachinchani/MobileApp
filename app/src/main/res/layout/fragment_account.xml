@@ -10,24 +10,28 @@
 
     <ImageView
         android:id="@+id/account_Image"
-        android:layout_width="129dp"
-        android:layout_height="112dp"
+        android:layout_width="116dp"
+        android:layout_height="109dp"
+        android:background="#5A5757"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="20dp"
         app:srcCompat="@drawable/profile_image" />
 
     <TextView
-        android:id="@+id/accont_name"
+        android:id="@+id/nameTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="20dp"
         android:fontFamily="monospace"
         android:gravity="center_horizontal|center_vertical"
-         />
+        android:textColor="#938D8D"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        tools:text="Name will be displayed here" />
 
     <ListView
-        android:id="@+id/listView"
+        android:id="@+id/accountListView"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 </LinearLayout>
