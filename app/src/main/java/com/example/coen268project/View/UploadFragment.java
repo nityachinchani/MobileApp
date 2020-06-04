@@ -48,6 +48,7 @@ public class UploadFragment extends Fragment {
     String imgDecodableString;
     Uri contentUri;
     File f = null;
+    final String[] picture_name = {""};
 
     @Nullable
     @Override
@@ -85,28 +86,11 @@ public class UploadFragment extends Fragment {
             @Override
             public void onClick (View v)
             {
-                String picture_name = "";
-                if(f!= null)
-                {
-                    picture_name = f.getName();
-                    utility.uploadImageToStorage(picture_name, contentUri, new CallBack() {
-                        @Override
-                        public void onSuccess(Object object) {
-                            Toast.makeText(getContext(), "Image upload succeeded" + f.getName(), Toast.LENGTH_LONG).show();
-                            Log.d("tag", "Image upload succeeded" + f.getName());
-                        }
-
-                        @Override
-                        public void onError(Object object) {
-                            Toast.makeText(getContext(), "Image upload failed", Toast.LENGTH_SHORT).show();
-                        }
-                    });
-                }
                 Intent intent = new Intent(getActivity(), HomeActivity.class);
                 intent.putExtra("from", SellDescriptionFragment.class.getSimpleName());
                 intent.putExtra("Item",item);
                 intent.putExtra("Location",Location);
-                intent.putExtra("Path", picture_name);
+                intent.putExtra("Path", picture_name[0]);
                 startActivity(intent);
             }
         });
@@ -173,6 +157,28 @@ public class UploadFragment extends Fragment {
             Glide.with(getActivity()).load(contentUri).into(imageView);
             Toast.makeText(getContext(),"File Path --> "+ f.getName(),Toast.LENGTH_LONG).show();
 
+        }
+
+        uploadPictureToFirebase();
+    }
+
+    private void uploadPictureToFirebase() {
+        if(f!= null)
+        {
+            picture_name[0] = f.getName();
+            utility.uploadImageToStorage(picture_name[0], contentUri, new CallBack() {
+                @Override
+                public void onSuccess(Object object) {
+                    picture_name[0] = object.toString();
+                    Toast.makeText(getContext(), "Image upload succeeded" + picture_name[0], Toast.LENGTH_LONG).show();
+                    Log.d("tag", "Image upload succeeded" + picture_name[0]);
+                }
+
+                @Override
+                public void onError(Object object) {
+                    Toast.makeText(getContext(), "Image upload failed", Toast.LENGTH_SHORT).show();
+                }
+            });
         }
     }
 

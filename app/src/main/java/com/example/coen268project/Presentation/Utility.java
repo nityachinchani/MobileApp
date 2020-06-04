@@ -93,6 +93,6 @@ public class Utility extends FirebaseRepository {
             public void onError(Object object) {
                 callBack.onError(object);
             }
-        },getCurrentUserId());
+        });
     }
 }

@@ -29,13 +29,15 @@ public class SellDescriptionFragment extends Fragment {
     private EditText p_price;
     private TextView p_description;
     private Item itemDb;
+    private Utility utility;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-       View view = inflater.inflate(R.layout.fragment_sell_description, container, false);
+        View view = inflater.inflate(R.layout.fragment_sell_description, container, false);
         itemDb = new Item();
+        utility = new Utility();
         p_name = view.findViewById(R.id.edit_text_file_name);
         p_price = view.findViewById(R.id.edit_text_file_price);
         p_description = view.findViewById(R.id.Description);
@@ -71,7 +73,7 @@ public class SellDescriptionFragment extends Fragment {
                        itemDb.createItem(Utility.getCurrentUserId(), product_name, item, "south sanfrancisco", product_price, product_description, path_1, new CallBack() {
                            @Override
                            public void onSuccess(Object object) {
-                               Toast.makeText(getContext(),"Product uploaded successfully",Toast.LENGTH_LONG).show();
+                               Toast.makeText(getContext(),"Product uploaded successfully" + object.toString(),Toast.LENGTH_LONG).show();
                            }
 
                            @Override

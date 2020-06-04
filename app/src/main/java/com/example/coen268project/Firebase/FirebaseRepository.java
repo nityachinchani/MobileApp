@@ -16,14 +16,12 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 public abstract class FirebaseRepository {
-
-    private String imageUrl = "";
-
-
     protected final void firebaseAuthentication(final FirebaseAuth mFirebaseAuth, String email, String password, final CallBack callback)
     {
         mFirebaseAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -54,49 +52,17 @@ public abstract class FirebaseRepository {
         });
     }
 
-    protected void firebaseUploadImageToStorage(final StorageReference storageReference, String name, Uri contentUri, final CallBack callback,
-                                                final String itemId){
+    protected void firebaseUploadImageToStorage(final StorageReference storageReference, String name, Uri contentUri, final CallBack callback){
         StorageReference image = storageReference.child("images/"+name);
-        final StorageReference imageFilePath = image.child(contentUri.getLastPathSegment());
-        image.putFile(contentUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+        UploadTask uploadTask = image.putFile(contentUri);
+        uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>(){
             @Override
-            public void onSuccess(final UploadTask.TaskSnapshot taskSnapshot) {
-                imageFilePath.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                    @Override
-                    public void onSuccess(Uri uri) {
-                        Task<Uri> urlTask = taskSnapshot.getStorage().getDownloadUrl();
-                        setImageUrl(urlTask.getResult().toString());
-                    }
-                });
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                callback.onError(e.getMessage());
+            public  void onSuccess(final UploadTask.TaskSnapshot taskSnapshot) {
+                Task<Uri> urlTask = taskSnapshot.getStorage().getDownloadUrl();
+                callback.onSuccess(urlTask.getResult().toString());
             }
         });
     }
-
-    /*protected  void updateField(String itemId, HashMap map, final CallBack callBack){
-        final Map<String, String> updates = new HashMap<>();
-        updates.put("pictureName", this.getImageUrl());
-        if (!itemId.isEmpty()) {
-            DatabaseReference databaseReference = FirebaseInstance.DATABASE.getReference(FirebaseConstants.DATABASE_ROOT).child("itemTable").child(itemId);
-            firebaseUpdateChildren(databaseReference, map, new CallBack() {
-                @Override
-                public void onSuccess(Object object) {
-                    callBack.onSuccess(FirebaseConstants.SUCCESS);
-                }
-
-                @Override
-                public void onError(Object object) {
-                    callBack.onError(object);
-                }
-            });
-        } else {
-            callBack.onError(FirebaseConstants.FAIL);
-        }
-    }*/
 
     protected final void firebaseCreate(final DatabaseReference databaseReference, final Object model, final CallBack callback) {
         databaseReference.keepSynced(true);
@@ -104,7 +70,7 @@ public abstract class FirebaseRepository {
             @Override
             public void onComplete(DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
                 if (databaseError == null) {
-                    callback.onSuccess(FirebaseConstants.SUCCESS);
+                    callback.onSuccess(databaseReference.getKey());
                 } else {
                     callback.onError(databaseError);
                 }
@@ -155,11 +121,4 @@ public abstract class FirebaseRepository {
         });
     }
 
-    public String getImageUrl() {
-        return imageUrl;
-    }
-
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
-    }
 }

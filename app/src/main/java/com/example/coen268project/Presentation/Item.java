@@ -31,7 +31,7 @@ public class Item extends FirebaseRepository implements ItemRepository {
             firebaseCreate(databaseReference, item, new CallBack() {
                 @Override
                 public void onSuccess(Object object) {
-                    callBack.onSuccess(FirebaseConstants.SUCCESS);
+                    callBack.onSuccess(object.toString());
                 }
 
                 @Override
@@ -204,10 +204,6 @@ public class Item extends FirebaseRepository implements ItemRepository {
             }
         });
     }
-
-
-
-
 
     public void getMyItems(String uid, final CallBack callBack) {
         final ArrayList<ItemDao> itemArrayList = new ArrayList<>();
