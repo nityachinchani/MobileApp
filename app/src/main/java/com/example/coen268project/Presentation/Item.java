@@ -205,9 +205,9 @@ public class Item extends FirebaseRepository implements ItemRepository {
         });
     }
 
-    public void getMyItems(String uid, final CallBack callBack) {
+    public void getMyAds(String sellerId, final CallBack callBack) {
         final ArrayList<ItemDao> itemArrayList = new ArrayList<>();
-        Query query = itemDatabaseReference.orderByChild("sellerId").equalTo(uid);
+        Query query = itemDatabaseReference.orderByChild("sellerId").equalTo(sellerId);
         firebaseReadData(query, new CallBack() {
             @Override
             public void onSuccess(Object object) {

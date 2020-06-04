@@ -30,7 +30,7 @@ public class AdsFragment extends Fragment {
         View view = inflater.inflate(R.layout.activity_sell, container, false);
         listView = view.findViewById(R.id.list_view);
         item = new Item();
-        item.getMyItems(Utility.getCurrentUserId(), new CallBack() {
+        item.getMyAds(Utility.getCurrentUserId(), new CallBack() {
             @Override
             public void onSuccess(Object object) {
                 if(object == null)
