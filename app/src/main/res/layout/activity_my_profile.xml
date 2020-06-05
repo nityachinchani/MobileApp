@@ -1,47 +1,121 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#E5F6F8"
     tools:context=".View.MyProfileActivity">
 
-
-    <TextView
-android:id="@+id/profileName"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
-        android:fontFamily="monospace"
+        android:layout_height="match_parent">
 
-        android:textSize="18sp"
-        android:textStyle="bold"
-        tools:text="Name will be displayed here" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/profileEmail"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
-        android:fontFamily="monospace"
+            <ImageView
+                android:id="@+id/profileImage"
+                android:layout_width="129dp"
+                android:layout_height="112dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.498"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/profile_image" />
 
-        android:textSize="18sp"
-        android:textStyle="bold"
-        tools:text="Email will be displayed here" />
+            <EditText
+                android:id="@+id/profileName"
+                android:layout_width="match_parent"
+                android:layout_height="44dp"
+                android:layout_marginTop="12dp"
+                android:ems="10"
+                android:fontFamily="monospace"
+                android:gravity="center_vertical"
+                android:hint="Fullname"
+                android:inputType="textPersonName"
+                android:textAlignment="textStart"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/profileImage"
+                tools:ignore="RtlCompat" />
 
-    <TextView
-        android:id="@+id/profilePhone"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
-        android:fontFamily="monospace"
+            <EditText
+                android:id="@+id/profileEmail"
+                android:layout_width="match_parent"
+                android:layout_height="44dp"
+                android:layout_marginTop="24dp"
+                android:ems="10"
+                android:fontFamily="monospace"
+                android:hint="Email"
+                android:inputType="textEmailAddress"
+                android:textAlignment="textStart"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/fullnameEditText" />
 
-        android:textSize="18sp"
-        android:textStyle="bold"
-        tools:text="Phone no will be displayed here" />
+            <EditText
+                android:id="@+id/profilePhoneNumber"
+                android:layout_width="match_parent"
+                android:layout_height="44dp"
+                android:layout_marginTop="24dp"
+                android:ems="10"
+                android:fontFamily="monospace"
+                android:hint="Enter your number"
+                android:inputType="number"
+                android:textAlignment="textStart"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/emailEditText" />
 
-</LinearLayout>
+            <EditText
+                android:id="@+id/profilePassword"
+                android:layout_width="match_parent"
+                android:layout_height="44dp"
+                android:layout_marginTop="24dp"
+                android:ems="10"
+                android:fontFamily="monospace"
+                android:hint="Password"
+                android:inputType="textPassword"
+                android:textAlignment="textStart"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/emailEditText" />
+
+            <Button
+                android:id="@+id/btnUpdate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/button_beautification"
+                android:fontFamily="monospace"
+                android:gravity="center_horizontal|center_vertical"
+                android:text="Update"
+                android:textColor="@android:color/background_light"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/confirmpasswordEditText" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>
