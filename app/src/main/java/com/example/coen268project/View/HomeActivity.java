@@ -6,6 +6,7 @@ import com.example.coen268project.R;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
 
 public class HomeActivity extends AppCompatActivity implements BottomFragment.OnFragmentInteractionListener {
     String from="";
@@ -26,6 +27,9 @@ public class HomeActivity extends AppCompatActivity implements BottomFragment.On
         getExtras();
     }
 
+
+
+
     @Override
     public void replaceFragment(FragmentType type) {
         switch(type){
@@ -45,6 +49,12 @@ public class HomeActivity extends AppCompatActivity implements BottomFragment.On
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new AccountFragment()).addToBackStack(null).commit();
                 break;
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        getMenuInflater().inflate(R.menu.threedot_menu, menu);
+        return true;
     }
 
     private void getExtras() {

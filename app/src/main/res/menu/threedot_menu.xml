@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <item android:title="MyProfile"
+        android:id="@+id/my_profile"></item>
+
+    <item android:title="MyBillings"
+        android:id="@+id/my_billings"></item>
+
+    <item android:title="MyOrders"
+        android:id="@+id/my_orders"></item>
+
+    <item android:title="Logout"
+        android:id="@+id/logout"></item>
+
+
+</menu>

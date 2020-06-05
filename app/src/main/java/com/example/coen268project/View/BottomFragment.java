@@ -4,16 +4,21 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import com.example.coen268project.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationView;
+
+import java.util.zip.Inflater;
 
 /**
  * create an instance of this fragment.
  */
-public class BottomFragment extends Fragment implements BottomNavigationView.OnNavigationItemSelectedListener {
+public class BottomFragment extends Fragment implements BottomNavigationView.OnNavigationItemSelectedListener{
     OnFragmentInteractionListener listener;
 
     public BottomFragment() {
@@ -24,6 +29,9 @@ public class BottomFragment extends Fragment implements BottomNavigationView.OnN
     public interface OnFragmentInteractionListener{
         void replaceFragment(HomeActivity.FragmentType type);
     }
+
+
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
