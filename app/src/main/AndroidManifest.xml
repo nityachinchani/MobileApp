@@ -20,13 +20,28 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".View.ViewOrderActivity"></activity>
-        <activity android:name=".View.UpdateBillingActivity"></activity>
-        <activity android:name=".View.ExploreBuyActivity" />
-        <activity android:name=".View.UpdateAdsActivity" />
-        <activity android:name=".View.MyOrdersActivity" />
-        <activity android:name=".View.MyBillingActivity" />
-        <activity android:name=".View.MyProfileActivity" />
+        <activity android:name=".View.ViewOrderActivity"
+            android:label="View Orders"></activity>
+        <activity android:name=".View.UpdateBillingActivity"
+            android:label="Update Billing Status"></activity>
+        <activity android:name=".View.ExploreBuyActivity"
+            android:label="Item Information"/>
+        <activity android:name=".View.UpdateAdsActivity"
+            android:label="Update Item"/>
+        <activity android:name=".View.MyOrdersActivity"
+            android:label="My Orders"/>
+        <activity android:name=".View.MyBillingActivity"
+            android:label="My Billing Information"/>
+        <activity android:name=".View.MyProfileActivity"
+            android:label="My Profile"/>
+        <activity android:name=".View.Splash_screen"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -65,11 +80,7 @@
         <activity
             android:name=".View.MainActivity"
             android:label="Buy-Rona">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
         <provider
