@@ -46,13 +46,13 @@ private ImageView accountImage;
                 Intent intent;
                 switch (accountListView.getItemAtPosition(i).toString()){
                     case "MyProfile":
-                        intent = new Intent(getActivity(), AccountProfileActivity.class);
+                        intent = new Intent(getActivity(), MyProfileActivity.class);
                         break;
                     case "MyBillings":
-                        intent = new Intent(getActivity(), AccountBillingActivity.class);
+                        intent = new Intent(getActivity(), MyBillingActivity.class);
                         break;
                     case "MyOrders":
-                        intent = new Intent(getActivity(), AccountMyOrdersActivity.class);
+                        intent = new Intent(getActivity(), MyOrdersActivity.class);
                         break;
                     default:
                         throw new IllegalStateException("Unexpected value: " + accountListView.getItemAtPosition(i).toString());

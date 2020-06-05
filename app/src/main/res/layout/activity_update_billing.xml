@@ -1,16 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:clipToPadding="false"
-    tools:context=".View.UpdateAdsActivity">
-    <!--  android:clickable="true"
-    android:focusable="true"
-
-    android:orientation="vertical"
-    android:background="@color/color_blue"> -->
-
+    tools:context=".View.UpdateBillingActivity">
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -21,17 +16,7 @@
             android:background="#E5F6F8"
             android:clickable="false"
             android:focusable="true"
-            android:orientation="vertical"
-            tools:context=".View.UpdateAdsActivity">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal|center_vertical"
-                android:text="Product Image"
-                android:textColor="@android:color/holo_blue_dark"
-                android:textSize="25dp"
-                android:textStyle="bold" />
+            android:orientation="vertical">
 
             <ImageView
                 android:id="@+id/product_image"
@@ -41,10 +26,9 @@
                 android:layout_marginTop="30dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginBottom="30dp"
-                android:src="@drawable/profile_image" />
+                app:srcCompat="@drawable/profile_image" />
 
             <TextView
-                android:id="@+id/tv_ProductName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal|center_vertical"
@@ -53,22 +37,18 @@
                 android:textSize="25dp"
                 android:textStyle="bold" />
 
-            <EditText
-                android:id="@+id/et_ProductName"
+            <TextView
+                android:id="@+id/product_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="30dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginBottom="30dp"
-                android:hint="Enter Product name"
-                android:maxLength="55"
-                android:maxLines="1"
-                android:singleLine="true"
                 android:textColor="#76A5CD" />
 
             <TextView
-                android:id="@+id/tv_Price"
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal|center_vertical"
@@ -77,41 +57,34 @@
                 android:textSize="25dp"
                 android:textStyle="bold" />
 
-            <EditText
-                android:id="@+id/et_Price"
+            <TextView
+                android:id="@+id/product_price"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="30dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginBottom="30dp"
-                android:hint="Enter Price"
-                android:inputType="number"
-                android:maxLength="4"
-                android:maxLines="1"
                 android:textColor="#76A5CD" />
 
             <TextView
-                android:id="@+id/tv_Description"
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal|center_vertical"
-                android:text="Description (optional) "
+                android:text="Description"
                 android:textColor="@android:color/holo_blue_dark"
                 android:textSize="25dp"
                 android:textStyle="bold" />
 
-            <EditText
-                android:id="@+id/et_Description"
+            <TextView
+                android:id="@+id/product_description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="30dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginBottom="30dp"
-                android:hint="Short Description"
-                android:lines="2"
-                android:maxLength="400"
                 android:textColor="#76A5CD" />
 
             <TextView
@@ -119,13 +92,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal|center_vertical"
-                android:text="Status"
+                android:text="Billing Status"
                 android:textColor="@android:color/holo_blue_dark"
                 android:textSize="25dp"
                 android:textStyle="bold" />
 
             <Spinner
-                android:id="@+id/itemStatusSpinner"
+                android:id="@+id/billingStatusSpinner"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -133,39 +106,20 @@
                 android:gravity="center_horizontal|center_vertical"
                 android:spinnerMode="dialog" />
 
-            <LinearLayout
-                android:id="@+id/buttonLayout"
+            <Button
+                android:id="@+id/btnUpdate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true" android:padding="25dp">
-                <Button
-                    android:id="@+id/btnUpdate"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@drawable/button_beautification"
-                    android:fontFamily="monospace"
-                    android:text="Update"
-                    android:textAlignment="center"
-                    android:textAllCaps="false"
-                    android:textColor="@android:color/background_light"
-                    android:textSize="20sp"
-                    android:textStyle="bold"></Button>
-
-                <Button
-                    android:id="@+id/btnDelete"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@drawable/button_beautification"
-                    android:fontFamily="monospace"
-                    android:text="Delete"
-                    android:textAlignment="center"
-                    android:textAllCaps="false"
-                    android:textColor="@android:color/background_light"
-                    android:textSize="20sp"
-                    android:textStyle="bold"></Button>
-            </LinearLayout>
+                android:layout_weight="1"
+                android:background="@drawable/button_beautification"
+                android:fontFamily="monospace"
+                android:text="Update"
+                android:textAlignment="center"
+                android:textAllCaps="false"
+                android:textColor="@android:color/background_light"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:padding="25dp"/>
 
 
         </LinearLayout>

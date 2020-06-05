@@ -26,7 +26,7 @@ public class Item extends FirebaseRepository implements ItemRepository {
     public void createItem(String sellerId, String itemName, String category, String location, String price, String description, String pictureName, final CallBack callBack) {
         String pushKey = itemDatabaseReference.push().getKey();
         if (!pushKey.isEmpty()) {
-            ItemDao item = new ItemDao(pushKey, itemName, category, location, price, description, sellerId, "", Utility.ItemStatus.POSTED.toString(), pictureName);
+            ItemDao item = new ItemDao(pushKey, itemName, category, location, price, description, sellerId, "", Utility.ItemStatus.POSTED.toString(), pictureName, Utility.BillingStatus.PENDING.toString());
             DatabaseReference databaseReference = itemDatabaseReference.child(pushKey);
             firebaseCreate(databaseReference, item, new CallBack() {
                 @Override
@@ -105,7 +105,8 @@ public class Item extends FirebaseRepository implements ItemRepository {
                             String buyerId = dataSnapshot.child("buyerId").getValue().toString();
                             String itemStatus = dataSnapshot.child("itemStatus").getValue().toString();
                             String pictureName = dataSnapshot.child("pictureName").getValue().toString();
-                            itemDao[0] = new ItemDao(itemId, itemName, category, location, price, description, sellerId, buyerId, itemStatus, pictureName);
+                            String billingStatus = dataSnapshot.child("billingStatus").getValue().toString();
+                            itemDao[0] = new ItemDao(itemId, itemName, category, location, price, description, sellerId, buyerId, itemStatus, pictureName, billingStatus);
                         }
                         callBack.onSuccess(itemDao[0]);
                     } else {
@@ -143,7 +144,8 @@ public class Item extends FirebaseRepository implements ItemRepository {
                             String buyerId = suggestionSnapshot.child("buyerId").getValue().toString();
                             String itemStatus = suggestionSnapshot.child("itemStatus").getValue().toString();
                             String pictureName = suggestionSnapshot.child("pictureName").getValue().toString();
-                            ItemDao itemDao = new ItemDao(itemId, itemName, category, location, price, description, sellerId, buyerId, itemStatus, pictureName);
+                            String billingStatus = suggestionSnapshot.child("billingStatus").getValue().toString();
+                            ItemDao itemDao = new ItemDao(itemId, itemName, category, location, price, description, sellerId, buyerId, itemStatus, pictureName, billingStatus);
                             itemArrayList.add(itemDao);
                         }
                         callBack.onSuccess(itemArrayList.toArray());
@@ -185,7 +187,8 @@ public class Item extends FirebaseRepository implements ItemRepository {
                             String buyerId = suggestionSnapshot.child("buyerId").getValue().toString();
                             String itemStatus = suggestionSnapshot.child("itemStatus").getValue().toString();
                             String pictureName = suggestionSnapshot.child("pictureName").getValue().toString();
-                            ItemDao itemDao = new ItemDao(itemId, itemName, category, location, price, description, sellerId, buyerId, itemStatus, pictureName);
+                            String billingStatus = suggestionSnapshot.child("billingStatus").getValue().toString();
+                            ItemDao itemDao = new ItemDao(itemId, itemName, category, location, price, description, sellerId, buyerId, itemStatus, pictureName, billingStatus);
                             itemArrayList.add(itemDao);
                         }
                         callBack.onSuccess(itemArrayList.toArray());
@@ -197,6 +200,46 @@ public class Item extends FirebaseRepository implements ItemRepository {
                 }
             }
 
+
+            @Override
+            public void onError(Object object) {
+                callBack.onError(null);
+            }
+        });
+    }
+
+    public void getMyOrders(String buyerId, final CallBack callBack) {
+        final ArrayList<ItemDao> itemArrayList = new ArrayList<>();
+        Query query = itemDatabaseReference.orderByChild("buyerId").equalTo(buyerId);
+        firebaseReadData(query, new CallBack() {
+            @Override
+            public void onSuccess(Object object) {
+                if (object != null) {
+                    DataSnapshot dataSnapshot = (DataSnapshot) object;
+                    if (dataSnapshot.getValue() != null && dataSnapshot.hasChildren()) {
+                        for (DataSnapshot suggestionSnapshot : dataSnapshot.getChildren()) {
+                            String itemId = suggestionSnapshot.getKey();
+                            String itemName = suggestionSnapshot.child("itemName").getValue().toString();
+                            String category = suggestionSnapshot.child("category").getValue().toString();
+                            String location = suggestionSnapshot.child("location").getValue().toString();
+                            String price = suggestionSnapshot.child("price").getValue().toString();
+                            String description = suggestionSnapshot.child("description").getValue().toString();
+                            String sellerId = suggestionSnapshot.child("sellerId").getValue().toString();
+                            String buyerId = suggestionSnapshot.child("buyerId").getValue().toString();
+                            String itemStatus = suggestionSnapshot.child("itemStatus").getValue().toString();
+                            String pictureName = suggestionSnapshot.child("pictureName").getValue().toString();
+                            String billingStatus = suggestionSnapshot.child("billingStatus").getValue().toString();
+                            ItemDao itemDao = new ItemDao(itemId, itemName, category, location, price, description, sellerId, buyerId, itemStatus, pictureName, billingStatus);
+                            itemArrayList.add(itemDao);
+                        }
+                        callBack.onSuccess(itemArrayList.toArray());
+                    } else {
+                        callBack.onSuccess(null);
+                    }
+                } else {
+                    callBack.onSuccess(null);
+                }
+            }
 
             @Override
             public void onError(Object object) {
@@ -225,7 +268,8 @@ public class Item extends FirebaseRepository implements ItemRepository {
                             String buyerId = suggestionSnapshot.child("buyerId").getValue().toString();
                             String itemStatus = suggestionSnapshot.child("itemStatus").getValue().toString();
                             String pictureName = suggestionSnapshot.child("pictureName").getValue().toString();
-                            ItemDao itemDao = new ItemDao(itemId, itemName, category, location, price, description, sellerId, buyerId, itemStatus, pictureName);
+                            String billingStatus = suggestionSnapshot.child("billingStatus").getValue().toString();
+                            ItemDao itemDao = new ItemDao(itemId, itemName, category, location, price, description, sellerId, buyerId, itemStatus, pictureName, billingStatus);
                             itemArrayList.add(itemDao);
                         }
                         callBack.onSuccess(itemArrayList.toArray());
@@ -265,7 +309,8 @@ public class Item extends FirebaseRepository implements ItemRepository {
                             String buyerId = suggestionSnapshot.child("buyerId").getValue().toString();
                             String itemStatus = suggestionSnapshot.child("itemStatus").getValue().toString();
                             String pictureName = suggestionSnapshot.child("pictureName").getValue().toString();
-                            ItemDao itemDao = new ItemDao(itemId, itemName, category, location, price, description, sellerId, buyerId, itemStatus, pictureName);
+                            String billingStatus = suggestionSnapshot.child("billingStatus").getValue().toString();
+                            ItemDao itemDao = new ItemDao(itemId, itemName, category, location, price, description, sellerId, buyerId, itemStatus, pictureName, billingStatus);
                             itemArrayList.add(itemDao);
                         }
                         callBack.onSuccess(itemArrayList.toArray());

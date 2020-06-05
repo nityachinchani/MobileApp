@@ -20,11 +20,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".View.ExploreBuyActivity"></activity>
-        <activity android:name=".View.UpdateAdsActivity"></activity>
-        <activity android:name=".View.AccountMyOrdersActivity"></activity>
-        <activity android:name=".View.AccountBillingActivity" />
-        <activity android:name=".View.AccountProfileActivity" />
+        <activity android:name=".View.ViewOrderActivity"></activity>
+        <activity android:name=".View.UpdateBillingActivity"></activity>
+        <activity android:name=".View.ExploreBuyActivity" />
+        <activity android:name=".View.UpdateAdsActivity" />
+        <activity android:name=".View.MyOrdersActivity" />
+        <activity android:name=".View.MyBillingActivity" />
+        <activity android:name=".View.MyProfileActivity" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -53,6 +55,13 @@
         <activity
             android:name=".View.SignUpActivity"
             android:label="Sign Up" />
+        <activity
+            android:name=".View.Chat.ChatActivity"
+            />
+        <activity
+            android:name=".View.Chat.MessageAdapter"
+            />
+
         <activity
             android:name=".View.MainActivity"
             android:label="Buy-Rona">

@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".View.ExploreBuyActivity">
+    android:clipToPadding="false"
+    tools:context=".View.UpdateAdsActivity">
+    <!--  android:clickable="true"
+    android:focusable="true"
+
+    android:orientation="vertical"
+    android:background="@color/color_blue"> -->
 
     <ScrollView
         android:layout_width="match_parent"
@@ -17,10 +21,10 @@
             android:background="#E5F6F8"
             android:clickable="false"
             android:focusable="true"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            tools:context=".View.UpdateAdsActivity">
 
             <TextView
-
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal|center_vertical"
@@ -37,10 +41,10 @@
                 android:layout_marginTop="30dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginBottom="30dp"
-                app:srcCompat="@drawable/profile_image" />
+                android:src="@drawable/profile_image" />
 
             <TextView
-
+                android:id="@+id/tv_ProductName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal|center_vertical"
@@ -49,18 +53,22 @@
                 android:textSize="25dp"
                 android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/product_title"
+            <EditText
+                android:id="@+id/et_ProductName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="30dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginBottom="30dp"
+                android:hint="Enter Product name"
+                android:maxLength="55"
+                android:maxLines="1"
+                android:singleLine="true"
                 android:textColor="#76A5CD" />
 
             <TextView
-
+                android:id="@+id/tv_Price"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal|center_vertical"
@@ -69,85 +77,97 @@
                 android:textSize="25dp"
                 android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/product_price"
+            <EditText
+                android:id="@+id/et_Price"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="30dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginBottom="30dp"
+                android:hint="Enter Price"
+                android:inputType="number"
+                android:maxLength="4"
+                android:maxLines="1"
                 android:textColor="#76A5CD" />
 
             <TextView
-
+                android:id="@+id/tv_Description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal|center_vertical"
-                android:text="Description"
+                android:text="Description (optional) "
                 android:textColor="@android:color/holo_blue_dark"
                 android:textSize="25dp"
                 android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/product_description"
+            <EditText
+                android:id="@+id/et_Description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="30dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginBottom="30dp"
+                android:hint="Short Description"
+                android:lines="2"
+                android:maxLength="400"
                 android:textColor="#76A5CD" />
 
             <TextView
-
+                android:id="@+id/tv_Status"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal|center_vertical"
-                android:text="Status"
+                android:text="Item Status"
                 android:textColor="@android:color/holo_blue_dark"
                 android:textSize="25dp"
                 android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/product_status"
-                android:layout_width="match_parent"
+            <Spinner
+                android:id="@+id/itemStatusSpinner"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="30dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginBottom="30dp"
-                android:textColor="#76A5CD" />
-
-            <Button
-                android:id="@+id/exploreBuyBtn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:layout_weight="1"
-                android:background="@drawable/button_beautification"
-                android:fontFamily="monospace"
-                android:text="Chat"
-                android:textAlignment="center"
-                android:textAllCaps="false"
-                android:textColor="@android:color/background_light"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+                android:gravity="center_horizontal|center_vertical"
+                android:spinnerMode="dialog" />
+
+            <LinearLayout
+                android:id="@+id/buttonLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true" android:padding="25dp">
+                <Button
+                    android:id="@+id/btnUpdate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/button_beautification"
+                    android:fontFamily="monospace"
+                    android:text="Update"
+                    android:textAlignment="center"
+                    android:textAllCaps="false"
+                    android:textColor="@android:color/background_light"
+                    android:textSize="20sp"
+                    android:textStyle="bold"></Button>
+
+                <Button
+                    android:id="@+id/btnDelete"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/button_beautification"
+                    android:fontFamily="monospace"
+                    android:text="Delete"
+                    android:textAlignment="center"
+                    android:textAllCaps="false"
+                    android:textColor="@android:color/background_light"
+                    android:textSize="20sp"
+                    android:textStyle="bold"></Button>
+            </LinearLayout>
 
 
         </LinearLayout>
     </ScrollView>
-
-  <!--  <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomNavigation"
-        android:layout_alignParentBottom="true"
-        android:background="#FCFFFF"
-        app:itemIconTint="@android:color/holo_blue_dark"
-        app:itemTextColor="#76A5CD"
-        android:layout_width="match_parent"
-        app:menu="@menu/explore_buy"
-        android:layout_height="wrap_content">
-
-    </com.google.android.material.bottomnavigation.BottomNavigationView> -->
-
-
 </RelativeLayout>
