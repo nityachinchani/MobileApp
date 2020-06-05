@@ -55,6 +55,13 @@
             android:name=".View.SignUpActivity"
             android:label="Sign Up" />
         <activity
+            android:name=".View.Chat.ChatActivity"
+            />
+        <activity
+            android:name=".View.Chat.MessageAdapter"
+            />
+
+        <activity
             android:name=".View.MainActivity"
             android:label="Buy-Rona">
             <intent-filter>

@@ -5,6 +5,9 @@ import com.example.coen268project.Firebase.CallBack;
 import com.example.coen268project.Model.ItemDao;
 import com.example.coen268project.Presentation.Item;
 import com.example.coen268project.R;
+import com.example.coen268project.View.Chat.ChatActivity;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -17,6 +20,7 @@ public class ExploreBuyActivity extends AppCompatActivity {
     private TextView productPrice,productDescription,productTitle, productStatus;
     private Button exploreBuyBtn;
     private Item item;
+    private ItemDao obj;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +42,7 @@ public class ExploreBuyActivity extends AppCompatActivity {
             item.getItem(resId, new CallBack() {
                 @Override
                 public void onSuccess(Object object) {
-                    ItemDao obj=(ItemDao) object;
+                    obj = (ItemDao) object;
                     BindItems(obj);
 
 
@@ -56,8 +60,12 @@ public class ExploreBuyActivity extends AppCompatActivity {
 
         exploreBuyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-
+            public void onClick(View v)
+            {
+                Intent intent = new Intent(ExploreBuyActivity.this, ChatActivity.class);
+                intent.putExtra("buyerId", obj.getBuyerId());
+                intent.putExtra("sellerId",obj.getSellerId());
+                startActivity(new Intent(intent));
             }
         });
 
