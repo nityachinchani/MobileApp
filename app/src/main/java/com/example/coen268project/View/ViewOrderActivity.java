@@ -9,9 +9,6 @@ import com.example.coen268project.Model.ItemDao;
 import com.example.coen268project.Presentation.Item;
 import com.example.coen268project.R;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class ViewOrderActivity extends AppCompatActivity {
     private TextView tv_ProductName;
     private TextView tv_Price;
@@ -32,7 +29,6 @@ public class ViewOrderActivity extends AppCompatActivity {
         img_ProductPicture = findViewById(R.id.product_image);
         tv_StatusValue = findViewById(R.id.tv_StatusValue);
         final String itemId = bundle.getString("ItemId");
-        final Map<String, String> updates = new HashMap<>();
         item.getItem(itemId, new CallBack() {
             @Override
             public void onSuccess(Object object) {

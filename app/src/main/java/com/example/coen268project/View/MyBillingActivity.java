@@ -1,12 +1,11 @@
 package com.example.coen268project.View;
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.bumptech.glide.Glide;
 import com.example.coen268project.Firebase.CallBack;
 import com.example.coen268project.Model.ItemDao;
 import com.example.coen268project.Presentation.Item;
+import com.example.coen268project.Presentation.Utility;
 import com.example.coen268project.R;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -18,9 +17,7 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import java.util.ArrayList;
-
 
 public class MyBillingActivity extends AppCompatActivity {
     private Item item;
@@ -33,11 +30,12 @@ public class MyBillingActivity extends AppCompatActivity {
         setContentView(R.layout.activity_billing_info);
         item = new Item();
         billingGridView= findViewById(R.id.billingGridView);
-        getAllItems();
+        getMyAds();
+        getMyOrders();
     }
 
-    private void getAllItems(){
-        item.getAllItems(new CallBack() {
+    private void getMyAds(){
+        item.getMyAds(Utility.getCurrentUserId(), new CallBack() {
             @Override
             public void onSuccess(Object object) {
                 Object[] objectArray = (Object[]) object;
@@ -55,8 +53,31 @@ public class MyBillingActivity extends AppCompatActivity {
         });
     }
 
+    private void getMyOrders(){
+        item.getMyOrders(Utility.getCurrentUserId(), new CallBack() {
+            @Override
+            public void onSuccess(Object object) {
+                Object[] objectArray = (Object[]) object;
+                itemList.clear();
+                for (Object itemElement : objectArray
+                ) {
+                    itemList.add((ItemDao) itemElement);
+                }
+                BindItems();
+            }
+
+            @Override
+            public void onError(Object object) {
+            }
+        });
+    }
+
+    MainAdapter_billing_info adapter = null;
     public void BindItems() {
-        final MainAdapter_billing_info adapter = new MainAdapter_billing_info(itemList);
+        if(adapter == null) {
+            adapter = new MainAdapter_billing_info();
+        }
+        adapter.AddItems(itemList);
         billingGridView.setAdapter(adapter);
         billingGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -73,8 +94,13 @@ public class MyBillingActivity extends AppCompatActivity {
         LayoutInflater inflater;
         ArrayList<ItemDao> items;
 
-        public MainAdapter_billing_info(ArrayList<ItemDao> items) {
-            this.items = items;
+        public MainAdapter_billing_info() {
+            this.items = new ArrayList<>();
+        }
+
+        public void AddItems(ArrayList<ItemDao> items)
+        {
+            this.items.addAll(items);
         }
 
         @Override
