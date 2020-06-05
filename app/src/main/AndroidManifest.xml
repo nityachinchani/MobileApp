@@ -20,9 +20,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".View.ExploreBuyActivity"></activity>
-        <activity android:name=".View.UpdateAdsActivity"></activity>
-        <activity android:name=".View.MyOrdersActivity"></activity>
+        <activity android:name=".View.ViewOrderActivity"></activity>
+        <activity android:name=".View.ExploreBuyActivity" />
+        <activity android:name=".View.UpdateAdsActivity" />
+        <activity android:name=".View.MyOrdersActivity" />
         <activity android:name=".View.MyBillingActivity" />
         <activity android:name=".View.MyProfileActivity" />
         <!--

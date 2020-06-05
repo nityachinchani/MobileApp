@@ -30,7 +30,7 @@ public class MyOrdersActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_account_my_orders);
+        setContentView(R.layout.activity_my_orders);
         item = new Item();
         myOrdersGridView= findViewById(R.id.myOrdersGridView);
         getAllItems();
@@ -41,13 +41,13 @@ public class MyOrdersActivity extends AppCompatActivity {
         item.getMyOrders(Utility.getCurrentUserId(), new CallBack() {
             @Override
             public void onSuccess(Object object) {
+                if(object != null) {
                 Object[] objectArray = (Object[]) object;
                 itemList.clear();
                 for (Object itemElement : objectArray
                 ) {
                     itemList.add((ItemDao) itemElement);
                 }
-                if(itemList.size() > 0) {
                     BindItems();
                 }
                 else {
@@ -101,7 +101,7 @@ public class MyOrdersActivity extends AppCompatActivity {
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             inflater = getLayoutInflater();
-            convertView=inflater.inflate(R.layout.myorders_adapter_element, null);
+            convertView=inflater.inflate(R.layout.activity_myorders_row, null);
             ImageView imageView = convertView.findViewById(R.id.imageMyOrders);
             TextView nameText = convertView.findViewById(R.id.nameMyOrders);
             TextView categoryText = convertView.findViewById(R.id.categoryMyOrders);

@@ -32,7 +32,7 @@ public class MyBillingActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_account_billing);
+        setContentView(R.layout.activity_billing_info);
         item = new Item();
         billingGridView= (GridView)findViewById(R.id.billingGridView);
         getAllItems();
@@ -104,7 +104,7 @@ public class MyBillingActivity extends AppCompatActivity {
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             inflater = getLayoutInflater();
-            convertView=inflater.inflate(R.layout.billing_info_adapter_element, null);
+            convertView=inflater.inflate(R.layout.activity_billing_info_row, null);
             ImageView imageView = convertView.findViewById(R.id.imageBilling);
             TextView nameText = convertView.findViewById(R.id.nameBilling);
             TextView categoryText = convertView.findViewById(R.id.categoryBilling);
