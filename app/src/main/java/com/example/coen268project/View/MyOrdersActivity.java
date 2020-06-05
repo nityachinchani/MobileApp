@@ -68,8 +68,8 @@ public class MyOrdersActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Toast.makeText(MyOrdersActivity.this,adapter.getItem(i).getItemName(),Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(MyOrdersActivity.this, ExploreBuyActivity.class);
-                intent.putExtra("Item", (CharSequence) adapter.getItem(i).getItemId());
+                Intent intent = new Intent(MyOrdersActivity.this, ViewOrderActivity.class);
+                intent.putExtra("ItemId", (CharSequence) adapter.getItem(i).getItemId());
                 startActivity(intent);
             }
         });

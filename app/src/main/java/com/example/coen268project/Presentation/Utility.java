@@ -23,9 +23,9 @@ public class Utility extends FirebaseRepository {
 
     public static enum ItemStatus
     {
-        POSTED("Posted"),
-        SOLD("Sold"),
-        BOOKED("Booked");
+        POSTED("POSTED"),
+        SOLD("SOLD"),
+        BOOKED("BOOKED");
 
         private final String name;
 
@@ -38,7 +38,7 @@ public class Utility extends FirebaseRepository {
         }
 
         public static int getIndex(String name) {
-            return ItemStatus.valueOf(name.toUpperCase()).ordinal();
+            return ItemStatus.valueOf(name).ordinal();
         }
 
         public static String[] toArray() {
