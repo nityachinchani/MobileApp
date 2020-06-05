@@ -129,7 +129,7 @@ public class MyBillingActivity extends AppCompatActivity {
             Glide.with(MyBillingActivity.this).load(this.items.get(position).getPictureName()).into(imageView);
             nameText.setText(this.items.get(position).getItemName());
             categoryText.setText(this.items.get(position).getCategory());
-            statusText.setText("Sold");
+            statusText.setText(this.items.get(position).getBillingStatus());
             return convertView;
         }
     }

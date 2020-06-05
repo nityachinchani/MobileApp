@@ -1,13 +1,8 @@
 package com.example.coen268project.Presentation;
 import android.net.Uri;
-import androidx.annotation.NonNull;
 import com.example.coen268project.Firebase.CallBack;
 import com.example.coen268project.Firebase.FirebaseRepository;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.ListResult;
 import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
