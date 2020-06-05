@@ -5,7 +5,6 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -45,7 +44,7 @@ public class UpdateAdsActivity extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_update_ads);
+        setContentView(R.layout.activity_update_ads);
         Bundle bundle = getIntent().getExtras();
         item = new Item();
         et_ProductName = findViewById(R.id.et_ProductName);

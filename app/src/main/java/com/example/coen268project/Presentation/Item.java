@@ -205,6 +205,45 @@ public class Item extends FirebaseRepository implements ItemRepository {
         });
     }
 
+    public void getMyOrders(String buyerId, final CallBack callBack) {
+        final ArrayList<ItemDao> itemArrayList = new ArrayList<>();
+        Query query = itemDatabaseReference.orderByChild("buyerId").equalTo(buyerId);
+        firebaseReadData(query, new CallBack() {
+            @Override
+            public void onSuccess(Object object) {
+                if (object != null) {
+                    DataSnapshot dataSnapshot = (DataSnapshot) object;
+                    if (dataSnapshot.getValue() != null && dataSnapshot.hasChildren()) {
+                        for (DataSnapshot suggestionSnapshot : dataSnapshot.getChildren()) {
+                            String itemId = suggestionSnapshot.getKey();
+                            String itemName = suggestionSnapshot.child("itemName").getValue().toString();
+                            String category = suggestionSnapshot.child("category").getValue().toString();
+                            String location = suggestionSnapshot.child("location").getValue().toString();
+                            String price = suggestionSnapshot.child("price").getValue().toString();
+                            String description = suggestionSnapshot.child("description").getValue().toString();
+                            String sellerId = suggestionSnapshot.child("sellerId").getValue().toString();
+                            String buyerId = suggestionSnapshot.child("buyerId").getValue().toString();
+                            String itemStatus = suggestionSnapshot.child("itemStatus").getValue().toString();
+                            String pictureName = suggestionSnapshot.child("pictureName").getValue().toString();
+                            ItemDao itemDao = new ItemDao(itemId, itemName, category, location, price, description, sellerId, buyerId, itemStatus, pictureName);
+                            itemArrayList.add(itemDao);
+                        }
+                        callBack.onSuccess(itemArrayList.toArray());
+                    } else {
+                        callBack.onSuccess(null);
+                    }
+                } else {
+                    callBack.onSuccess(null);
+                }
+            }
+
+            @Override
+            public void onError(Object object) {
+                callBack.onError(null);
+            }
+        });
+    }
+
     public void getMyAds(String sellerId, final CallBack callBack) {
         final ArrayList<ItemDao> itemArrayList = new ArrayList<>();
         Query query = itemDatabaseReference.orderByChild("sellerId").equalTo(sellerId);

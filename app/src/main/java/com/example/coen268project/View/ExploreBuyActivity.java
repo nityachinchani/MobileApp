@@ -14,7 +14,7 @@ import android.widget.Toast;
 
 public class ExploreBuyActivity extends AppCompatActivity {
     private ImageView productImage;
-    private TextView productPrice,productDescription,productTitle;
+    private TextView productPrice,productDescription,productTitle, productStatus;
     private Button exploreBuyBtn;
     private Item item;
 
@@ -29,6 +29,7 @@ public class ExploreBuyActivity extends AppCompatActivity {
         productTitle=findViewById(R.id.product_title);
         productPrice=findViewById(R.id.product_price);
         exploreBuyBtn=findViewById(R.id.exploreBuyBtn);
+        productStatus=findViewById(R.id.product_status);
         productDescription=findViewById(R.id.product_description);
 
 
@@ -66,7 +67,7 @@ public class ExploreBuyActivity extends AppCompatActivity {
         productTitle.setText(itemDao.getItemName());
         productPrice.setText(itemDao.getPrice());
         productDescription.setText(itemDao.getDescription());
+        productStatus.setText(itemDao.getItemStatus());
         Glide.with(ExploreBuyActivity.this).load(itemDao.getPictureName()).into(productImage);
-
     }
 }

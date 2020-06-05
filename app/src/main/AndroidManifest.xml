@@ -22,9 +22,9 @@
         android:theme="@style/AppTheme">
         <activity android:name=".View.ExploreBuyActivity"></activity>
         <activity android:name=".View.UpdateAdsActivity"></activity>
-        <activity android:name=".View.AccountMyOrdersActivity"></activity>
-        <activity android:name=".View.AccountBillingActivity" />
-        <activity android:name=".View.AccountProfileActivity" />
+        <activity android:name=".View.MyOrdersActivity"></activity>
+        <activity android:name=".View.MyBillingActivity" />
+        <activity android:name=".View.MyProfileActivity" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").

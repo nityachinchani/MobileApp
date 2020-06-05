@@ -222,8 +222,5 @@ public class ExploreFragment extends Fragment {
             textView.setText(this.items.get(position).getItemName());
             return convertView;
         }
-
-
     }
-
 }
