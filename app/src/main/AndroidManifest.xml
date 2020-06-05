@@ -21,6 +21,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".View.ViewOrderActivity"></activity>
+        <activity android:name=".View.UpdateBillingActivity"></activity>
         <activity android:name=".View.ExploreBuyActivity" />
         <activity android:name=".View.UpdateAdsActivity" />
         <activity android:name=".View.MyOrdersActivity" />

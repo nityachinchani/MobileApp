@@ -1,12 +1,13 @@
 package com.example.coen268project.View;
-
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.bumptech.glide.Glide;
 import com.example.coen268project.Firebase.CallBack;
 import com.example.coen268project.Model.ItemDao;
 import com.example.coen268project.Presentation.Item;
 import com.example.coen268project.R;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,9 +23,6 @@ import java.util.ArrayList;
 
 
 public class MyBillingActivity extends AppCompatActivity {
-    int[] numberImage = {R.drawable.test1, R.drawable.test2, R.drawable.test3, R.drawable.test4, R.drawable.test5, R.drawable.test6
-            , R.drawable.ic_account_box_black_24dp, R.drawable.ic_camera_alt_black_24dp, R.drawable.ic_chat_bubble_black_24dp, R.drawable.ic_current
-            , R.drawable.ic_find_in_page_black_24dp};
     private Item item;
     private ArrayList<ItemDao> itemList = new ArrayList<>();
     private GridView billingGridView;
@@ -34,11 +32,9 @@ public class MyBillingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_billing_info);
         item = new Item();
-        billingGridView= (GridView)findViewById(R.id.billingGridView);
+        billingGridView= findViewById(R.id.billingGridView);
         getAllItems();
     }
-
-
 
     private void getAllItems(){
         item.getAllItems(new CallBack() {
@@ -60,30 +56,25 @@ public class MyBillingActivity extends AppCompatActivity {
     }
 
     public void BindItems() {
-        final MainAdapter_billing_info adapter = new MainAdapter_billing_info(itemList, numberImage);
+        final MainAdapter_billing_info adapter = new MainAdapter_billing_info(itemList);
         billingGridView.setAdapter(adapter);
         billingGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Toast.makeText(MyBillingActivity.this,adapter.getItem(i).getItemName(),Toast.LENGTH_SHORT).show();
-//                Intent intent = new Intent(AccountBilling.this, Explore_buy.class);
-//                intent.putExtra("Item", (CharSequence) adapter.getItem(i).getItemId());
-//                startActivity(intent);
+                Intent intent = new Intent(MyBillingActivity.this, UpdateBillingActivity.class);
+                intent.putExtra("ItemId", (CharSequence) adapter.getItem(i).getItemId());
+                startActivity(intent);
             }
         });
     }
 
-
-
-
     public class MainAdapter_billing_info extends BaseAdapter {
         LayoutInflater inflater;
         ArrayList<ItemDao> items;
-        int[] numberImage; // remove this parameter
 
-        public MainAdapter_billing_info(ArrayList<ItemDao> items, int[] numberImage) {
+        public MainAdapter_billing_info(ArrayList<ItemDao> items) {
             this.items = items;
-            this.numberImage = numberImage;
         }
 
         @Override
@@ -109,8 +100,7 @@ public class MyBillingActivity extends AppCompatActivity {
             TextView nameText = convertView.findViewById(R.id.nameBilling);
             TextView categoryText = convertView.findViewById(R.id.categoryBilling);
             TextView statusText = convertView.findViewById(R.id.statusBilling);
-
-            imageView.setImageResource(numberImage[position]); // set same as in explore_buy
+            Glide.with(MyBillingActivity.this).load(this.items.get(position).getPictureName()).into(imageView);
             nameText.setText(this.items.get(position).getItemName());
             categoryText.setText(this.items.get(position).getCategory());
             statusText.setText("Sold");

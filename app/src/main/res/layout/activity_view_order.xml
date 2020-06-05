@@ -93,36 +93,20 @@ tools:context=".View.ViewOrderActivity">
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal|center_vertical"
-            android:text="Status"
+            android:text="Item Status"
             android:textColor="@android:color/holo_blue_dark"
             android:textSize="25dp"
             android:textStyle="bold" />
 
-        <Spinner
-            android:id="@+id/itemStatusSpinner"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:gravity="center_horizontal|center_vertical"
-            android:spinnerMode="dialog" />
-
-        <Button
-            android:id="@+id/btnUpdate"
+        <TextView
+            android:id="@+id/tv_StatusValue"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@drawable/button_beautification"
-            android:fontFamily="monospace"
-            android:text="Update"
-            android:textAlignment="center"
-            android:textAllCaps="false"
-            android:textColor="@android:color/background_light"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:padding="25dp"/>
-
-
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="30dp"
+            android:textColor="#76A5CD" />
     </LinearLayout>
 </ScrollView>
 
