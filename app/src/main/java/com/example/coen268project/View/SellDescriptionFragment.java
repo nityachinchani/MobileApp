@@ -46,7 +46,7 @@ public class SellDescriptionFragment extends Fragment {
        //Getting Data From Upload_fragment
         Bundle bundle = getArguments();
         final String item = bundle.getString("Item");
-        final String Location = bundle.getString("Location_1");
+        final String Location = bundle.getString("Location");
         final String path_1 = bundle.getString("Path");
 
 
@@ -70,7 +70,7 @@ public class SellDescriptionFragment extends Fragment {
                            p_price.requestFocus();
                            return;
                        }
-                       itemDb.createItem(Utility.getCurrentUserId(), product_name, item, "south sanfrancisco", product_price, product_description, path_1, new CallBack() {
+                       itemDb.createItem(Utility.getCurrentUserId(), product_name, item, Location, product_price, product_description, path_1, new CallBack() {
                            @Override
                            public void onSuccess(Object object) {
                                Toast.makeText(getContext(),"Product uploaded successfully" + object.toString(),Toast.LENGTH_LONG).show();

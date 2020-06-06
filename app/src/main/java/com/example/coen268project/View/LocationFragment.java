@@ -59,7 +59,7 @@ public class LocationFragment extends AppCompatActivity implements OnMapReadyCal
         findHomeLocation = findViewById(R.id.ic_go);
         button = findViewById(R.id.button_continue);
         final String item_1 = getIntent().getCharSequenceExtra("Item").toString();
-        final String location_1 = searchText.getText().toString();
+
         getLocationPermission();
 
         //location_fragment.this.getActionBar().setTitle("Choose Location");
@@ -68,6 +68,7 @@ public class LocationFragment extends AppCompatActivity implements OnMapReadyCal
             @Override
             public void onClick(View v)
             {
+                final String location_1 = searchText.getText().toString();
                 Intent intent = new Intent(LocationFragment.this, HomeActivity.class);
                 intent.putExtra("from", UploadFragment.class.getSimpleName());
                 intent.putExtra("Item_1",item_1);
