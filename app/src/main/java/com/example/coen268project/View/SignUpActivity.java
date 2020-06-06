@@ -105,7 +105,6 @@ public class SignUpActivity extends AppCompatActivity {
                     account.createUserWithEmailAndPassword(email, password, new CallBack() {
                         @Override
                         public void onSuccess(Object object) {
-                            utility.setCurrentUserId(object.toString());
                             account.createAccount(object.toString(), fullName, email, number, password, picture_name[0], new CallBack() {
                                 @Override
                                 public void onSuccess(Object object) {
@@ -153,14 +152,14 @@ public class SignUpActivity extends AppCompatActivity {
             utility.uploadImageToStorage(picture_name[0], contentUri, new CallBack() {
                 @Override
                 public void onSuccess(Object object) {
-                    picture_name[0] = object.toString();
-                    Toast.makeText(SignUpActivity.this, "Image upload succeeded" + picture_name[0], Toast.LENGTH_LONG).show();
-                    Log.d("tag", "Image upload succeeded" + picture_name[0]);
+                    signUpBtn.setEnabled(true);
+                    picture_name[0] =  object.toString();
+                    Toast.makeText(SignUpActivity.this, "Image upload succeeded", Toast.LENGTH_LONG).show();
                 }
 
                 @Override
                 public void onError(Object object) {
-                    Toast.makeText(SignUpActivity.this, "Image upload failed", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SignUpActivity.this, "Image upload in progresss" + (int) object, Toast.LENGTH_SHORT).show();
                 }
             });
         }

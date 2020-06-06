@@ -16,7 +16,9 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
 
+import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -52,36 +54,37 @@ public abstract class FirebaseRepository {
         });
     }
 
-    protected void firebaseUploadImageToStorage(final StorageReference storageReference, String name, Uri contentUri, final CallBack callback){
-        StorageReference image = storageReference.child("images/"+name);
-        UploadTask uploadTask = image.putFile(contentUri);
-        uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>(){
-            @Override
-            public  void onSuccess(final UploadTask.TaskSnapshot taskSnapshot) {
-                Task<Uri> urlTask = taskSnapshot.getStorage().getDownloadUrl();
-                callback.onSuccess(urlTask.getResult().toString());
-            }
-        }).addOnFailureListener(new OnFailureListener() {
+    protected void firebaseUploadImageToStorage(final StorageReference storageReference, String name, final Uri contentUri, final CallBack callback){
+        final StorageReference image = storageReference.child("images/"+name);
+        final UploadTask uploadTask = image.putFile(contentUri);
+        uploadTask.addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e)
             {
                 callback.onError(e.getMessage());
             }
         }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-
-                            // Progress Listener for loading
-                            // percentage on the dialog box
-                            @Override
-                            public void onProgress(
-                                    UploadTask.TaskSnapshot taskSnapshot)
-                            {
-                                double progress
-                                        = (100.0
-                                        * taskSnapshot.getBytesTransferred()
-                                        / taskSnapshot.getTotalByteCount());
-                                callback.onError(progress);
-                            }
-                        });
+            @Override
+            public void onProgress(
+                    UploadTask.TaskSnapshot taskSnapshot) {
+                double progress
+                        = (100.0
+                        * taskSnapshot.getBytesTransferred()
+                        / taskSnapshot.getTotalByteCount());
+                callback.onError((int)progress);
+            }
+        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                Task<Uri> task = taskSnapshot.getMetadata().getReference().getDownloadUrl();
+                task.addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+                       callback.onSuccess(uri.toString());
+                    }
+                });
+            }
+        });
     }
 
     protected final void firebaseCreate(final DatabaseReference databaseReference, final Object model, final CallBack callback) {

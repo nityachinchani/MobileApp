@@ -84,12 +84,11 @@ public class UploadFragment extends Fragment {
         button.setOnClickListener(new View.OnClickListener()
         {
             @Override
-            public void onClick (View v)
-            {
+            public void onClick (View v) {
                 Intent intent = new Intent(getActivity(), HomeActivity.class);
                 intent.putExtra("from", SellDescriptionFragment.class.getSimpleName());
-                intent.putExtra("Item",item);
-                intent.putExtra("Location",Location);
+                intent.putExtra("Item", item);
+                intent.putExtra("Location", Location);
                 intent.putExtra("Path", picture_name[0]);
                 startActivity(intent);
             }
@@ -170,14 +169,13 @@ public class UploadFragment extends Fragment {
                 @Override
                 public void onSuccess(Object object) {
                     button.setEnabled(true);
-                    picture_name[0] = object.toString();
-                    Toast.makeText(getContext(), "Image upload succeeded" + picture_name[0], Toast.LENGTH_LONG).show();
-                    Log.d("tag", "Image upload succeeded" + picture_name[0]);
+                    picture_name[0] =  object.toString();
+                    Toast.makeText(getContext(), "Image upload succeeded", Toast.LENGTH_LONG).show();
                 }
 
                 @Override
                 public void onError(Object object) {
-                    Toast.makeText(getContext(), "Image upload in progresss" + (double) object, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Image upload in progresss" + (int) object, Toast.LENGTH_SHORT).show();
                 }
             });
         }

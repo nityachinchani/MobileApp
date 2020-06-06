@@ -2,6 +2,8 @@ package com.example.coen268project.Presentation;
 import android.net.Uri;
 import com.example.coen268project.Firebase.CallBack;
 import com.example.coen268project.Firebase.FirebaseRepository;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -16,7 +18,7 @@ public class Utility extends FirebaseRepository {
         storageReference = FirebaseStorage.getInstance().getReference();
     }
 
-    public static enum ItemStatus
+    public enum ItemStatus
     {
         POSTED("POSTED"),
         SOLD("SOLD"),
@@ -53,7 +55,7 @@ public class Utility extends FirebaseRepository {
         VIDEO
     }
 
-    public static enum BillingStatus
+    public enum BillingStatus
     {
         PENDING("PENDING"),
         DELIVERED("DELIVERED"),
@@ -79,7 +81,7 @@ public class Utility extends FirebaseRepository {
         }
     }
 
-    public static enum Category
+    public enum Category
     {
         CATEGORY1("Sofa and Dining"),
         CATEGORY2("Bed and Wardrobes"),
@@ -108,11 +110,9 @@ public class Utility extends FirebaseRepository {
     }
 
     public static String getCurrentUserId() {
+        //FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        //String uid = user.getUid();
         return "HShwnTE38jNhhTZTczkfj3CAJmK2";
-    }
-
-    public static void setCurrentUserId(String currentUserId) {
-        Utility.currentUserId = currentUserId;
     }
 
     public void uploadImageToStorage(String name, Uri contentUri, final CallBack callBack){
