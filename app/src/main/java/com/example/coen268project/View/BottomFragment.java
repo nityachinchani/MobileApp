@@ -70,9 +70,9 @@ public class BottomFragment extends Fragment implements BottomNavigationView.OnN
                 listener.replaceFragment(HomeActivity.FragmentType.ADS);
                 break;
 
-            case R.id.account:
-                listener.replaceFragment(HomeActivity.FragmentType.ACCOUNT);
-                break;
+//            case R.id.account:
+//                listener.replaceFragment(HomeActivity.FragmentType.ACCOUNT);
+//                break;
         }
 
         return true;

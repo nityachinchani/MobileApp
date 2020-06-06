@@ -16,7 +16,5 @@
         android:id="@+id/ads"
         android:icon="@drawable/ic_folder_black_24dp"></item>
 
-    <item android:title="Account"
-        android:id="@+id/account"
-        android:icon="@drawable/ic_account_box_black_24dp"></item>
+
 </menu>

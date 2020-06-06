@@ -1,15 +1,28 @@
 package com.example.coen268project.View;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 
 import com.example.coen268project.R;
+import com.google.android.material.navigation.NavigationView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.Menu;
+import android.view.MenuItem;
 
-public class HomeActivity extends AppCompatActivity implements BottomFragment.OnFragmentInteractionListener {
+import de.hdodenhof.circleimageview.CircleImageView;
+
+public class HomeActivity extends AppCompatActivity implements BottomFragment.OnFragmentInteractionListener,
+NavigationView.OnNavigationItemSelectedListener{
     String from="";
+private DrawerLayout drawerLayout;
 
     public enum FragmentType {
         EXPLORE, CHATS, SELL, ADS, ACCOUNT;
@@ -20,6 +33,19 @@ public class HomeActivity extends AppCompatActivity implements BottomFragment.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+        Toolbar toolbar =findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        drawerLayout=findViewById(R.id.drawerLayout);
+        NavigationView navigationView=findViewById(R.id.drawer_navigation_view);
+        navigationView.setNavigationItemSelectedListener(this);
+        //CircleImageView c=findViewById(R.id.drawerImageCircleImageView);  setup the profile image here
+
+        ActionBarDrawerToggle toggle=new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.hello_blank_fragment,R.string.app_name);
+        drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
+
+
         ExploreFragment defaultFragment = new ExploreFragment();
         getSupportFragmentManager().beginTransaction().add(R.id.fragmentContainer, defaultFragment).commit();
         BottomFragment bottomFragment = new BottomFragment();
@@ -27,8 +53,36 @@ public class HomeActivity extends AppCompatActivity implements BottomFragment.On
         getExtras();
     }
 
+    @Override
+    public void onBackPressed() {
+        if(drawerLayout.isDrawerOpen(GravityCompat.START)){
+            drawerLayout.closeDrawer(GravityCompat.START);
+        }
+        else {
+            super.onBackPressed();
+        }
+    }
 
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.my_profile:
+                startActivity(new Intent(this,MyProfileActivity.class));
+                break;
+            case R.id.my_billings:
+                startActivity(new Intent(this,MyBillingActivity.class));
+                break;
+            case R.id.my_orders:
+                startActivity(new Intent(this,MyOrdersActivity.class));
+                break;
+            case R.id.logout:
 
+                startActivity(new Intent(this,Splash_screen.class));
+                finish();
+                break;
+        }
+        return true;
+    }
 
     @Override
     public void replaceFragment(FragmentType type) {
@@ -51,11 +105,7 @@ public class HomeActivity extends AppCompatActivity implements BottomFragment.On
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu){
-        getMenuInflater().inflate(R.menu.threedot_menu, menu);
-        return true;
-    }
+
 
     private void getExtras() {
         Intent intent = getIntent();

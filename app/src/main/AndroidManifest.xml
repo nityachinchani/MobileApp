@@ -57,7 +57,8 @@
         <activity
             android:name=".View.LocationFragment"
             android:label="Choose Location" />
-        <activity android:name=".View.HomeActivity" />
+        <activity android:name=".View.HomeActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".View.SellFragment"
             android:label="Choose Furniture" />
