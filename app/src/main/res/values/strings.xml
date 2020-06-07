@@ -7,6 +7,15 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_location_fragment">Map</string>
+    <string name="username_text">Username :</string>
+    <string name="password_text">Password :</string>
+    <string name="sign_up_text">Don\'t have an account yet? Sign up</string>
+    <string name="forgot_password">Forgot Password? Click here</string>
+    <string name="password_edit_text">Enter Password here</string>
+    <string name="username_edit_text">Enter Username here</string>
+    <string name="sign_in_button">Sign In</string>
+    <string name="guest_login_button">Log in as guest</string>
+    <string name="app_description">Buy and Sell furniture with just one click</string>
 
 
 </resources>
