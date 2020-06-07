@@ -29,26 +29,42 @@ public class Messages extends FirebaseRepository implements MessagesRepository {
         allMessagesDatabaseReference = FirebaseInstance.DATABASE.getReference(FirebaseConstants.DATABASE_ROOT).child("messageTable");
     }
 
-    @Override
-    public void createMessage(String sellerId, String buyerId, final String buyerName, String uid, String name, String messageContent, final CallBack callBack) {
-        MessagesDao messagesDao = new MessagesDao(uid, name, messageContent);
+    public void setBuyerName(String sellerId, String buyerId,final String buyerName, final CallBack callBack)
+    {
         final DatabaseReference messageReference = allMessagesDatabaseReference.child(sellerId).child(buyerId);
         firebaseReadData(messageReference, new CallBack() {
-                    @Override
-                    public void onSuccess(Object object) {
-                        DataSnapshot dataSnapshot = (DataSnapshot) object;
-                        if (!dataSnapshot.hasChild("buyerName")) {
-                            HashMap<String, String> map = new HashMap<>();
-                            map.put("buyerName", buyerName);
-                            messageReference.setValue(map);
+            @Override
+            public void onSuccess(Object object) {
+                DataSnapshot dataSnapshot = (DataSnapshot) object;
+                if (!dataSnapshot.hasChild("buyerName")) {
+                    HashMap<String, String> map = new HashMap<>();
+                    map.put("buyerName", buyerName);
+                    firebaseCreate(messageReference, map, new CallBack() {
+                        @Override
+                        public void onSuccess(Object object) {
+                            callBack.onSuccess(object);
                         }
-                    }
 
-                    @Override
-                    public void onError(Object object) {
+                        @Override
+                        public void onError(Object object) {
+                            callBack.onError(object);
+                        }
+                    });
+                }
+                else
+                    callBack.onSuccess(null);
+            }
 
-                    }
-                });
+            @Override
+            public void onError(Object object) {
+
+            }
+        });
+    }
+    @Override
+    public void createMessage(String sellerId, String buyerId, String uid, String name, String messageContent, final CallBack callBack) {
+        MessagesDao messagesDao = new MessagesDao(uid, name, messageContent);
+        final DatabaseReference messageReference = allMessagesDatabaseReference.child(sellerId).child(buyerId);
         String pushKey = messageReference.push().getKey();
         if (messagesDao != null && !pushKey.isEmpty()) {
             DatabaseReference databaseReference = messageReference.child(pushKey);
@@ -113,13 +129,19 @@ public class Messages extends FirebaseRepository implements MessagesRepository {
                     DataSnapshot dataSnapshot = (DataSnapshot) object;
                     if (dataSnapshot.getValue() != null && dataSnapshot.hasChildren()) {
                         for (DataSnapshot suggestionSnapshot : dataSnapshot.getChildren()) {
-                            String uid = suggestionSnapshot.child("uid").getValue().toString();
-                            String name = suggestionSnapshot.child("name").getValue().toString();
-                            String messageContent = suggestionSnapshot.child("messageContent").getValue().toString();
-                            MessagesDao messagesDao = new MessagesDao(uid, name, messageContent);
-                            messageArrayList.add(messagesDao);
+                            if(suggestionSnapshot.hasChildren()) {
+                                String uid = suggestionSnapshot.child("uid").getValue().toString();
+                                String name = suggestionSnapshot.child("name").getValue().toString();
+                                String messageContent = suggestionSnapshot.child("messageContent").getValue().toString();
+                                MessagesDao messagesDao = new MessagesDao(uid, name, messageContent);
+                                messageArrayList.add(messagesDao);
+                            }
                         }
-                        callBack.onSuccess(messageArrayList.toArray());
+                        if(messageArrayList.size() > 0) {
+                            callBack.onSuccess(messageArrayList.toArray());
+                        }
+                        else
+                            callBack.onSuccess(null);
                     } else {
                         callBack.onSuccess(null);
                     }

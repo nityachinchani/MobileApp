@@ -74,14 +74,15 @@ public class OneToOneChatActivity extends AppCompatActivity {
             }
         });
 
-                btnSend.setOnClickListener(new View.OnClickListener() {
-
-                    @RequiresApi(api = Build.VERSION_CODES.O)
+        btnSend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final String messageContent = et_MessageContent.getText().toString();
+                et_MessageContent.setText("");
+                messages.setBuyerName(sellerId, buyerId, buyerName, new CallBack() {
                     @Override
-                    public void onClick(View v) {
-                        String messageContent = et_MessageContent.getText().toString();
-                        et_MessageContent.setText("");
-                        messages.createMessage(sellerId, buyerId, buyerName, Utility.getCurrentUserId(), Utility.getCurrentUserName(), messageContent, new CallBack() {
+                    public void onSuccess(Object object) {
+                        messages.createMessage(sellerId, buyerId, Utility.getCurrentUserId(), Utility.getCurrentUserName(), messageContent, new CallBack() {
                             @Override
                             public void onSuccess(Object object) {
                             }
@@ -91,8 +92,13 @@ public class OneToOneChatActivity extends AppCompatActivity {
                             }
                         });
                     }
-                });
 
+                    @Override
+                    public void onError(Object object) {
+                    }
+                });
+            }
+        });
     }
 
     CustomAdapter adapter;
