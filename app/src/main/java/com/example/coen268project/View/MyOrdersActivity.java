@@ -40,6 +40,7 @@ public class MyOrdersActivity extends AppCompatActivity {
             public void onSuccess(Object object) {
                 if(object == null) {
                     Toast.makeText(MyOrdersActivity.this,"No items to display", Toast.LENGTH_SHORT).show();
+                    return;
                 }
                 Object[] objectArray = (Object[]) object;
                 itemList.clear();
