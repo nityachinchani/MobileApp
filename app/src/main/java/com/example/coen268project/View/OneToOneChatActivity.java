@@ -3,11 +3,19 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.coen268project.Firebase.CallBack;
 import com.example.coen268project.Firebase.FirebaseChildCallback;
+import com.example.coen268project.Firebase.FirebaseConstants;
+import com.example.coen268project.Firebase.FirebaseInstance;
 import com.example.coen268project.Model.MessagesDao;
 import com.example.coen268project.Presentation.Messages;
 import com.example.coen268project.Presentation.Utility;
 import com.example.coen268project.R;
 import com.example.coen268project.View.Video.Calling_Activity;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ValueEventListener;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -29,6 +37,9 @@ public class OneToOneChatActivity extends AppCompatActivity {
     private String buyerId = "";
     private String buyerName = "";
     private ImageButton VideoCallBtn;
+    private DatabaseReference userRef;
+    private String currentUserId = "";
+    private String calledBy="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +52,9 @@ public class OneToOneChatActivity extends AppCompatActivity {
         messages = new Messages();
         sellerId = getIntent().getStringExtra("sellerId");
         buyerId = getIntent().getStringExtra("buyerId");
+        userRef = FirebaseInstance.DATABASE.getReference(FirebaseConstants.DATABASE_ROOT).child("accountTable");
+        currentUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
         if(buyerId.equals(""))
         {
             buyerId = Utility.getCurrentUserId();
@@ -110,6 +124,34 @@ public class OneToOneChatActivity extends AppCompatActivity {
                 startActivity(new Intent(intent));
             }
         });
+
+
+        checkForReceivingCall();
+
+
+
+    }
+    private void checkForReceivingCall() {
+        userRef.child(currentUserId)
+                .child("Ringing")
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+
+                        if(dataSnapshot.hasChild("ringing")){
+                            calledBy = dataSnapshot.child("ringing").getValue().toString();
+
+                            Intent intent = new Intent(OneToOneChatActivity.this,Calling_Activity.class);
+                            intent.putExtra("visit_user_id",calledBy);
+                            startActivity(intent);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
     }
 
     CustomAdapter adapter;

@@ -22,6 +22,7 @@ import com.opentok.android.Subscriber;
 import android.Manifest;
 import android.content.Intent;
 import android.opengl.GLSurfaceView;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -159,6 +160,7 @@ public class Video_Chat_Activity extends AppCompatActivity  implements Session.S
     public void onError(PublisherKit publisherKit, OpentokError opentokError) {
 
     }
+
 
     @Override
     public void onConnected(Session session) {
