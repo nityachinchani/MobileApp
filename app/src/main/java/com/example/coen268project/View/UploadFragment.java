@@ -86,7 +86,7 @@ public class UploadFragment extends Fragment {
             @Override
             public void onClick (View v) {
                 Intent intent = new Intent(getActivity(), HomeActivity.class);
-                intent.putExtra("from", SellDescriptionActivity.class.getSimpleName());
+                intent.putExtra("from", SellDescriptionFragment.class.getSimpleName());
                 intent.putExtra("Item", item);
                 intent.putExtra("Location", Location);
                 intent.putExtra("Path", picture_name[0]);
