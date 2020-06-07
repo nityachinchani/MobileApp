@@ -26,7 +26,7 @@ public class UpdateBillingActivity extends AppCompatActivity {
     private TextView tv_ProductName;
     private TextView tv_Price;
     private TextView tv_Description;
-    private Spinner statusSpinner;
+    private Spinner billingStatusSpinner;
     private Item item;
     private ImageView img_ProductPicture;
     private static String[] billingStatus = Utility.BillingStatus.toArray();
@@ -42,10 +42,10 @@ public class UpdateBillingActivity extends AppCompatActivity {
         tv_Description = findViewById(R.id.product_description);
         img_ProductPicture = findViewById(R.id.product_image);
         btnUpdate = findViewById(R.id.btnUpdate);
-        statusSpinner = findViewById(R.id.billingStatusSpinner);
+        billingStatusSpinner = findViewById(R.id.billingStatusSpinner);
 
-        ArrayAdapter<String> categoryAdapter = new ArrayAdapter<String>(UpdateBillingActivity.this, R.layout.activity_spinner_row, R.id.text_id, billingStatus);
-        statusSpinner.setAdapter(categoryAdapter);
+        ArrayAdapter<String> billingAdapter = new ArrayAdapter<String>(UpdateBillingActivity.this, R.layout.activity_spinner_row, R.id.text_id, billingStatus);
+        billingStatusSpinner.setAdapter(billingAdapter);
         final String itemId = bundle.getString("ItemId");
         final Map<String, String> updates = new HashMap<>();
         item.getItem(itemId, new CallBack() {
@@ -65,13 +65,13 @@ public class UpdateBillingActivity extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
-                updates.put("billingStatus", statusSpinner.getSelectedItem().toString());
-                if(statusSpinner.getSelectedItem().toString().equals(Utility.BillingStatus.DELIVERED))
+                updates.put("billingStatus", billingStatusSpinner.getSelectedItem().toString());
+                if(billingStatusSpinner.getSelectedItem().toString().equals(Utility.BillingStatus.DELIVERED))
                 {
                     updates.put("buyerId", Utility.getCurrentUserId());
                 }
 
-                if(statusSpinner.getSelectedItem().toString().equals(Utility.BillingStatus.RECEIVED)) {
+                if(billingStatusSpinner.getSelectedItem().toString().equals(Utility.BillingStatus.RECEIVED)) {
                     updates.put("itemStatus", Utility.ItemStatus.SOLD.toString());
                 }
                 item.updateItem(itemId, (HashMap) updates, new CallBack() {
@@ -92,7 +92,7 @@ public class UpdateBillingActivity extends AppCompatActivity {
     }
 
     private void BindItems(ItemDao itemDao) {
-        statusSpinner.setSelection(Utility.ItemStatus.getIndex(itemDao.getItemStatus()));
+        billingStatusSpinner.setSelection(Utility.BillingStatus.getIndex(itemDao.getBillingStatus()));
         tv_ProductName.setText(itemDao.getItemName());
         tv_Description.setText(itemDao.getDescription());
         tv_Price.setText(itemDao.getPrice());
