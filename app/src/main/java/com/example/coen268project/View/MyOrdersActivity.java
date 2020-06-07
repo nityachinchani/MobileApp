@@ -1,14 +1,11 @@
 package com.example.coen268project.View;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.bumptech.glide.Glide;
 import com.example.coen268project.Firebase.CallBack;
 import com.example.coen268project.Model.ItemDao;
 import com.example.coen268project.Presentation.Item;
 import com.example.coen268project.Presentation.Utility;
 import com.example.coen268project.R;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -41,18 +38,16 @@ public class MyOrdersActivity extends AppCompatActivity {
         item.getMyOrders(Utility.getCurrentUserId(), new CallBack() {
             @Override
             public void onSuccess(Object object) {
-                if(object != null) {
+                if(object == null) {
+                    Toast.makeText(MyOrdersActivity.this,"No items to display", Toast.LENGTH_SHORT).show();
+                }
                 Object[] objectArray = (Object[]) object;
                 itemList.clear();
                 for (Object itemElement : objectArray
                 ) {
                     itemList.add((ItemDao) itemElement);
                 }
-                    BindItems();
-                }
-                else {
-                    Toast.makeText(MyOrdersActivity.this,"No items to display",Toast.LENGTH_SHORT).show();
-                }
+                BindItems();
             }
 
             @Override
