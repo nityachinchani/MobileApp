@@ -38,11 +38,6 @@ public class MyBillingActivity extends AppCompatActivity {
         item.getMyAds(Utility.getCurrentUserId(), new CallBack() {
             @Override
             public void onSuccess(Object object) {
-                if(object == null)
-                {
-                    Toast.makeText(MyBillingActivity.this,"No ads to bill", Toast.LENGTH_SHORT).show();
-                    return;
-                }
                 Object[] objectArray = (Object[]) object;
                 itemList.clear();
                 for (Object itemElement : objectArray
@@ -62,11 +57,6 @@ public class MyBillingActivity extends AppCompatActivity {
         item.getMyOrders(Utility.getCurrentUserId(), new CallBack() {
             @Override
             public void onSuccess(Object object) {
-                if(object == null)
-                {
-                    Toast.makeText(MyBillingActivity.this,"No orders to bill", Toast.LENGTH_SHORT).show();
-                    return;
-                }
                 Object[] objectArray = (Object[]) object;
                 itemList.clear();
                 for (Object itemElement : objectArray
