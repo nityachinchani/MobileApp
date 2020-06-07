@@ -53,6 +53,13 @@ public class Utility extends FirebaseRepository {
         }
     }
 
+    public enum CommunicationType
+    {
+        TEXT,
+        AUDIO,
+        VIDEO
+    }
+
     public enum BillingStatus
     {
         PENDING("PENDING"),
@@ -67,10 +74,6 @@ public class Utility extends FirebaseRepository {
 
         public String toString() {
             return this.name;
-        }
-
-        public static int getIndex(String name) {
-            return BillingStatus.valueOf(name).ordinal();
         }
 
         public static String[] toArray() {

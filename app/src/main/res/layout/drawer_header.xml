@@ -3,18 +3,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="220dp"
+    android:background="@color/background_color_main"
     android:gravity="bottom"
-    android:padding="16dp"
-    android:theme="@style/AppTheme.AppBarOverlay"
     android:orientation="vertical"
-    android:background="#87BCD5">
+    android:padding="16dp"
+    android:theme="@style/AppTheme.AppBarOverlay">
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:orientation="vertical"
+        android:layout_marginBottom="10dp"
         android:gravity="bottom"
-        android:layout_marginBottom="10dp">
+        android:orientation="vertical">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/drawerImageCircleImageView"
@@ -31,13 +31,12 @@
             android:id="@+id/drawerTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="#FBFEFF"
-            android:textSize="14dp"
-            android:textStyle="bold"
-            android:layout_marginTop="10dp"
             android:layout_marginLeft="20dp"
-            android:gravity="center">
-        </TextView>
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:textColor="@color/general_text_color"
+            android:textSize="14dp"
+            android:textStyle="bold"></TextView>
 
     </LinearLayout>
 
