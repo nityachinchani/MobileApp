@@ -1,6 +1,9 @@
 package com.example.coen268project.View.Video;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.coen268project.Firebase.FirebaseConstants;
+import com.example.coen268project.Firebase.FirebaseInstance;
 import com.example.coen268project.R;
 import com.example.coen268project.View.HomeActivity;
 import com.google.firebase.auth.FirebaseAuth;
@@ -51,7 +54,7 @@ public class Video_Chat_Activity extends AppCompatActivity  implements Session.S
 
         userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
-        userRef = FirebaseDatabase.getInstance().getReference();
+        userRef = FirebaseInstance.DATABASE.getReference(FirebaseConstants.DATABASE_ROOT).child("accountTable");
 
         closeVideoChatBtn = findViewById(R.id.close_video_chat_btn);
         mPublisherViewController = findViewById(R.id.publisher_container);
