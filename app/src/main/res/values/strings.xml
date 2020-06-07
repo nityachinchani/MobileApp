@@ -1,7 +1,9 @@
 <resources>
     <string name="app_name">BuyRona</string>
     <string name="google_maps_API_key">AIzaSyAu_oDSThjxtfDKk8-O-WqZDLmxtU2w19Q</string>
+
     <style name="navigation_drawer_open">Open Navigation Drawer</style>
+
     <style name="navigation_drawer_close">Close Navigation Drawer</style>
 
     <!-- TODO: Remove or change this placeholder text -->

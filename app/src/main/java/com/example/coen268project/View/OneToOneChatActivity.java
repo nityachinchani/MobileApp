@@ -3,22 +3,20 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.coen268project.Firebase.CallBack;
 import com.example.coen268project.Firebase.FirebaseChildCallback;
-import com.example.coen268project.Model.ItemDao;
 import com.example.coen268project.Model.MessagesDao;
-import com.example.coen268project.Presentation.Account;
 import com.example.coen268project.Presentation.Messages;
 import com.example.coen268project.Presentation.Utility;
 import com.example.coen268project.R;
+import com.example.coen268project.View.Video.Calling_Activity;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 import java.util.ArrayList;
@@ -29,6 +27,8 @@ public class OneToOneChatActivity extends AppCompatActivity {
     private Button btnSend;
     private String sellerId = "";
     private String buyerId = "";
+    private String buyerName = "";
+    private ImageButton VideoCallBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,12 +37,14 @@ public class OneToOneChatActivity extends AppCompatActivity {
         listView = findViewById(R.id.list_view);
         btnSend = findViewById(R.id.button_chatbox_send);
         et_MessageContent = findViewById(R.id.edittext_chatbox);
+        VideoCallBtn=findViewById(R.id.video_call_btn);
         messages = new Messages();
         sellerId = getIntent().getStringExtra("sellerId");
         buyerId = getIntent().getStringExtra("buyerId");
         if(buyerId.equals(""))
         {
             buyerId = Utility.getCurrentUserId();
+            buyerName = Utility.getCurrentUserName();
         }
 
         messages.getAllMessageByChildEvent(sellerId, buyerId, new FirebaseChildCallback() {
@@ -72,13 +74,14 @@ public class OneToOneChatActivity extends AppCompatActivity {
             }
         });
 
-                btnSend.setOnClickListener(new View.OnClickListener() {
-
-                    @RequiresApi(api = Build.VERSION_CODES.O)
+        btnSend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final String messageContent = et_MessageContent.getText().toString();
+                et_MessageContent.setText("");
+                messages.setBuyerName(sellerId, buyerId, buyerName, new CallBack() {
                     @Override
-                    public void onClick(View v) {
-                        String messageContent = et_MessageContent.getText().toString();
-                        et_MessageContent.setText("");
+                    public void onSuccess(Object object) {
                         messages.createMessage(sellerId, buyerId, Utility.getCurrentUserId(), Utility.getCurrentUserName(), messageContent, new CallBack() {
                             @Override
                             public void onSuccess(Object object) {
@@ -89,8 +92,24 @@ public class OneToOneChatActivity extends AppCompatActivity {
                             }
                         });
                     }
-                });
 
+                    @Override
+                    public void onError(Object object) {
+                    }
+                });
+            }
+        });
+
+
+        VideoCallBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(OneToOneChatActivity.this, Calling_Activity.class);
+                intent.putExtra("buyerId", buyerId);
+                intent.putExtra("sellerId",sellerId);
+                startActivity(new Intent(intent));
+            }
+        });
     }
 
     CustomAdapter adapter;

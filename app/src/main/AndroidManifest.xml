@@ -63,6 +63,9 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyAu_oDSThjxtfDKk8-O-WqZDLmxtU2w19Q" />
 
+        <activity android:name=".View.Video.Video_Chat_Activity"></activity>
+        <activity android:name=".View.Video.Calling_Activity" />
+
         <activity
             android:name=".View.LocationFragment"
             android:label="Choose Location" />

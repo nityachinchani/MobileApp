@@ -31,16 +31,18 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class SignUpActivity extends AppCompatActivity {
-    public static final int CAMERA_REQUEST_CODE = 102;
+
     EditText fullnameEditText, emailEditText, numberEditText, passwordEditText, confirmPasswordEditText;
     Button signUpBtn;
     TextView signInTextView;
     private Account account;
     private Utility utility;
     ImageView profileImage;
-    public static final int CAMERA_PERMISSION_CODE=100;
     String currentPhotoPath;
     Uri imageUri;
+
+    public static final int CAMERA_REQUEST_CODE = 102;
+    public static final int CAMERA_PERMISSION_CODE=100;
     Uri contentUri;
     File f;
     final String[] picture_name = {""};

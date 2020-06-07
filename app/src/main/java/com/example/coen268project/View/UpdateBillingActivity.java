@@ -70,6 +70,10 @@ public class UpdateBillingActivity extends AppCompatActivity {
                 {
                     updates.put("buyerId", Utility.getCurrentUserId());
                 }
+
+                if(statusSpinner.getSelectedItem().toString().equals(Utility.BillingStatus.RECEIVED)) {
+                    updates.put("itemStatus", Utility.ItemStatus.SOLD.toString());
+                }
                 item.updateItem(itemId, (HashMap) updates, new CallBack() {
                     @Override
                     public void onSuccess(Object object) {
