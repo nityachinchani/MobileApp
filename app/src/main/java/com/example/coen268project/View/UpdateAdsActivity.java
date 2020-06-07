@@ -69,6 +69,7 @@ public class UpdateAdsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_update_ads);
         Bundle bundle = getIntent().getExtras();
         item = new Item();
+        utility = new Utility();
         et_ProductName = findViewById(R.id.et_ProductName);
         et_Price = findViewById(R.id.et_Price);
         et_Description = findViewById(R.id.et_Description);
