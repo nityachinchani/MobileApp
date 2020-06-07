@@ -8,7 +8,11 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 
+import com.bumptech.glide.Glide;
+import com.example.coen268project.Firebase.CallBack;
+import com.example.coen268project.Model.AccountDao;
 import com.example.coen268project.Presentation.Account;
+import com.example.coen268project.Presentation.Utility;
 import com.example.coen268project.R;
 import com.google.android.material.navigation.NavigationView;
 
@@ -17,13 +21,18 @@ import android.os.Bundle;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class HomeActivity extends AppCompatActivity implements BottomFragment.OnFragmentInteractionListener,
-NavigationView.OnNavigationItemSelectedListener{
+        NavigationView.OnNavigationItemSelectedListener{
     String from="";
-private DrawerLayout drawerLayout;
+    private Account account;
+    CircleImageView c;
+    TextView textView;
+    private DrawerLayout drawerLayout;
 
     public enum FragmentType {
         EXPLORE, CHATS, SELL, ADS, ACCOUNT;
@@ -36,11 +45,30 @@ private DrawerLayout drawerLayout;
 
         Toolbar toolbar =findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        account = new Account();
         drawerLayout=findViewById(R.id.drawerLayout);
         NavigationView navigationView=findViewById(R.id.drawer_navigation_view);
         navigationView.setNavigationItemSelectedListener(this);
-        //CircleImageView c=findViewById(R.id.drawerImageCircleImageView);  setup the profile image here
+        View headerLayout = navigationView.inflateHeaderView(R.layout.drawer_header);
+        c = headerLayout.findViewById(R.id.drawerImageCircleImageView);  //setup the profile image here
+        textView = headerLayout.findViewById(R.id.drawerTextView);
+
+
+        account.getAccount(Utility.getCurrentUserId(), new CallBack() {
+            @Override
+            public void onSuccess(Object object) {
+                AccountDao accountDao = (AccountDao) object;
+                textView.setText(accountDao.getUserName());
+                Glide.with(HomeActivity.this).load(accountDao.getPictureName()).into(c);
+            }
+            @Override
+            public void onError(Object object)
+            {
+
+            }
+        });
+
+
         ActionBarDrawerToggle toggle=new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.hello_blank_fragment,R.string.app_name);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
