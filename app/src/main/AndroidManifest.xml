@@ -20,21 +20,30 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".View.ViewOrderActivity"
-            android:label="View Orders"></activity>
-        <activity android:name=".View.UpdateBillingActivity"
-            android:label="Update Billing Status"></activity>
-        <activity android:name=".View.ExploreBuyActivity"
-            android:label="Item Information"/>
-        <activity android:name=".View.UpdateAdsActivity"
-            android:label="Update Item"/>
-        <activity android:name=".View.MyOrdersActivity"
-            android:label="My Orders"/>
-        <activity android:name=".View.MyBillingActivity"
-            android:label="My Billing Information"/>
-        <activity android:name=".View.MyProfileActivity"
-            android:label="My Profile"/>
-        <activity android:name=".View.Splash_screen"
+        <activity android:name=".View.OneToOneChatActivity"></activity>
+        <activity
+            android:name=".View.ViewOrderActivity"
+            android:label="View Orders" />
+        <activity
+            android:name=".View.UpdateBillingActivity"
+            android:label="Update Billing Status" />
+        <activity
+            android:name=".View.ExploreBuyActivity"
+            android:label="Item Information" />
+        <activity
+            android:name=".View.UpdateAdsActivity"
+            android:label="Update Item" />
+        <activity
+            android:name=".View.MyOrdersActivity"
+            android:label="My Orders" />
+        <activity
+            android:name=".View.MyBillingActivity"
+            android:label="My Billing Information" />
+        <activity
+            android:name=".View.MyProfileActivity"
+            android:label="My Profile" />
+        <activity
+            android:name=".View.Splash_screen"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -57,8 +66,9 @@
         <activity
             android:name=".View.LocationFragment"
             android:label="Choose Location" />
-        <activity android:name=".View.HomeActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".View.HomeActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".View.SellFragment"
             android:label="Choose Furniture" />
@@ -71,18 +81,11 @@
         <activity
             android:name=".View.SignUpActivity"
             android:label="Sign Up" />
-        <activity
-            android:name=".View.Chat.ChatActivity"
-            />
-        <activity
-            android:name=".View.Chat.MessageAdapter"
-            />
-
+        <activity android:name=".View.Chat.ChatActivity" />
+        <activity android:name=".View.Chat.MessageAdapter" />
         <activity
             android:name=".View.MainActivity"
-            android:label="Buy-Rona">
-
-        </activity>
+            android:label="Buy-Rona"></activity>
 
         <provider
             android:name="androidx.core.content.FileProvider"

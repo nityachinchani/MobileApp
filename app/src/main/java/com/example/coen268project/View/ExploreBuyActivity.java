@@ -5,8 +5,6 @@ import com.example.coen268project.Firebase.CallBack;
 import com.example.coen268project.Model.ItemDao;
 import com.example.coen268project.Presentation.Item;
 import com.example.coen268project.R;
-import com.example.coen268project.View.Chat.ChatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -62,9 +60,9 @@ public class ExploreBuyActivity extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
-                Intent intent = new Intent(ExploreBuyActivity.this, ChatActivity.class);
-                intent.putExtra("buyerId", obj.getBuyerId());
+                Intent intent = new Intent(ExploreBuyActivity.this, OneToOneChatActivity.class);
                 intent.putExtra("sellerId",obj.getSellerId());
+                intent.putExtra("buyerId",obj.getBuyerId());
                 startActivity(new Intent(intent));
             }
         });
