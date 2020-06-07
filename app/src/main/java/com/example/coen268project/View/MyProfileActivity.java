@@ -85,14 +85,14 @@ public class MyProfileActivity extends AppCompatActivity {
                 final String profile_email = et_Email.getText().toString();
                 final String profile_phone_number = et_PhoneNumber.getText().toString();
                 final String profile_password= et_Password.getText().toString();
-                final String profile_picture = f.getName();
+
 
 
                 updates.put("userName", profile_name);
                 updates.put("email", profile_email);
                 updates.put("phoneNumber", profile_phone_number);
                 updates.put("password", profile_password);
-                updates.put("pictureName",profile_picture);
+                updates.put("pictureName",picture_name[0]);
 
                 account.updateAccount(Utility.getCurrentUserId(), (HashMap) updates, new CallBack() {
                     @Override
