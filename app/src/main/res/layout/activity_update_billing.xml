@@ -13,7 +13,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#E5F6F8"
+            android:background="@color/background_color_main"
             android:clickable="false"
             android:focusable="true"
             android:orientation="vertical">
@@ -22,10 +22,8 @@
                 android:id="@+id/product_image"
                 android:layout_width="match_parent"
                 android:layout_height="212dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="30dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginBottom="30dp"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginVertical="30dp"
                 app:srcCompat="@drawable/profile_image" />
 
             <TextView
@@ -33,7 +31,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal|center_vertical"
                 android:text="Product Name"
-                android:textColor="@android:color/holo_blue_dark"
+                android:textColor="@color/general_text_color"
                 android:textSize="25dp"
                 android:textStyle="bold" />
 
@@ -41,19 +39,18 @@
                 android:id="@+id/product_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="30dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginBottom="30dp"
-                android:textColor="#76A5CD" />
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginVertical="30dp"
+                android:backgroundTint="@color/general_text_color"
+                android:textColor="@color/general_text_color"
+                android:textColorHint="@color/general_text_color" />
 
             <TextView
-
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal|center_vertical"
                 android:text="Price "
-                android:textColor="@android:color/holo_blue_dark"
+                android:textColor="@color/general_text_color"
                 android:textSize="25dp"
                 android:textStyle="bold" />
 
@@ -61,19 +58,16 @@
                 android:id="@+id/product_price"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="30dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginBottom="30dp"
-                android:textColor="#76A5CD" />
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginVertical="30dp"
+                android:textColor="@color/general_text_color" />
 
             <TextView
-
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal|center_vertical"
                 android:text="Description"
-                android:textColor="@android:color/holo_blue_dark"
+                android:textColor="@color/general_text_color"
                 android:textSize="25dp"
                 android:textStyle="bold" />
 
@@ -81,11 +75,9 @@
                 android:id="@+id/product_description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="30dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginBottom="30dp"
-                android:textColor="#76A5CD" />
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginVertical="30dp"
+                android:textColor="@color/general_text_color" />
 
             <TextView
                 android:id="@+id/tv_Status"
@@ -93,7 +85,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal|center_vertical"
                 android:text="Billing Status"
-                android:textColor="@android:color/holo_blue_dark"
+                android:textColor="@color/general_text_color"
                 android:textSize="25dp"
                 android:textStyle="bold" />
 
@@ -112,11 +104,11 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@drawable/button_beautification"
-                android:fontFamily="monospace"
+                android:fontFamily="sans-serif-smallcaps"
                 android:text="Update"
                 android:textAlignment="center"
                 android:textAllCaps="false"
-                android:textColor="@android:color/background_light"
+                android:textColor="@color/button_text"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:padding="25dp"/>

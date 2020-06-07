@@ -170,12 +170,12 @@ public class UploadFragment extends Fragment {
                 public void onSuccess(Object object) {
                     button.setEnabled(true);
                     picture_name[0] =  object.toString();
-                    Toast.makeText(getContext(), "Image upload succeeded", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(), "Image upload succeeded ", Toast.LENGTH_LONG).show();
                 }
 
                 @Override
                 public void onError(Object object) {
-                    Toast.makeText(getContext(), "Image upload in progresss" + (int) object, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Image upload in progresss " + (int) object, Toast.LENGTH_SHORT).show();
                 }
             });
         }

@@ -1,62 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-    <androidx.drawerlayout.widget.DrawerLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_height="match_parent"
-        android:layout_width="match_parent"
-        android:fitsSystemWindows="true"
-        tools:openDrawer="start"
-        android:id="@+id/drawerLayout"
-        tools:context=".View.HomeActivity">
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <androidx.appcompat.widget.Toolbar
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:id="@+id/toolbar"
-                android:theme="@style/AppTheme.AppBarOverlay"
-                android:background="@color/colorPrimary">
-            </androidx.appcompat.widget.Toolbar>
-
-<RelativeLayout
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawerLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <FrameLayout
-        android:id="@+id/fragmentContainer"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context=".View.HomeActivity"
+    tools:openDrawer="start">
+
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="0.8"></FrameLayout>
+        android:orientation="vertical">
 
-    <FrameLayout
-        android:id="@+id/bottomContainer"
-        android:layout_width="match_parent"
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/colorPrimary"
+            android:theme="@style/AppTheme.AppBarOverlay">
+
+        </androidx.appcompat.widget.Toolbar>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <FrameLayout
+                android:id="@+id/fragmentContainer"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.8"></FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/bottomContainer"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.2"></FrameLayout>
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/drawer_navigation_view"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_weight="0.2"></FrameLayout>
-</RelativeLayout>
+        android:layout_gravity="start"
+        app:headerLayout="@layout/drawer_header"
+        app:menu="@menu/threedot_menu">
 
-        </LinearLayout>
-
-        <com.google.android.material.navigation.NavigationView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            app:menu="@menu/threedot_menu"
-            android:layout_gravity="start"
-            app:headerLayout="@layout/drawer_header"
-            android:id="@+id/drawer_navigation_view">
-
-        </com.google.android.material.navigation.NavigationView>
+    </com.google.android.material.navigation.NavigationView>
 
 
-        
-    </androidx.drawerlayout.widget.DrawerLayout>
+</androidx.drawerlayout.widget.DrawerLayout>
 
 
 

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:padding="10dp"
+    android:background="@color/background_color_main"
     android:gravity="center">
 
     <ImageView
@@ -29,8 +29,8 @@
             android:layout_marginTop="5dp"
             android:padding="10dp"
             android:text="Product Name"
-
-            android:textSize="17sp"></TextView>
+            android:textColor="@color/general_text_color"
+            android:textSize="17sp" />
 
         <TextView
             android:id="@+id/categoryBilling"
@@ -39,9 +39,8 @@
             android:layout_marginTop="5dp"
             android:padding="10dp"
             android:text="Category"
-            android:textSize="14sp">
-
-        </TextView>
+            android:textColor="@color/general_text_color"
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/statusBilling"
@@ -50,9 +49,8 @@
             android:layout_marginTop="5dp"
             android:padding="10dp"
             android:text="Status"
-            android:textSize="20sp">
-
-        </TextView>
+            android:textColor="@color/general_text_color"
+            android:textSize="20sp" />
 
     </LinearLayout>
 
