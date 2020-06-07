@@ -9,6 +9,8 @@ import com.example.coen268project.Presentation.Account;
 import com.example.coen268project.Presentation.Messages;
 import com.example.coen268project.Presentation.Utility;
 import com.example.coen268project.R;
+import com.example.coen268project.View.Video.Calling_Activity;
+
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -19,6 +21,7 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 import java.util.ArrayList;
@@ -30,6 +33,7 @@ public class OneToOneChatActivity extends AppCompatActivity {
     private String sellerId = "";
     private String buyerId = "";
     private String buyerName = "";
+    private ImageButton VideoCallBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +42,7 @@ public class OneToOneChatActivity extends AppCompatActivity {
         listView = findViewById(R.id.list_view);
         btnSend = findViewById(R.id.button_chatbox_send);
         et_MessageContent = findViewById(R.id.edittext_chatbox);
+        VideoCallBtn=findViewById(R.id.video_call_btn);
         messages = new Messages();
         sellerId = getIntent().getStringExtra("sellerId");
         buyerId = getIntent().getStringExtra("buyerId");
@@ -97,6 +102,17 @@ public class OneToOneChatActivity extends AppCompatActivity {
                     public void onError(Object object) {
                     }
                 });
+            }
+        });
+
+
+        VideoCallBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(OneToOneChatActivity.this, Calling_Activity.class);
+                intent.putExtra("buyerId", buyerId);
+                intent.putExtra("sellerId",sellerId);
+                startActivity(new Intent(intent));
             }
         });
     }

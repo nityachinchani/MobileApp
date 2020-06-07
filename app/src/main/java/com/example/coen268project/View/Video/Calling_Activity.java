@@ -2,8 +2,11 @@ package com.example.coen268project.View.Video;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.coen268project.Firebase.FirebaseConstants;
+import com.example.coen268project.Firebase.FirebaseInstance;
 import com.example.coen268project.R;
-import com.example.coen268project.View.Chat.ChatActivity;
+
 import com.example.coen268project.View.HomeActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -40,7 +43,7 @@ public class Calling_Activity extends AppCompatActivity {
 
         sellerID=getIntent().getStringExtra("sellerId");
         buyerID=getIntent().getStringExtra("buyerId");
-        userRef = FirebaseDatabase.getInstance().getReference();
+        userRef = FirebaseInstance.DATABASE.getReference(FirebaseConstants.DATABASE_ROOT).child("accountTable");
         /*
          * buyer=sender
          * seller=receiver

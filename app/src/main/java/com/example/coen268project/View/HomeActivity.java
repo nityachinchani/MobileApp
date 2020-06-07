@@ -8,6 +8,7 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 
+import com.example.coen268project.Presentation.Account;
 import com.example.coen268project.R;
 import com.google.android.material.navigation.NavigationView;
 
@@ -40,7 +41,6 @@ private DrawerLayout drawerLayout;
         NavigationView navigationView=findViewById(R.id.drawer_navigation_view);
         navigationView.setNavigationItemSelectedListener(this);
         //CircleImageView c=findViewById(R.id.drawerImageCircleImageView);  setup the profile image here
-
         ActionBarDrawerToggle toggle=new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.hello_blank_fragment,R.string.app_name);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
