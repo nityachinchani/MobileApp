@@ -4,6 +4,7 @@ import com.bumptech.glide.Glide;
 import com.example.coen268project.Firebase.CallBack;
 import com.example.coen268project.Model.ItemDao;
 import com.example.coen268project.Presentation.Item;
+import com.example.coen268project.Presentation.Utility;
 import com.example.coen268project.R;
 import android.content.Intent;
 import android.os.Bundle;
@@ -60,13 +61,17 @@ public class ExploreBuyActivity extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
+                if(Utility.getCurrentUserId().equals(obj.getSellerId()))
+                {
+                    Toast.makeText(ExploreBuyActivity.this,"You are the owner of this item, you cannot chat with yourself.",Toast.LENGTH_LONG).show();
+                    return;
+                }
                 Intent intent = new Intent(ExploreBuyActivity.this, OneToOneChatActivity.class);
                 intent.putExtra("sellerId",obj.getSellerId());
                 intent.putExtra("buyerId",obj.getBuyerId());
                 startActivity(new Intent(intent));
             }
         });
-
     }
 
     private void BindItems(ItemDao itemDao) {

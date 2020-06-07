@@ -23,12 +23,15 @@ import com.example.coen268project.Presentation.Utility;
 import com.example.coen268project.R;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 public class ChatsFragment extends Fragment {
     private ListView listView;
     private TextView textView;
     private Messages messages;
-    private ArrayList<String> buyerList = new ArrayList<>();
+    private HashMap<String, String> buyerList = new HashMap<>();
 
     @Nullable
     @Override
@@ -44,11 +47,7 @@ public class ChatsFragment extends Fragment {
                     Toast.makeText(getContext(), "You do not have buyers you have chatted with", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                Object[] objectArray = (Object[]) object;
-                for (Object buyerElement : objectArray
-                ) {
-                    buyerList.add(buyerElement.toString());
-                }
+                buyerList.putAll((HashMap)object);
                 BindItems();
             }
 
@@ -79,11 +78,41 @@ public class ChatsFragment extends Fragment {
      * @author nitya
      */
     public class CustomAdapter extends BaseAdapter {
-        ArrayList<String> buyers = new ArrayList<>();
-        public CustomAdapter(ArrayList<String> buyerList) {
-            for (String buyer: buyerList
-            ) {
-                this.buyers.add(buyer);
+        class MyBuyers {
+            private String name ="";
+            private String uid ="";
+
+            public MyBuyers(String uid, String name)
+            {
+                this.uid = uid;
+                this.name = name;
+            }
+
+            public String getName() {
+                return name;
+            }
+
+            public void setName(String name) {
+                this.name = name;
+            }
+
+
+            public String getUid() {
+                return uid;
+            }
+
+            public void setUid(String uid) {
+                this.uid = uid;
+            }
+        }
+
+        ArrayList<MyBuyers> buyers = new ArrayList<>();
+        public CustomAdapter(HashMap<String, String> buyerList) {
+            Iterator hmIterator = buyerList.entrySet().iterator();
+            while (hmIterator.hasNext()) {
+                Map.Entry mapElement = (Map.Entry)hmIterator.next();
+                MyBuyers myBuyers = new MyBuyers(mapElement.getKey().toString(), mapElement.getValue().toString());
+                buyers.add(myBuyers);
             }
         }
 
@@ -92,7 +121,7 @@ public class ChatsFragment extends Fragment {
         }
 
         public String getItem(int position) {
-            return this.buyers.get(position);
+            return this.buyers.get(position).getUid();
         }
 
         public long getItemId(int position) {
@@ -105,7 +134,7 @@ public class ChatsFragment extends Fragment {
             View activity_row;
             activity_row = inflater.inflate(R.layout.activity_row, parent, false);
             textView = activity_row.findViewById(R.id.text_id);
-            textView.setText(this.buyers.get(position));
+            textView.setText(this.buyers.get(position).getName());
             return activity_row;
         }
     }

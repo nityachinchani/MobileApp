@@ -29,6 +29,7 @@ public class OneToOneChatActivity extends AppCompatActivity {
     private Button btnSend;
     private String sellerId = "";
     private String buyerId = "";
+    private String buyerName = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +44,7 @@ public class OneToOneChatActivity extends AppCompatActivity {
         if(buyerId.equals(""))
         {
             buyerId = Utility.getCurrentUserId();
+            buyerName = Utility.getCurrentUserName();
         }
 
         messages.getAllMessageByChildEvent(sellerId, buyerId, new FirebaseChildCallback() {
@@ -79,7 +81,7 @@ public class OneToOneChatActivity extends AppCompatActivity {
                     public void onClick(View v) {
                         String messageContent = et_MessageContent.getText().toString();
                         et_MessageContent.setText("");
-                        messages.createMessage(sellerId, buyerId, Utility.getCurrentUserId(), Utility.getCurrentUserName(), messageContent, new CallBack() {
+                        messages.createMessage(sellerId, buyerId, buyerName, Utility.getCurrentUserId(), Utility.getCurrentUserName(), messageContent, new CallBack() {
                             @Override
                             public void onSuccess(Object object) {
                             }

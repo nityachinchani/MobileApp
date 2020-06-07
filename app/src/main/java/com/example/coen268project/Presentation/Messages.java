@@ -1,5 +1,7 @@
 package com.example.coen268project.Presentation;
 import android.os.Build;
+
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import com.example.coen268project.Firebase.CallBack;
 import com.example.coen268project.Firebase.FirebaseChildCallback;
@@ -11,9 +13,13 @@ import com.example.coen268project.Model.MessagesDao;
 import com.example.coen268project.Model.MessagesRepository;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Messages extends FirebaseRepository implements MessagesRepository {
     private DatabaseReference allMessagesDatabaseReference;
@@ -24,9 +30,25 @@ public class Messages extends FirebaseRepository implements MessagesRepository {
     }
 
     @Override
-    public void createMessage(String sellerId, String buyerId, String uid, String name, String messageContent, final CallBack callBack) {
+    public void createMessage(String sellerId, String buyerId, final String buyerName, String uid, String name, String messageContent, final CallBack callBack) {
         MessagesDao messagesDao = new MessagesDao(uid, name, messageContent);
-        DatabaseReference messageReference = allMessagesDatabaseReference.child(sellerId).child(buyerId);
+        final DatabaseReference messageReference = allMessagesDatabaseReference.child(sellerId).child(buyerId);
+        firebaseReadData(messageReference, new CallBack() {
+                    @Override
+                    public void onSuccess(Object object) {
+                        DataSnapshot dataSnapshot = (DataSnapshot) object;
+                        if (!dataSnapshot.hasChild("buyerName")) {
+                            HashMap<String, String> map = new HashMap<>();
+                            map.put("buyerName", buyerName);
+                            messageReference.setValue(map);
+                        }
+                    }
+
+                    @Override
+                    public void onError(Object object) {
+
+                    }
+                });
         String pushKey = messageReference.push().getKey();
         if (messagesDao != null && !pushKey.isEmpty()) {
             DatabaseReference databaseReference = messageReference.child(pushKey);
@@ -115,7 +137,7 @@ public class Messages extends FirebaseRepository implements MessagesRepository {
 
     @Override
     public void getAllBuyers(String sellerId, final CallBack callBack) {
-        final ArrayList<String> buyerArrayList = new ArrayList<>();
+        final HashMap<String, String> buyerMap = new HashMap<>();
         DatabaseReference messageReference = allMessagesDatabaseReference.child(sellerId);
         Query query = messageReference.orderByKey();
         firebaseReadData(query, new CallBack() {
@@ -125,9 +147,11 @@ public class Messages extends FirebaseRepository implements MessagesRepository {
                     DataSnapshot dataSnapshot = (DataSnapshot) object;
                     if (dataSnapshot.getValue() != null && dataSnapshot.hasChildren()) {
                         for (DataSnapshot suggestionSnapshot : dataSnapshot.getChildren()) {
-                            buyerArrayList.add(suggestionSnapshot.getKey());
+                            String key = suggestionSnapshot.getKey();
+                            String value = suggestionSnapshot.child("buyerName").getValue().toString();
+                            buyerMap.put(key, value);
                         }
-                        callBack.onSuccess(buyerArrayList.toArray());
+                        callBack.onSuccess(buyerMap);
                     } else {
                         callBack.onSuccess(null);
                     }
@@ -157,8 +181,8 @@ public class Messages extends FirebaseRepository implements MessagesRepository {
                                     String name = dataSnapshot.child("name").getValue().toString();
                                     String messageContent = dataSnapshot.child("messageContent").getValue().toString();
                                     messagesDao[0] = new MessagesDao(uid, name, messageContent);
+                                    firebaseChildCallBack.onChildAdded(messagesDao[0]);
                                 }
-                                firebaseChildCallBack.onChildAdded(messagesDao[0]);
                             } else {
                                 firebaseChildCallBack.onChildAdded(null);
                             }
