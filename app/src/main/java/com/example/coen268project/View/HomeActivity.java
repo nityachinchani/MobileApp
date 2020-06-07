@@ -50,7 +50,8 @@ public class HomeActivity extends AppCompatActivity implements BottomFragment.On
         NavigationView navigationView=findViewById(R.id.drawer_navigation_view);
         navigationView.setNavigationItemSelectedListener(this);
         View headerLayout = navigationView.inflateHeaderView(R.layout.drawer_header);
-        c = headerLayout.findViewById(R.id.drawerImageCircleImageView);  //setup the profile image here
+        c = headerLayout.findViewById(R.id.drawerImageCircleImageView);
+        //setup the profile image here
         textView = headerLayout.findViewById(R.id.drawerTextView);
 
 

@@ -53,7 +53,7 @@ public class OneToOneChatActivity extends AppCompatActivity {
         sellerId = getIntent().getStringExtra("sellerId");
         buyerId = getIntent().getStringExtra("buyerId");
         userRef = FirebaseInstance.DATABASE.getReference(FirebaseConstants.DATABASE_ROOT).child("accountTable");
-        currentUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        currentUserId = Utility.getCurrentUserId();
 
         if(buyerId.equals(""))
         {
@@ -139,10 +139,11 @@ public class OneToOneChatActivity extends AppCompatActivity {
                     public void onDataChange(DataSnapshot dataSnapshot) {
 
                         if(dataSnapshot.hasChild("ringing")){
-                            calledBy = dataSnapshot.child("ringing").getValue().toString();
+                           // calledBy = dataSnapshot.child("ringing").getValue().toString();
 
                             Intent intent = new Intent(OneToOneChatActivity.this,Calling_Activity.class);
-                            intent.putExtra("visit_user_id",calledBy);
+                            intent.putExtra("buyerId", buyerId);
+                            intent.putExtra("sellerId",sellerId);
                             startActivity(intent);
                         }
                     }

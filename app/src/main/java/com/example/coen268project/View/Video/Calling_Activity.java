@@ -186,7 +186,7 @@ public class Calling_Activity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                if(dataSnapshot.child(buyerID).hasChild("Ringing") && !dataSnapshot.child(buyerID).hasChild("Calling")){
+                if(dataSnapshot.child(sellerID).hasChild("Ringing") && !dataSnapshot.child(sellerID).hasChild("Calling")){
                     acceptCallBtn.setVisibility(View.VISIBLE);
                 }
 
