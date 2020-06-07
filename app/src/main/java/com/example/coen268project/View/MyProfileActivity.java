@@ -44,9 +44,10 @@ public class MyProfileActivity extends AppCompatActivity {
     Uri contentUri;
     File f;
     final String[] picture_name = {""};
+    String currentPhotoPath;
     private Button btnUpdate;
     private Account account;
-    String currentPhotoPath;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
