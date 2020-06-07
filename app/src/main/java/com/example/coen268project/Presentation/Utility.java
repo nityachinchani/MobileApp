@@ -11,11 +11,16 @@ import java.util.ArrayList;
 
 public class Utility extends FirebaseRepository {
     private StorageReference storageReference;
-    private static String currentUserId;
 
     public Utility()
     {
         storageReference = FirebaseStorage.getInstance().getReference();
+    }
+
+    public static String getCurrentUserName() {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        int index = user.getEmail().indexOf('@');
+        return user.getEmail().substring(0,index);
     }
 
     public enum ItemStatus
@@ -109,10 +114,8 @@ public class Utility extends FirebaseRepository {
         }
     }
 
-    public static String getCurrentUserId() {
-        //FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        //String uid = user.getUid();
-        return "HShwnTE38jNhhTZTczkfj3CAJmK2";
+    public static String getCurrentUserId() { FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        return user.getUid();
     }
 
     public void uploadImageToStorage(String name, Uri contentUri, final CallBack callBack){

@@ -1,18 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/background_color_main"
     android:orientation="vertical"
-    android:background="#E5F6F8"
     android:paddingBottom="56dp">
 
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:background="#E5F6F8"
         android:layout_height="wrap_content"
+        android:background="#132A3E"
         android:orientation="horizontal">
 
         <Spinner
@@ -21,6 +19,7 @@
             android:layout_height="match_parent"
             android:layout_gravity="left"
             android:layout_weight="1"
+            android:backgroundTint="#ED9E5A"
             android:gravity="center_horizontal|center_vertical"
             android:spinnerMode="dialog" />
 
@@ -30,6 +29,7 @@
             android:layout_height="match_parent"
             android:layout_gravity="right"
             android:layout_weight="1"
+            android:backgroundTint="#ED9E5A"
             android:gravity="center_horizontal|center_vertical"
             android:spinnerMode="dialog" />
 
@@ -38,24 +38,30 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:backgroundTint="#502419"
             android:clickable="false"
-            android:text="-->" />
+            android:text="-->"
+            android:textColor="@color/general_text_color"/>
+
 
     </LinearLayout>
 
-        <GridView
-            android:id="@+id/exploreGridView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:numColumns="2">
-
-        </GridView>
-
- <!--   <ListView
-        android:id="@+id/explore_List_View"
+    <GridView
+        android:id="@+id/exploreGridView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#E5F6F8" />
--->
+        android:horizontalSpacing="10dp"
+        android:numColumns="2"
+        android:padding="10dp"
+        android:verticalSpacing="10dp">
+
+    </GridView>
+
+    <!--   <ListView
+           android:id="@+id/explore_List_View"
+           android:layout_width="match_parent"
+           android:layout_height="match_parent"
+           android:background="#E5F6F8" />
+   -->
 
 </LinearLayout>

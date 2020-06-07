@@ -62,7 +62,7 @@ public class UploadFragment extends Fragment {
         utility = new Utility();
         Bundle bundle = getArguments();
         final String item = bundle.getString("Item");
-        final String Location = bundle.getString("Location_1");
+        final String Location = bundle.getString("Location");
 
         //Log.d("tag"," Item is "+ item +" Location is "+Location);
 

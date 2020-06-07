@@ -8,6 +8,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -142,6 +143,67 @@ public abstract class FirebaseRepository {
                 callback.onError(databaseError);
             }
         });
+    }
+
+    /**
+     * Fetch data with child event listener
+     *
+     * @param query                 to add childEvent listener
+     * @param firebaseChildCallBack callback for event handling
+     * @return ChildEventListener
+     */
+    protected final ChildEventListener fireBaseChildEventListener(final Query query, final FirebaseChildCallback firebaseChildCallBack) {
+        query.keepSynced(true);
+        return new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, String s) {
+                firebaseChildCallBack.onChildAdded(dataSnapshot);
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, String s) {
+                firebaseChildCallBack.onChildChanged(dataSnapshot);
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+                firebaseChildCallBack.onChildRemoved(dataSnapshot);
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, String s) {
+                firebaseChildCallBack.onChildMoved(dataSnapshot);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                firebaseChildCallBack.onCancelled(databaseError);
+            }
+        };
+    }
+
+    /**
+     * Fetch data with Value event listener
+     *
+     * @param query    to add childEvent listener
+     * @param callback callback for event handling
+     * @return ValueEventListener reference
+     */
+    protected final ValueEventListener fireBaseDataChangeListener(final Query query, final CallBack callback) {
+        query.keepSynced(true);
+        ValueEventListener valueEventListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                callback.onSuccess(dataSnapshot);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                callback.onError(databaseError);
+            }
+        };
+        query.addValueEventListener(valueEventListener);
+        return valueEventListener;
     }
 
 }

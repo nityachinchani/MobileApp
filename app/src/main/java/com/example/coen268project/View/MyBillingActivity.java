@@ -40,9 +40,15 @@ public class MyBillingActivity extends AppCompatActivity {
             public void onSuccess(Object object) {
                 Object[] objectArray = (Object[]) object;
                 itemList.clear();
-                for (Object itemElement : objectArray
-                ) {
-                    itemList.add((ItemDao) itemElement);
+                if (object != null)
+                {
+                    for (Object itemElement : objectArray)
+                    {
+                        itemList.add((ItemDao) itemElement);
+                    }
+                }
+                else{
+                    Toast.makeText(MyBillingActivity.this,"You have not posted any Ads",Toast.LENGTH_SHORT).show();
                 }
                 BindItems();
             }
@@ -59,9 +65,15 @@ public class MyBillingActivity extends AppCompatActivity {
             public void onSuccess(Object object) {
                 Object[] objectArray = (Object[]) object;
                 itemList.clear();
-                for (Object itemElement : objectArray
-                ) {
-                    itemList.add((ItemDao) itemElement);
+                if (object != null)
+                {
+                    for (Object itemElement : objectArray)
+                    {
+                        itemList.add((ItemDao) itemElement);
+                    }
+                }
+                else{
+                    Toast.makeText(MyBillingActivity.this,"You have no Orders",Toast.LENGTH_SHORT).show();
                 }
                 BindItems();
             }

@@ -5,141 +5,137 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.BaseAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.coen268project.Model.Contacts;
+import com.example.coen268project.Firebase.CallBack;
+import com.example.coen268project.Model.ItemDao;
+import com.example.coen268project.Presentation.Item;
+import com.example.coen268project.Presentation.Messages;
 import com.example.coen268project.Presentation.Utility;
-import com.example.coen268project.View.Chat.ChatActivity;
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
-import com.firebase.ui.database.FirebaseRecyclerOptions;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.example.coen268project.R;
 
-import com.squareup.picasso.Picasso;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
-import de.hdodenhof.circleimageview.CircleImageView;
-
-
-/**
- * A simple {@link Fragment} subclass.
- */
 public class ChatsFragment extends Fragment {
+    private ListView listView;
+    private TextView textView;
+    private Messages messages;
+    private HashMap<String, String> buyerList = new HashMap<>();
 
-    private View PrivateChatsView;
-    private RecyclerView chatsList;
-
-    private DatabaseReference ChatsRef, UsersRef;
-    private FirebaseAuth mAuth;
-    private String currentUserID;
-
-    private String retImage = "default_image";
-
-    public ChatsFragment() {
-        // Required empty public constructor
-    }
-
+    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        PrivateChatsView = inflater.inflate(R.layout.fragment_chats, container, false);
-        mAuth = FirebaseAuth.getInstance();
-        currentUserID = Utility.getCurrentUserId();
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_chats, container, false);
+        listView = view.findViewById(R.id.list_view);
+        messages = new Messages();
+        messages.getAllBuyers(Utility.getCurrentUserId(), new CallBack() {
+            @Override
+            public void onSuccess(Object object) {
+                if(object == null)
+                {
+                    Toast.makeText(getContext(), "You do not have buyers you have chatted with", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                buyerList.putAll((HashMap)object);
+                BindItems();
+            }
 
-        ChatsRef = FirebaseDatabase.getInstance().getReference().child("Contacts").child(currentUserID);
-        UsersRef = FirebaseDatabase.getInstance().getReference().child("Users");
-        chatsList = PrivateChatsView.findViewById(R.id.chats_list);
-        chatsList.setLayoutManager(new LinearLayoutManager(getContext()));
-
-        return PrivateChatsView;
+            @Override
+            public void onError(Object object) {
+            }
+        });
+        return view;
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-
-        FirebaseRecyclerOptions<Contacts> options =
-                new FirebaseRecyclerOptions.Builder<Contacts>()
-                        .setQuery(ChatsRef, Contacts.class)
-                        .build();
-
-        FirebaseRecyclerAdapter<Contacts, ChatsViewHolder> adapter =
-                new FirebaseRecyclerAdapter<Contacts, ChatsViewHolder>(options) {
-                    @Override
-                    protected void onBindViewHolder(@NonNull final ChatsViewHolder holder, int position, @NonNull Contacts model) {
-                        final String usersIDs = getRef(position).getKey();
-                        final String[] retImage = {"default_image"};
-
-                        UsersRef.child(usersIDs).addValueEventListener(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(DataSnapshot dataSnapshot) {
-                                if (dataSnapshot.exists()) {
-                                    if (dataSnapshot.hasChild("image")) {
-                                        retImage[0] = dataSnapshot.child("image").getValue().toString();
-                                        //Picasso.get().load(retImage[0]).into(holder.profileImage);
-                                    }
-
-                                    final String retName = dataSnapshot.child("name").getValue().toString();
-                                    final String retStatus = dataSnapshot.child("status").getValue().toString();
-
-                                    holder.userName.setText(retName);
-                                    holder.userStatus.setText("Last Seen: " + "\n" + "Date " + "Time");
-
-                                    holder.itemView.setOnClickListener(new View.OnClickListener() {
-                                        @Override
-                                        public void onClick(View v) {
-                                            Intent chatIntent = new Intent(getContext(), ChatActivity.class);
-                                            chatIntent.putExtra("visit_user_id", usersIDs);
-                                            chatIntent.putExtra("visit_user_name", retName);
-                                            chatIntent.putExtra("visit_image", retImage[0]);
-
-                                            startActivity(chatIntent);
-                                        }
-                                    });
-                                }
-                            }
-
-                            @Override
-                            public void onCancelled(DatabaseError databaseError) {
-
-                            }
-                        });
-
-
-                    }
-
-                    @NonNull
-                    @Override
-                    public ChatsViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-                        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.users_display_layout, viewGroup, false);
-                        return new ChatsViewHolder(view);
-                    }
-                };
-
-        chatsList.setAdapter(adapter);
-        adapter.startListening();
+    public void BindItems()
+    {
+        final CustomAdapter adapter = new CustomAdapter(buyerList);
+        listView.setAdapter(adapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent = new Intent(getActivity(), OneToOneChatActivity.class);
+                intent.putExtra("sellerId", Utility.getCurrentUserId());
+                intent.putExtra("buyerId", (CharSequence) adapter.getItem(i));
+                startActivity(intent);
+            }
+        });
     }
 
-    public static class ChatsViewHolder extends RecyclerView.ViewHolder {
-        CircleImageView profileImage;
-        TextView userStatus, userName;
+    /**
+     * This class extends the BaseAdapter class to provide a Custom adapter for the list view
+     * @author nitya
+     */
+    public class CustomAdapter extends BaseAdapter {
+        class MyBuyers {
+            private String name ="";
+            private String uid ="";
 
-        public ChatsViewHolder(@NonNull View itemView) {
-            super(itemView);
+            public MyBuyers(String uid, String name)
+            {
+                this.uid = uid;
+                this.name = name;
+            }
 
-            profileImage = itemView.findViewById(R.id.users_profile_image);
-            userName = itemView.findViewById(R.id.user_profile_name);
-            userStatus = itemView.findViewById(R.id.user_status);
+            public String getName() {
+                return name;
+            }
+
+            public void setName(String name) {
+                this.name = name;
+            }
+
+
+            public String getUid() {
+                return uid;
+            }
+
+            public void setUid(String uid) {
+                this.uid = uid;
+            }
+        }
+
+        ArrayList<MyBuyers> buyers = new ArrayList<>();
+        public CustomAdapter(HashMap<String, String> buyerList) {
+            Iterator hmIterator = buyerList.entrySet().iterator();
+            while (hmIterator.hasNext()) {
+                Map.Entry mapElement = (Map.Entry)hmIterator.next();
+                MyBuyers myBuyers = new MyBuyers(mapElement.getKey().toString(), mapElement.getValue().toString());
+                buyers.add(myBuyers);
+            }
+        }
+
+        public int getCount() {
+            return this.buyers.size();
+        }
+
+        public String getItem(int position) {
+            return this.buyers.get(position).getUid();
+        }
+
+        public long getItemId(int position) {
+            return position;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            LayoutInflater inflater = getLayoutInflater();
+            View activity_row;
+            activity_row = inflater.inflate(R.layout.activity_row, parent, false);
+            textView = activity_row.findViewById(R.id.text_id);
+            textView.setText(this.buyers.get(position).getName());
+            return activity_row;
         }
     }
 }

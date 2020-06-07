@@ -39,8 +39,8 @@ public class AdsFragment extends Fragment {
                     return;
                 }
                 Object[] objectArray = (Object[]) object;
-                for (Object itemElement : objectArray
-                ) {
+                for (Object itemElement : objectArray)
+                {
                     itemList.add((ItemDao)itemElement);
                 }
                 BindItems();
@@ -57,7 +57,8 @@ public class AdsFragment extends Fragment {
     {
         final CustomAdapter adapter = new CustomAdapter(itemList);
         listView.setAdapter(adapter);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener()
+        {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Intent intent = new Intent(getActivity(), UpdateAdsActivity.class);
