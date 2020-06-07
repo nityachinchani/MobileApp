@@ -47,11 +47,10 @@ public class HomeActivity extends AppCompatActivity implements BottomFragment.On
         setSupportActionBar(toolbar);
         account = new Account();
         drawerLayout=findViewById(R.id.drawerLayout);
-        NavigationView navigationView=findViewById(R.id.drawer_navigation_view);
+        NavigationView navigationView=(NavigationView)findViewById(R.id.drawer_navigation_view);
         navigationView.setNavigationItemSelectedListener(this);
         View headerLayout = navigationView.inflateHeaderView(R.layout.drawer_header);
-        c = headerLayout.findViewById(R.id.drawerImageCircleImageView);
-        //setup the profile image here
+        c = headerLayout.findViewById(R.id.drawerImageCircleImageView);  //setup the profile image here
         textView = headerLayout.findViewById(R.id.drawerTextView);
 
 

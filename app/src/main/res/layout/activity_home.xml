@@ -49,7 +49,7 @@
             android:layout_height="match_parent"
             app:menu="@menu/threedot_menu"
             android:layout_gravity="start"
-            app:headerLayout="@layout/drawer_header"
+
             android:id="@+id/drawer_navigation_view">
 
         </com.google.android.material.navigation.NavigationView>
