@@ -35,7 +35,7 @@ public class HomeActivity extends AppCompatActivity implements BottomFragment.On
     private DrawerLayout drawerLayout;
 
     public enum FragmentType {
-        EXPLORE, CHATS, SELL, ADS, ACCOUNT;
+        EXPLORE, CHATS, SELL, ADS, ACCOUNT
     }
 
     @Override

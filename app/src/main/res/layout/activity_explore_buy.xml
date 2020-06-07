@@ -124,11 +124,11 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@drawable/button_beautification"
-                android:fontFamily="monospace"
-                android:text="Chat"
+                android:fontFamily="sans-serif-smallcaps"
+                android:text="Chat Now"
                 android:textAlignment="center"
                 android:textAllCaps="false"
-                android:textColor="@color/general_text_color"
+                android:textColor="@color/button_text"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 

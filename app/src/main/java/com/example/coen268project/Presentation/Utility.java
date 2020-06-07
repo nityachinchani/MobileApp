@@ -53,7 +53,7 @@ public class Utility extends FirebaseRepository {
         }
     }
 
-    public static enum CommunicationType
+    public enum CommunicationType
     {
         TEXT,
         AUDIO,
