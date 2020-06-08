@@ -48,7 +48,7 @@
 
                 <EditText
                     android:id="@+id/et_ProductName"
-                    android:layout_width="218dp"
+                    android:layout_width="183dp"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="20dp"
                     android:backgroundTint="@color/general_text_color"
@@ -70,12 +70,21 @@
                     android:id="@+id/tv_Price"
                     android:layout_width="wrap_content"
                     android:layout_height="44dp"
-                    android:layout_weight="3"
+                    android:layout_weight="2"
                     android:gravity="center_vertical"
-                    android:text="Price "
+                    android:text="Price"
                     android:textColor="@color/general_text_color"
                     android:textSize="25dp"
                     android:textStyle="bold" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="44dp"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:text="$"
+                    android:textColor="@color/general_text_color"
+                    android:textSize="25dp" />
+
 
                 <EditText
                     android:id="@+id/et_Price"
@@ -132,11 +141,12 @@
                 android:id="@+id/tv_Status"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_horizontal|center_vertical"
+                android:gravity="left|center_vertical"
                 android:text="Item Status"
                 android:textColor="@color/general_text_color"
                 android:textSize="25dp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:paddingHorizontal="10dp"/>
 
             <Spinner
                 android:id="@+id/itemStatusSpinner"

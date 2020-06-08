@@ -265,7 +265,7 @@ public class UpdateAdsActivity extends AppCompatActivity {
     private void BindItems(ItemDao itemDao) {
         et_ProductName.setText(itemDao.getItemName());
         et_Description.setText(itemDao.getDescription());
-        et_Price.setText("$ "+itemDao.getPrice());
+        et_Price.setText(itemDao.getPrice());
         statusSpinner.setSelection(Utility.ItemStatus.getIndex(itemDao.getItemStatus()));
         Glide.with(UpdateAdsActivity.this).load(itemDao.getPictureName()).into(img_ProductPicture);
         if(statusSpinner.getSelectedItem().toString().equals(Utility.ItemStatus.SOLD.toString()))
