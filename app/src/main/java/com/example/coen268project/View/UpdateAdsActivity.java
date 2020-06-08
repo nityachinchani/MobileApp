@@ -106,6 +106,9 @@ public class UpdateAdsActivity extends AppCompatActivity {
                 updates.put("description", product_description);
                 updates.put("price", product_price);
                 updates.put("itemStatus", statusSpinner.getSelectedItem().toString());
+                if(statusSpinner.getSelectedItem().toString().equals(Utility.ItemStatus.BOOKED)) {
+                    updates.put("buyerId", Utility.getCurrentUserId());
+                }
                 updates.put("productPictureName",product_picture_name[0]);
                 item.updateItem(itemId, (HashMap) updates, new CallBack() {
                     @Override
