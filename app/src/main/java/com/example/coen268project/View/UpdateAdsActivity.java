@@ -268,7 +268,7 @@ public class UpdateAdsActivity extends AppCompatActivity {
         et_Price.setText(itemDao.getPrice());
         statusSpinner.setSelection(Utility.ItemStatus.getIndex(itemDao.getItemStatus()));
         Glide.with(UpdateAdsActivity.this).load(itemDao.getPictureName()).into(img_ProductPicture);
-        if(statusSpinner.getSelectedItem().toString().equals(Utility.ItemStatus.SOLD))
+        if(statusSpinner.getSelectedItem().toString().equals(Utility.ItemStatus.SOLD.toString()))
         {
             Toast.makeText(UpdateAdsActivity.this,"Item already sold, you do not have permission to update.",Toast.LENGTH_LONG).show();
             btnUpdate.setEnabled(false);
