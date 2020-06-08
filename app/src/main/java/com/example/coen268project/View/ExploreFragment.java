@@ -32,11 +32,8 @@ import java.util.Arrays;
 public class ExploreFragment extends Fragment {
     private ArrayList<ItemDao> itemList = new ArrayList<>();
     private Item item;
-
     private static String[] category = Utility.Category.toArray();
-
     private static String[] location = null;
-
     private Spinner locationSpinner, categorySpinner;
     private GridView exploreGridView;
     private TextView textView;
@@ -53,6 +50,7 @@ public class ExploreFragment extends Fragment {
         locationSpinner = (Spinner) view.findViewById(R.id.locationSpinner);
         exploreGridView = (GridView) view.findViewById(R.id.exploreGridView);
         goBtn=(Button) view.findViewById(R.id.goBtn);
+
 
         getAllItems();
         if(!category[0].equals("All")) {
@@ -72,24 +70,18 @@ public class ExploreFragment extends Fragment {
                 ArrayList<String> arrayList=new ArrayList<>();
                 arrayList.clear();
                 arrayList.add("All");
-
                 for (Object location: obj
                      ) {
                     arrayList.add(location.toString());
                 }
-
                 location = arrayList.toArray(new String[0]);
-
                 bindLocation();
             }
 
             @Override
             public void onError(Object object) {
-
             }
         });
-
-
 
         goBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -121,55 +113,66 @@ public class ExploreFragment extends Fragment {
 
     private void getSpecificItem() {
         String selectedCategory= categorySpinner.getSelectedItem().toString();
-        if(!selectedCategory.equals("All")) {
-            item.getItemsByCategory(selectedCategory, new CallBack() {
-                @Override
-                public void onSuccess(Object object) {
-                    Object[] objectArray = (Object[]) object;
-                    itemList.clear();
-                    for (Object itemElement : objectArray
-                    ) {
-                        itemList.add((ItemDao) itemElement);
-                    }
-
-                    BindItems();
-                }
-
-                @Override
-                public void onError(Object object) {
-
-                }
-            });
-
-
-            String selectedLocation = locationSpinner.getSelectedItem().toString();
-            if (!selectedLocation.equals("All")) {
-                item.getItemsByLocation(selectedLocation, new CallBack() {
-                    @Override
-                    public void onSuccess(Object object) {
-                        Object[] objectArray = (Object[]) object;
-                        itemList.clear();
-                        for (Object itemElement : objectArray
-                        ) {
-                            itemList.add((ItemDao) itemElement);
-                        }
-
-                        BindItems();
-                    }
-
-                    @Override
-                    public void onError(Object object) {
-
-                    }
-                });
-            }
+        String selectedLocation = locationSpinner.getSelectedItem().toString();
+        if(!selectedCategory.equals("All") && !selectedLocation.equals("All")) {
+            getSpecificCategory(selectedCategory);
+            getSpecificLocation(selectedLocation);
         }
-        else {
-            locationSpinner.setSelection(0);
+        else if (!selectedCategory.equals("All") && selectedLocation.equals("All")) {
+            getSpecificCategory(selectedCategory);
+        }
+        else if (selectedCategory.equals("All") && !selectedLocation.equals("All")) {
+            getSpecificLocation(selectedLocation);
+        }
+        else if (selectedCategory.equals("All") && selectedLocation.equals("All"))
+        {
             getAllItems();
         }
     }
 
+    private void getSpecificCategory(String selectedCategory)
+    {
+        item.getItemsByCategory(selectedCategory, new CallBack() {
+            @Override
+            public void onSuccess(Object object) {
+                Object[] objectArray = (Object[]) object;
+                itemList.clear();
+                for (Object itemElement : objectArray
+                ) {
+                    itemList.add((ItemDao) itemElement);
+                }
+
+                BindItems();
+            }
+
+            @Override
+            public void onError(Object object) {
+
+            }
+        });
+    }
+
+    private void getSpecificLocation(String selectedLocation)
+    {
+        item.getItemsByLocation(selectedLocation, new CallBack() {
+            @Override
+            public void onSuccess(Object object) {
+                Object[] objectArray = (Object[]) object;
+                itemList.clear();
+                for (Object itemElement : objectArray
+                ) {
+                    itemList.add((ItemDao) itemElement);
+                }
+
+                BindItems();
+            }
+
+            @Override
+            public void onError(Object object) {
+
+            }
+        });
+    }
 
     private void bindLocation() {
         ArrayAdapter<String> locationAdapter = new ArrayAdapter<String>(getActivity(), R.layout.activity_spinner_row, R.id.text_id, location);
