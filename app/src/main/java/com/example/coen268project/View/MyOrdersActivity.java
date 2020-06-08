@@ -122,10 +122,10 @@ public class MyOrdersActivity extends AppCompatActivity {
             convertView=inflater.inflate(R.layout.activity_myorders_row, null);
             ImageView imageView = convertView.findViewById(R.id.imageMyOrders);
             TextView nameText = convertView.findViewById(R.id.nameMyOrders);
-            TextView categoryText = convertView.findViewById(R.id.categoryMyOrders);
+//            TextView categoryText = convertView.findViewById(R.id.categoryMyOrders);
             Glide.with(MyOrdersActivity.this).load(this.items.get(position).getPictureName()).into(imageView);
             nameText.setText(this.items.get(position).getItemName());
-            categoryText.setText(this.items.get(position).getCategory());
+//            categoryText.setText(this.items.get(position).getCategory());
             return convertView;
         }
     }

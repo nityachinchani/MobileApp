@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/background_color_main"
+    android:background="@drawable/card_border"
     android:gravity="center"
     android:orientation="horizontal"
     android:padding="10dp">
@@ -16,7 +16,7 @@
     </ImageView>
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="15dp"
         android:orientation="vertical">
@@ -25,30 +25,21 @@
             android:id="@+id/nameMyOrders"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
             android:padding="10dp"
             android:text="Product Name"
             android:textColor="@color/general_text_color"
-            android:textSize="15sp" />
+            android:textSize="20sp" />
 
-        <TextView
-            android:id="@+id/categoryMyOrders"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:padding="10dp"
-            android:text="Category"
-            android:textColor="@color/general_text_color"
-            android:textSize="14sp" />
+<!--        <TextView-->
+<!--            android:id="@+id/categoryMyOrders"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="5dp"-->
+<!--            android:gravity="center"-->
+<!--            android:text="Category"-->
+<!--            android:textColor="@color/general_text_color"-->
+<!--            android:padding="5dp"-->
+<!--            android:textSize="12sp" />-->
 
     </LinearLayout>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:enabled="false"
-        android:text="Status"
-        android:textColor="@color/general_text_color"
-        android:visibility="invisible" />
-
 </LinearLayout>
