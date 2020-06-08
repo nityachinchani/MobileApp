@@ -4,8 +4,9 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:padding="10dp"
-    android:background="@color/background_color_main"
-    android:gravity="center">
+    android:background="@drawable/card_border"
+    android:gravity="center"
+    android:layout_margin="10dp">
 
     <ImageView
         android:id="@+id/imageBilling"
@@ -26,33 +27,20 @@
             android:id="@+id/nameBilling"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
             android:padding="10dp"
             android:text="Product Name"
             android:textColor="@color/general_text_color"
-            android:textSize="17sp" />
-
-        <TextView
-            android:id="@+id/categoryBilling"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:padding="10dp"
-            android:text="Category"
-            android:textColor="@color/general_text_color"
-            android:textSize="14sp" />
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/statusBilling"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:padding="10dp"
+            android:padding="2dp"
             android:text="Status"
             android:textColor="@color/general_text_color"
-            android:textSize="20sp" />
+            android:textSize="12sp" />
 
     </LinearLayout>
-
 
 </LinearLayout>

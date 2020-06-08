@@ -157,11 +157,11 @@ public class MyBillingActivity extends AppCompatActivity {
             convertView=inflater.inflate(R.layout.activity_billing_info_row, null);
             ImageView imageView = convertView.findViewById(R.id.imageBilling);
             TextView nameText = convertView.findViewById(R.id.nameBilling);
-            TextView categoryText = convertView.findViewById(R.id.categoryBilling);
+//            TextView categoryText = convertView.findViewById(R.id.categoryBilling);
             TextView statusText = convertView.findViewById(R.id.statusBilling);
             Glide.with(MyBillingActivity.this).load(this.items.get(position).getPictureName()).into(imageView);
             nameText.setText(this.items.get(position).getItemName());
-            categoryText.setText(this.items.get(position).getCategory());
+//            categoryText.setText(this.items.get(position).getCategory());
             statusText.setText(this.items.get(position).getBillingStatus());
             return convertView;
         }

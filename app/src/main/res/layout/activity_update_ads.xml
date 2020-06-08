@@ -39,18 +39,18 @@
                 <TextView
                     android:id="@+id/tv_ProductName"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
+                    android:layout_height="match_parent"
+                    android:gravity="left|center_vertical"
                     android:text="Product Name"
                     android:textColor="@color/general_text_color"
-                    android:textSize="22dp"
-                    android:textStyle="bold" />
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    android:layout_weight="2"/>
 
                 <EditText
                     android:id="@+id/et_ProductName"
                     android:layout_width="210dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="20dp"
                     android:backgroundTint="@color/general_text_color"
                     android:hint="Enter Product name"
                     android:maxLength="55"
@@ -78,19 +78,19 @@
                     android:textStyle="bold" />
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="44dp"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:gravity="right"
+                    android:gravity="right|center_vertical"
                     android:text="$"
                     android:textColor="@color/general_text_color"
-                    android:textSize="25dp" />
+                    android:textSize="22dp" />
 
 
                 <EditText
                     android:id="@+id/et_Price"
                     android:layout_width="210dp"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="right"
+                    android:layout_gravity="right|center_vertical"
                     android:backgroundTint="@color/general_text_color"
                     android:hint="Enter Price"
                     android:inputType="number"
