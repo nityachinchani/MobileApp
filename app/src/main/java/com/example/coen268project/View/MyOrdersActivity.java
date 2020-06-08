@@ -34,15 +34,33 @@ public class MyOrdersActivity extends AppCompatActivity {
         item = new Item();
         myOrdersGridView= findViewById(R.id.myOrdersGridView);
         getAllItems();
+
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
     }
 
+    public boolean onOptionsItemSelected(MenuItem item){
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+        return true;
+    }
 
 
     private void getAllItems(){
         item.getMyOrders(Utility.getCurrentUserId(), new CallBack() {
             @Override
             public void onSuccess(Object object) {
-                if(object == null) {
+                if(object == null)
+                {
                     Toast.makeText(MyOrdersActivity.this,"No items to display", Toast.LENGTH_SHORT).show();
                     return;
                 }

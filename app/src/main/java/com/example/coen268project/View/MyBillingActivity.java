@@ -54,6 +54,7 @@ public class MyBillingActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         return true;
     }
+
     private void getMyAds(){
         item.getMyAds(Utility.getCurrentUserId(), new CallBack() {
             @Override
