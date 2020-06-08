@@ -20,7 +20,7 @@ import com.google.firebase.database.ValueEventListener;
 
 public class MainActivity extends AppCompatActivity {
     EditText usernameEditText, passwordEditText;
-    Button logInBtn, guestLoginBtn;
+    Button logInBtn;
     TextView signUpTextView, forgotPasswordTextView;
     private Account account;
 
@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         usernameEditText = findViewById(R.id.usernameEditText);
         passwordEditText = findViewById(R.id.passwordEditText);
         logInBtn = findViewById(R.id.logInBtn);
-        guestLoginBtn = findViewById(R.id.guestBtn);
+
         signUpTextView = findViewById(R.id.signUpTextView);
         forgotPasswordTextView = findViewById(R.id.forgotPasswordTextView);
 
