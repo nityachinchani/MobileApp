@@ -20,7 +20,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".View.OneToOneChatActivity"></activity>
+        <activity android:name=".View.OneToOneChatActivity"
+            android:windowSoftInputMode="adjustResize"></activity>
         <activity
             android:name=".View.ViewOrderActivity"
             android:label="View Orders" />
