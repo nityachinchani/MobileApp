@@ -13,11 +13,14 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ExploreBuyActivity extends AppCompatActivity {
     private ImageView productImage;
     private TextView productPrice,productDescription,productTitle, productStatus;
     private Button exploreBuyBtn;
+    private Button bookBtn;
     private Item item;
     private ItemDao obj;
 
@@ -34,6 +37,7 @@ public class ExploreBuyActivity extends AppCompatActivity {
         exploreBuyBtn=findViewById(R.id.exploreBuyBtn);
         productStatus=findViewById(R.id.product_status);
         productDescription=findViewById(R.id.product_description);
+        bookBtn=findViewById(R.id.btnBook);
 
 
         if(bundle!=null){
@@ -43,10 +47,7 @@ public class ExploreBuyActivity extends AppCompatActivity {
                 public void onSuccess(Object object) {
                     obj = (ItemDao) object;
                     BindItems(obj);
-
-
                     Toast.makeText(ExploreBuyActivity.this,"The activity works"+obj.getItemName(),Toast.LENGTH_LONG).show();
-
                 }
 
                 @Override
@@ -70,6 +71,30 @@ public class ExploreBuyActivity extends AppCompatActivity {
                 intent.putExtra("sellerId",obj.getSellerId());
                 intent.putExtra("buyerId",obj.getBuyerId());
                 startActivity(new Intent(intent));
+            }
+        });
+
+        bookBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                if(productStatus.getText().equals(Utility.ItemStatus.POSTED.toString()))
+                {
+                    final Map<String, String> updates = new HashMap<>();
+                    updates.put("buyerId", Utility.getCurrentUserId());
+                    item.updateItem(obj.getItemId(), (HashMap) updates, new CallBack() {
+                        @Override
+                        public void onSuccess(Object object) {
+                            Toast.makeText(ExploreBuyActivity.this,"Order status updated successfully",Toast.LENGTH_LONG).show();
+                            productStatus.setText("BOOKED");
+                        }
+
+                        @Override
+                        public void onError(Object object) {
+                            Toast.makeText(ExploreBuyActivity.this,"Order status update failed",Toast.LENGTH_LONG).show();
+                        }
+                    });
+                }
             }
         });
     }

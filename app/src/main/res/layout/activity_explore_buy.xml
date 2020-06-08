@@ -118,19 +118,43 @@
                 android:layout_marginBottom="30dp"
                 android:textColor="@color/general_text_color" />
 
-            <Button
-                android:id="@+id/exploreBuyBtn"
+            <LinearLayout
+                android:id="@+id/buttonLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/button_beautification"
-                android:fontFamily="sans-serif-smallcaps"
-                android:text="Chat Now"
-                android:textAlignment="center"
-                android:textAllCaps="false"
-                android:textColor="@color/button_text"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+                android:layout_alignParentBottom="true" android:padding="25dp">
+
+                <Button
+                    android:id="@+id/exploreBuyBtn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/button_beautification"
+                    android:layout_marginHorizontal="10dp"
+                    android:text="CHAT"
+                    android:textAlignment="center"
+                    android:textAllCaps="false"
+                    android:fontFamily="sans-serif-smallcaps"
+                    android:textSize="20sp"
+                    android:textColor="@color/button_text"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/btnBook"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/button_beautification"
+                    android:layout_marginHorizontal="10dp"
+                    android:text="BOOK"
+                    android:textAlignment="center"
+                    android:textAllCaps="false"
+                    android:fontFamily="sans-serif-smallcaps"
+                    android:textSize="20sp"
+                    android:textColor="@color/button_text"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
 
         </LinearLayout>
     </ScrollView>
