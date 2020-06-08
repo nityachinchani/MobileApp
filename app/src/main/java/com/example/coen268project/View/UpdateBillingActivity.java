@@ -66,12 +66,12 @@ public class UpdateBillingActivity extends AppCompatActivity {
             public void onClick(View v)
             {
                 updates.put("billingStatus", statusSpinner.getSelectedItem().toString());
-                if(statusSpinner.getSelectedItem().toString().equals(Utility.BillingStatus.DELIVERED))
+                if(statusSpinner.getSelectedItem().toString().equals(Utility.BillingStatus.DELIVERED.toString()))
                 {
                     updates.put("buyerId", Utility.getCurrentUserId());
                 }
 
-                if(statusSpinner.getSelectedItem().toString().equals(Utility.BillingStatus.RECEIVED)) {
+                if(statusSpinner.getSelectedItem().toString().equals(Utility.BillingStatus.RECEIVED.toString())) {
                     updates.put("itemStatus", Utility.ItemStatus.SOLD.toString());
                 }
                 item.updateItem(itemId, (HashMap) updates, new CallBack() {
