@@ -47,10 +47,6 @@ public class Utility extends FirebaseRepository {
             ArrayList<String> itemStatusArray = new ArrayList<>();
             for (ItemStatus status: ItemStatus.values()
             ) {
-                if(status.name.equals("BOOKED"))
-                {
-                    continue;
-                }
                 itemStatusArray.add(status.name);
             }
             return  itemStatusArray.toArray(new String[0]);
