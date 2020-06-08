@@ -49,7 +49,7 @@
 
                 <TextView
                     android:id="@+id/product_title"
-                    android:layout_width="210dp"
+                    android:layout_width="150dp"
                     android:layout_height="match_parent"
                     android:layout_marginStart="10dp"
                     android:gravity="right|center_vertical"
@@ -87,7 +87,7 @@
 
                 <TextView
                     android:id="@+id/product_price"
-                    android:layout_width="210dp"
+                    android:layout_width="150dp"
                     android:layout_height="match_parent"
                     android:gravity="right|center_vertical"
                     android:text="sampleText"
@@ -115,13 +115,13 @@
 
                 <TextView
                     android:id="@+id/tv_LocationValue"
-                    android:layout_width="210dp"
+                    android:layout_width="150dp"
                     android:layout_height="match_parent"
+                    android:layout_marginStart="10dp"
                     android:gravity="right|center_vertical"
                     android:text="sampleText"
                     android:textColor="@color/general_text_color"
-                    android:textSize="20sp"
-                    android:layout_marginStart="10dp"/>
+                    android:textSize="20sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -144,13 +144,13 @@
 
                 <TextView
                     android:id="@+id/tv_StatusValue"
-                    android:layout_width="210dp"
+                    android:layout_width="150dp"
                     android:layout_height="match_parent"
+                    android:layout_marginStart="10dp"
                     android:gravity="right|center_vertical"
                     android:text="sampleText"
                     android:textColor="@color/general_text_color"
-                    android:textSize="20sp"
-                    android:layout_marginStart="10dp"/>
+                    android:textSize="20sp" />
             </LinearLayout>
 
             <TextView

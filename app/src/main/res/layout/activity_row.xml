@@ -1,20 +1,43 @@
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/background_color_main"
-    android:orientation="vertical">
+    android:layout_height="wrap_content"
+    android:background="@drawable/card_border"
+    android:gravity="center"
+    android:orientation="horizontal"
+    android:padding="10dp">
 
-    <TextView
-        android:id="@+id/text_id"
+    <ImageView
+        android:id="@+id/image_my_ads"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="10dp"
+        android:scaleType="fitXY">
+
+    </ImageView>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/button_beautification"
-        android:fontFamily="sans-serif-medium"
-        android:gravity="center_horizontal|center_vertical"
-        android:text="No data"
-        android:textAlignment="center"
-        android:textSize="22sp"
-        android:paddingVertical="20dp"/>
+        android:layout_marginHorizontal="15dp"
+        android:orientation="vertical"
+        android:paddingHorizontal="10dp">
 
+        <TextView
+            android:id="@+id/text_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Product Name"
+            android:textColor="@color/general_text_color"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/item_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="2dp"
+            android:text="Status"
+            android:textColor="@color/general_text_color"
+            android:textSize="12sp" />
+
+    </LinearLayout>
 </LinearLayout>

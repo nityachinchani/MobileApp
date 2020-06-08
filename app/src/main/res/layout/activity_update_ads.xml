@@ -49,7 +49,7 @@
 
                 <EditText
                     android:id="@+id/et_ProductName"
-                    android:layout_width="210dp"
+                    android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:backgroundTint="@color/general_text_color"
                     android:hint="Enter Product name"
@@ -74,8 +74,9 @@
                     android:gravity="center_vertical"
                     android:text="Price"
                     android:textColor="@color/general_text_color"
-                    android:textSize="22dp"
+                    android:textSize="20dp"
                     android:textStyle="bold" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
@@ -83,12 +84,12 @@
                     android:gravity="right|center_vertical"
                     android:text="$"
                     android:textColor="@color/general_text_color"
-                    android:textSize="22dp" />
+                    android:textSize="20dp" />
 
 
                 <EditText
                     android:id="@+id/et_Price"
-                    android:layout_width="210dp"
+                    android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="right|center_vertical"
                     android:backgroundTint="@color/general_text_color"
@@ -97,7 +98,7 @@
                     android:maxLength="4"
                     android:maxLines="1"
                     android:textColor="@color/general_text_color"
-                    android:textColorHint="@color/general_text_color" />
+                    android:textColorHint="@color/general_text_color"/>
 
             </LinearLayout>
 
@@ -116,16 +117,15 @@
                     android:gravity="left|center_vertical"
                     android:text="Item Status"
                     android:textColor="@color/general_text_color"
-                    android:textSize="22dp"
+                    android:textSize="20dp"
                     android:textStyle="bold"
                     android:layout_weight="2"/>
 
                 <Spinner
                     android:id="@+id/itemStatusSpinner"
-                    android:layout_width="185dp"
+                    android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="left"
-                    android:layout_weight="1"
                     android:gravity="center_horizontal|center_vertical"
                     android:spinnerMode="dialog" />
             </LinearLayout>
@@ -137,7 +137,7 @@
                 android:gravity="left|center_vertical"
                 android:text="Description (optional) "
                 android:textColor="@color/general_text_color"
-                android:textSize="22dp"
+                android:textSize="20dp"
                 android:textStyle="bold"
                 android:layout_marginHorizontal="10dp"/>
 

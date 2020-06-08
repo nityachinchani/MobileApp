@@ -11,6 +11,7 @@
         android:id="@+id/imageMyOrders"
         android:layout_width="100dp"
         android:layout_height="100dp"
+        android:layout_marginStart="10dp"
         android:scaleType="fitXY">
 
     </ImageView>
@@ -30,16 +31,16 @@
             android:textColor="@color/general_text_color"
             android:textSize="20sp" />
 
-<!--        <TextView-->
-<!--            android:id="@+id/categoryMyOrders"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginTop="5dp"-->
-<!--            android:gravity="center"-->
-<!--            android:text="Category"-->
-<!--            android:textColor="@color/general_text_color"-->
-<!--            android:padding="5dp"-->
-<!--            android:textSize="12sp" />-->
+        <TextView
+            android:id="@+id/categoryMyOrders"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:gravity="center_vertical"
+            android:text="Category"
+            android:textColor="@color/general_text_color"
+            android:padding="5dp"
+            android:textSize="12sp" />
 
     </LinearLayout>
 </LinearLayout>

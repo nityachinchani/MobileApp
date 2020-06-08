@@ -16,8 +16,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.coen268project.Firebase.CallBack;
-import com.example.coen268project.Model.ItemDao;
-import com.example.coen268project.Presentation.Item;
 import com.example.coen268project.Presentation.Messages;
 import com.example.coen268project.Presentation.Utility;
 import com.example.coen268project.R;
@@ -132,7 +130,7 @@ public class ChatsFragment extends Fragment {
         public View getView(int position, View convertView, ViewGroup parent) {
             LayoutInflater inflater = getLayoutInflater();
             View activity_row;
-            activity_row = inflater.inflate(R.layout.activity_row, parent, false);
+            activity_row = inflater.inflate(R.layout.activity_buyer_list, parent, false);
             textView = activity_row.findViewById(R.id.text_id);
             textView.setText(this.buyers.get(position).getName());
             return activity_row;

@@ -12,6 +12,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import android.widget.ImageView;
+import com.bumptech.glide.Glide;
 import com.example.coen268project.Firebase.CallBack;
 import com.example.coen268project.Model.ItemDao;
 import com.example.coen268project.Presentation.Item;
@@ -21,7 +23,8 @@ import java.util.ArrayList;
 
 public class AdsFragment extends Fragment {
     private ListView listView;
-    private TextView textView;
+    private TextView textView, itemStatus;
+    private ImageView myImage;
     private Item item;
     private ArrayList<ItemDao> itemList = new ArrayList<>();
     @Nullable
@@ -99,7 +102,12 @@ public class AdsFragment extends Fragment {
             View activity_row;
             activity_row = inflater.inflate(R.layout.activity_row, parent, false);
             textView = activity_row.findViewById(R.id.text_id);
+            itemStatus = activity_row.findViewById(R.id.item_status);
+            myImage = activity_row.findViewById(R.id.image_my_ads);
+            Glide.with(getContext()).load(this.items.get(position).getPictureName()).into(myImage);
             textView.setText(this.items.get(position).getItemName());
+            itemStatus.setText(this.items.get(position).getItemStatus());
+
             return activity_row;
         }
     }

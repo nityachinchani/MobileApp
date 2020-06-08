@@ -46,16 +46,16 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:layout_marginStart="10dp"
                     android:id="@+id/product_title"
-                    android:layout_width="210dp"
+                    android:layout_width="150dp"
                     android:layout_height="match_parent"
+                    android:layout_marginStart="10dp"
                     android:backgroundTint="@color/general_text_color"
                     android:gravity="center_vertical|left"
                     android:text="SampleText"
                     android:textColor="@color/general_text_color"
                     android:textColorHint="@color/general_text_color"
-                    android:textSize="20dp"/>
+                    android:textSize="20dp" />
             </LinearLayout>
 
             <LinearLayout
@@ -88,7 +88,7 @@
 
                 <TextView
                     android:id="@+id/product_price"
-                    android:layout_width="210dp"
+                    android:layout_width="150dp"
                     android:layout_height="match_parent"
                     android:gravity="left|center_vertical"
                     android:text="SampleText"
@@ -116,12 +116,12 @@
 
                 <Spinner
                     android:id="@+id/billingStatusSpinner"
-                    android:layout_width="210dp"
+                    android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:layout_marginStart="10dp"
                     android:gravity="center_horizontal|center_vertical"
-                    android:spinnerMode="dialog"
-                    android:layout_marginStart="10dp"/>
+                    android:spinnerMode="dialog" />
             </LinearLayout>
 
 
@@ -139,7 +139,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="10dp"
-                android:textColor="@color/general_text_color" />
+                android:textColor="@color/general_text_color"
+                android:textSize="20sp"/>
 
             <Button
                 android:id="@+id/btnUpdate"
@@ -154,8 +155,7 @@
                 android:textColor="@color/button_text"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                android:padding="25dp"/>
-
+                android:padding="10dp" />
 
         </LinearLayout>
     </ScrollView>

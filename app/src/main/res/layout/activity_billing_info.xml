@@ -7,14 +7,11 @@
     tools:context=".View.MyBillingActivity"
     android:background="@color/background_color_main">
 
-    <GridView
+    <ListView
         android:id="@+id/billingGridView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:horizontalSpacing="10dp"
-        android:numColumns="1"
-        android:verticalSpacing="10dp">
-
-    </GridView>
+        android:divider="@android:color/transparent"
+        android:dividerHeight="10sp"/>
 
 </LinearLayout>

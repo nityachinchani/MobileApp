@@ -88,6 +88,7 @@ public class ExploreBuyActivity extends AppCompatActivity {
                         public void onSuccess(Object object) {
                             Toast.makeText(ExploreBuyActivity.this,"Order status updated successfully",Toast.LENGTH_LONG).show();
                             productStatus.setText("BOOKED");
+                            startActivity(new Intent(ExploreBuyActivity.this, HomeActivity.class));
                         }
 
                         @Override
