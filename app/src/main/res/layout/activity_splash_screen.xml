@@ -19,11 +19,11 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginVertical="50dp"
-        android:fontFamily="monospace"
-        android:text="@string/app_description"
+        android:layout_marginVertical="10dp"
+        android:fontFamily="sans-serif-smallcaps"
+        android:text="Buy &amp; Sell Furniture\nDuring times of Corona"
         android:textAlignment="center"
-        android:textColor="@color/general_text_color"
+        android:textColor="#dedad3"
         android:textSize="20sp"
         android:textStyle="italic|bold" />
 
