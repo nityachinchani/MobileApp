@@ -154,7 +154,7 @@ public class UploadFragment extends Fragment {
             f = new File(imgDecodableString);
             cursor.close();
             Glide.with(getActivity()).load(contentUri).into(imageView);
-            Toast.makeText(getContext(),"File Path --> "+ f.getName(),Toast.LENGTH_LONG).show();
+            //Toast.makeText(getContext(),"File Path --> "+ f.getName(),Toast.LENGTH_LONG).show();
 
         }
 

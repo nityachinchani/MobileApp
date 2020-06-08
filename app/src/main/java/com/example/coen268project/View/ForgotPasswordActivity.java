@@ -39,7 +39,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
                                     Toast.makeText(ForgotPasswordActivity.this,"Password sent to your email",Toast.LENGTH_SHORT).show();
                                 }
                                 else {
-                                    Toast.makeText(ForgotPasswordActivity.this,"Email doesnt exist",Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(ForgotPasswordActivity.this,"Email doesn't exist",Toast.LENGTH_SHORT).show();
                                 }
 
                                 startActivity(new Intent(ForgotPasswordActivity.this,MainActivity.class));

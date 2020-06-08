@@ -99,6 +99,7 @@ public class MyProfileActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(Object object) {
                         Toast.makeText(MyProfileActivity.this,"My Profile updated successfully",Toast.LENGTH_LONG).show();
+                        startActivity(new Intent(MyProfileActivity.this,HomeActivity.class));
                     }
 
                     @Override

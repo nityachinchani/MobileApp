@@ -97,7 +97,7 @@ public class SignUpActivity extends AppCompatActivity {
                 }
 
                 else if(!password.equals(confirmPassword) ){
-                    Toast.makeText(SignUpActivity.this,"Passwords dont match",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SignUpActivity.this,"Passwords don't match",Toast.LENGTH_SHORT).show();
                 }
 
 

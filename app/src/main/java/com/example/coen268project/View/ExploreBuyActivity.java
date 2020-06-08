@@ -47,7 +47,7 @@ public class ExploreBuyActivity extends AppCompatActivity {
                 public void onSuccess(Object object) {
                     obj = (ItemDao) object;
                     BindItems(obj);
-                    Toast.makeText(ExploreBuyActivity.this,"The activity works"+obj.getItemName(),Toast.LENGTH_LONG).show();
+                    //Toast.makeText(ExploreBuyActivity.this,"The activity works"+obj.getItemName(),Toast.LENGTH_LONG).show();
                 }
 
                 @Override

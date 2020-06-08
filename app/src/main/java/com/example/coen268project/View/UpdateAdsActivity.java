@@ -114,6 +114,7 @@ public class UpdateAdsActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(Object object) {
                         Toast.makeText(UpdateAdsActivity.this,"Order updated successfully",Toast.LENGTH_LONG).show();
+                        startActivity(new Intent(UpdateAdsActivity.this, HomeActivity.class));
                     }
 
                     @Override

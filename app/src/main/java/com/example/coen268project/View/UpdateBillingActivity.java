@@ -78,6 +78,7 @@ public class UpdateBillingActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(Object object) {
                         Toast.makeText(UpdateBillingActivity.this,"Billing status updated successfully",Toast.LENGTH_LONG).show();
+                        startActivity(new Intent(UpdateBillingActivity.this,HomeActivity.class));
                     }
 
                     @Override

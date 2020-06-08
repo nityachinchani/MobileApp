@@ -1,4 +1,5 @@
 package com.example.coen268project.View;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import com.bumptech.glide.Glide;
 import com.example.coen268project.Firebase.CallBack;
@@ -9,6 +10,8 @@ import com.example.coen268project.R;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -32,6 +35,7 @@ public class MyOrdersActivity extends AppCompatActivity {
         myOrdersGridView= findViewById(R.id.myOrdersGridView);
         getAllItems();
     }
+
 
 
     private void getAllItems(){
@@ -63,7 +67,7 @@ public class MyOrdersActivity extends AppCompatActivity {
         myOrdersGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(MyOrdersActivity.this,adapter.getItem(i).getItemName(),Toast.LENGTH_SHORT).show();
+                //Toast.makeText(MyOrdersActivity.this,adapter.getItem(i).getItemName(),Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(MyOrdersActivity.this, ViewOrderActivity.class);
                 intent.putExtra("ItemId", (CharSequence) adapter.getItem(i).getItemId());
                 startActivity(intent);
