@@ -14,6 +14,7 @@ public class ViewOrderActivity extends AppCompatActivity {
     private TextView tv_Price;
     private TextView tv_Description;
     private TextView tv_StatusValue;
+    private TextView tv_Location;
     private Item item;
     private ImageView img_ProductPicture;
 
@@ -28,6 +29,7 @@ public class ViewOrderActivity extends AppCompatActivity {
         tv_Description = findViewById(R.id.product_description);
         img_ProductPicture = findViewById(R.id.product_image);
         tv_StatusValue = findViewById(R.id.tv_StatusValue);
+        tv_Location = findViewById(R.id.tv_LocationValue);
         final String itemId = bundle.getString("ItemId");
         item.getItem(itemId, new CallBack() {
             @Override
@@ -48,6 +50,7 @@ public class ViewOrderActivity extends AppCompatActivity {
         tv_Description.setText(itemDao.getDescription());
         tv_Price.setText(itemDao.getPrice());
         tv_StatusValue.setText(itemDao.getItemStatus());
+        tv_Location.setText(itemDao.getLocation());
         Glide.with(ViewOrderActivity.this).load(itemDao.getPictureName()).into(img_ProductPicture);
     }
 }
