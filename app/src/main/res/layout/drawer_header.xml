@@ -7,7 +7,7 @@
     android:padding="16dp"
     android:theme="@style/AppTheme.AppBarOverlay"
     android:orientation="vertical"
-    android:background="#86BBD8">
+    android:background="#13293D">
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -24,7 +24,7 @@
             android:layout_marginTop="20dp"
             android:elevation="6dp"
             android:src="@drawable/profile_image"
-            app:civ_border_color="#686963"
+            app:civ_border_color="#708D81"
             app:civ_border_width="6dp">
 
         </de.hdodenhof.circleimageview.CircleImageView>
