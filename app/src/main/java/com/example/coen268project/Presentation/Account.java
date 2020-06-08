@@ -101,6 +101,27 @@ public class Account extends FirebaseRepository implements AccountRepository {
     }
 
     @Override
+    public void validateUser(String email, final CallBack callBack) {
+        if (!email.isEmpty()) {
+            Query query = accountDatabaseReference.orderByChild("email").equalTo(email);
+            firebaseValidateUser(query, new CallBack() {
+                @Override
+                public void onSuccess(Object object) {
+                    callBack.onSuccess(object);
+                }
+
+                @Override
+                public void onError(Object object) {
+                    callBack.onError(object);
+                }
+            });
+        }
+        else {
+            callBack.onError(FirebaseConstants.FAIL);
+        }
+    }
+
+    @Override
     public void getAccount(String uid, final CallBack callBack)
     {
         final AccountDao[] accountDao = new AccountDao[1];

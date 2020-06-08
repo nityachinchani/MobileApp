@@ -189,21 +189,24 @@ public abstract class FirebaseRepository {
      * @param callback callback for event handling
      * @return ValueEventListener reference
      */
-    protected final ValueEventListener fireBaseDataChangeListener(final Query query, final CallBack callback) {
+    protected final void firebaseValidateUser(final Query query, final CallBack callback) {
         query.keepSynced(true);
-        ValueEventListener valueEventListener = new ValueEventListener() {
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                callback.onSuccess(dataSnapshot);
+                if(dataSnapshot.exists()){
+                    callback.onSuccess(true);
+                }
+                else {
+                    callback.onSuccess(false);
+                }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 callback.onError(databaseError);
             }
-        };
-        query.addValueEventListener(valueEventListener);
-        return valueEventListener;
+        });
     }
 
 }

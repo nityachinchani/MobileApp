@@ -9,4 +9,5 @@ public interface AccountRepository {
     void createAccount(String pushKey, String userName, String email, String phoneNumber, String password, String pictureName, CallBack callBack);
     void getAccount(String uid, CallBack callBack);
     void updateAccount(String accountId, HashMap map, CallBack callBack);
+    void validateUser(String email, CallBack callBack);
 }

@@ -8,8 +8,15 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.example.coen268project.Firebase.CallBack;
+import com.example.coen268project.Firebase.FirebaseConstants;
+import com.example.coen268project.Firebase.FirebaseInstance;
 import com.example.coen268project.Presentation.Account;
 import com.example.coen268project.R;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class MainActivity extends AppCompatActivity {
     EditText usernameEditText, passwordEditText;
@@ -40,37 +47,49 @@ public class MainActivity extends AppCompatActivity {
         logInBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String email = usernameEditText.getText().toString();
-                String password = passwordEditText.getText().toString();
+                final String email = usernameEditText.getText().toString();
+                final String password = passwordEditText.getText().toString();
 
                 if (email.isEmpty()) {
-                    usernameEditText.setError("Please enter email id");
+                    usernameEditText.setError("Enter email id");
                     usernameEditText.requestFocus();
                 } else if (password.isEmpty()) {
-                    passwordEditText.setError("Please enter password");
+                    passwordEditText.setError("Enter password");
                     passwordEditText.requestFocus();
                 } else if (!(email.isEmpty() && password.isEmpty())) {
-                    account.authenticateAccount(email, password, new CallBack() {
+
+                    account.validateUser(email, new CallBack() {
                         @Override
                         public void onSuccess(Object object) {
-                            startActivity(new Intent(MainActivity.this, HomeActivity.class));  //change this class once homescreen is created
+                            if(!(boolean)object){
+                                Toast.makeText(MainActivity.this,"Register to login",Toast.LENGTH_SHORT).show();
+                                return;
+                            }
+                            else {
+                                account.authenticateAccount(email, password, new CallBack() {
+                                    @Override
+                                    public void onSuccess(Object object) {
+                                        startActivity(new Intent(MainActivity.this, HomeActivity.class));  //change this class once homescreen is created
+                                    }
+
+                                    @Override
+                                    public void onError(Object object) {
+                                        Toast.makeText(MainActivity.this, "Login error, check credentials", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                            }
                         }
 
                         @Override
                         public void onError(Object object) {
-                            Toast.makeText(MainActivity.this, "Login error, please check credentials", Toast.LENGTH_SHORT).show();
+
                         }
                     });
+
                 }
             }
         });
 
-        guestLoginBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, HomeActivity.class));
-            }
-        });
 
         forgotPasswordTextView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,4 +98,5 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
 }
