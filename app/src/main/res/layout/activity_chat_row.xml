@@ -9,9 +9,8 @@
         android:id="@+id/name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center_horizontal|center_vertical"
+        android:gravity="left|center_vertical"
         android:text="No data"
-        android:textAlignment="center"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="@color/general_text_color" />
 
@@ -19,9 +18,8 @@
         android:id="@+id/messageContent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center_horizontal|center_vertical"
+        android:gravity="left|center_vertical"
         android:text="No data"
-        android:textAlignment="center"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="@color/general_text_color" />
 
