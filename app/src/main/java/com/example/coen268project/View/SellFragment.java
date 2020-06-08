@@ -23,7 +23,7 @@ public class SellFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_sell, container, false);
         listView = (ListView) view.findViewById(R.id.list_view);
-        ArrayAdapter<String> adapter=new ArrayAdapter<String>(getActivity(), R.layout.activity_row,R.id.text_id,titles);
+        ArrayAdapter<String> adapter=new ArrayAdapter<String>(getActivity(), R.layout.activity_buyer_list,R.id.text_id,titles);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

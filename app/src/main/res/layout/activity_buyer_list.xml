@@ -13,6 +13,7 @@
             android:layout_height="wrap_content"
             android:text="Product Name"
             android:textColor="@color/general_text_color"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:paddingVertical="8dp"/>
 
 </LinearLayout>
