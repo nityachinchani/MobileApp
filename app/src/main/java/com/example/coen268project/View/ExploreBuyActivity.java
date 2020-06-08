@@ -81,6 +81,7 @@ public class ExploreBuyActivity extends AppCompatActivity {
                 if(productStatus.getText().equals(Utility.ItemStatus.POSTED.toString()))
                 {
                     final Map<String, String> updates = new HashMap<>();
+                    updates.put("itemStatus", Utility.ItemStatus.BOOKED.toString());
                     updates.put("buyerId", Utility.getCurrentUserId());
                     item.updateItem(obj.getItemId(), (HashMap) updates, new CallBack() {
                         @Override
