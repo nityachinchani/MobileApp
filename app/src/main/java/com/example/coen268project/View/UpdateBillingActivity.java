@@ -92,7 +92,7 @@ public class UpdateBillingActivity extends AppCompatActivity {
     }
 
     private void BindItems(ItemDao itemDao) {
-        statusSpinner.setSelection(Utility.ItemStatus.getIndex(itemDao.getItemStatus()));
+        statusSpinner.setSelection(Utility.BillingStatus.getIndex(itemDao.getBillingStatus()));
         tv_ProductName.setText(itemDao.getItemName());
         tv_Description.setText(itemDao.getDescription());
         tv_Price.setText(itemDao.getPrice());
