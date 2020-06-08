@@ -93,6 +93,8 @@ public class UpdateAdsActivity extends AppCompatActivity {
             public void onError(Object object) {
 
             }
+
+
         });
 
         btnUpdate.setOnClickListener(new View.OnClickListener() {
