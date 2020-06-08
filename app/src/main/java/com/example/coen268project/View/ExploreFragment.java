@@ -1,10 +1,4 @@
 package com.example.coen268project.View;
-import com.bumptech.glide.Glide;
-import com.example.coen268project.Firebase.CallBack;
-import com.example.coen268project.Model.ItemDao;
-import com.example.coen268project.Presentation.Item;
-import com.example.coen268project.Presentation.Utility;
-import com.example.coen268project.R;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,7 +11,6 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,6 +18,13 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+
+import com.bumptech.glide.Glide;
+import com.example.coen268project.Firebase.CallBack;
+import com.example.coen268project.Model.ItemDao;
+import com.example.coen268project.Presentation.Item;
+import com.example.coen268project.Presentation.Utility;
+import com.example.coen268project.R;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -66,12 +66,15 @@ public class ExploreFragment extends Fragment {
         item.getAllLocations(new CallBack() {
             @Override
             public void onSuccess(Object object) {
-                Object[] obj=(Object[]) object;
-                ArrayList<String> arrayList=new ArrayList<>();
+                if (object == null)
+                    return;
+
+                Object[] obj = (Object[]) object;
+                ArrayList<String> arrayList = new ArrayList<>();
                 arrayList.clear();
                 arrayList.add("All");
-                for (Object location: obj
-                     ) {
+                for (Object location : obj
+                ) {
                     arrayList.add(location.toString());
                 }
                 location = arrayList.toArray(new String[0]);
@@ -96,6 +99,10 @@ public class ExploreFragment extends Fragment {
         item.getAllItems(new CallBack() {
             @Override
             public void onSuccess(Object object) {
+                if (object == null) {
+                    Toast.makeText(getContext(), "No Items to Display", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 Object[] objectArray = (Object[]) object;
                 itemList.clear();
                 for (Object itemElement : objectArray
@@ -135,6 +142,9 @@ public class ExploreFragment extends Fragment {
         item.getItemsByCategory(selectedCategory, new CallBack() {
             @Override
             public void onSuccess(Object object) {
+                if (object == null)
+                    return;
+
                 Object[] objectArray = (Object[]) object;
                 itemList.clear();
                 for (Object itemElement : objectArray
@@ -157,6 +167,9 @@ public class ExploreFragment extends Fragment {
         item.getItemsByLocation(selectedLocation, new CallBack() {
             @Override
             public void onSuccess(Object object) {
+                if (object == null)
+                    return;
+                
                 Object[] objectArray = (Object[]) object;
                 itemList.clear();
                 for (Object itemElement : objectArray
