@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/loc"
+    style="@style/Theme.AppCompat.DayNight.DarkActionBar"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    style="@style/Theme.AppCompat.DayNight.DarkActionBar"
-    tools:context=".View.LocationFragment"
-    android:id="@+id/loc"
-    android:background="@color/color_blue">
+    android:background="@color/background_color_main"
+    tools:context=".View.LocationFragment">
 
 
     <fragment
@@ -14,9 +14,8 @@
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
         android:layout_height="375dp"
-        tools:context=".MapsActivity"
-        android:layout_marginTop="30dp">
-    </fragment>
+        android:layout_marginTop="30dp"
+        tools:context=".MapsActivity" />
 
     <LinearLayout
         android:id="@+id/relativeLayout"
@@ -29,26 +28,22 @@
         android:elevation="200dp">
 
 
-
         <ImageView
             android:id="@+id/ic_search"
             android:layout_width="15dp"
             android:layout_height="15dp"
-            android:layout_centerVertical="true"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="15dp"
-            android:src="@drawable/ic_search"/>
+            android:layout_gravity="center_vertical"
+            android:layout_marginHorizontal="10dp"
+            android:src="@drawable/ic_search" />
 
         <EditText
             android:id="@+id/edit_search"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="0dp"
-            android:layout_toRightOf="@+id/ic_search"
             android:background="@null"
             android:hint="Enter Address, City or Zip Code..."
             android:imeOptions="actionSearch"
+            android:paddingHorizontal="5dp"
             android:textColor="#000"
             android:textSize="15sp" />
 
@@ -60,29 +55,26 @@
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_alignParentRight="true"
+        android:layout_marginLeft="280dp"
         android:layout_marginTop="410dp"
-        android:layout_marginLeft="270dp"
         android:scaleType="centerCrop"
         android:src="@drawable/ic_go" />
 
     <ImageView
+        android:id="@+id/ic_current"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_below="@id/ic_search"
-        android:layout_alignParentRight="true"
         android:layout_marginLeft="320dp"
         android:layout_marginTop="150dp"
         android:scaleType="centerCrop"
-        android:id="@+id/ic_current"
-        android:src="@drawable/ic_current"/>
+        android:src="@drawable/ic_current" />
 
     <Button
         android:id="@+id/button_continue"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/ic_go"
+        android:layout_marginTop="470dp"
+        android:background="@drawable/button_beautification"
         android:text="Continue"
-        android:layout_marginTop="460dp">
-
-    </Button>
+        android:textColor="@color/button_text" />
 </FrameLayout>

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#E5F6F8"
+    android:background="@color/background_color_main"
     tools:context=".View.MyProfileActivity">
 
     <ScrollView
@@ -46,6 +46,9 @@
                 app:layout_constraintHorizontal_bias="0.2"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/profileImage"
+                android:backgroundTint="@color/general_text_color"
+                android:textColor="@color/general_text_color"
+                android:textColorHint="@color/general_text_color"
                 tools:ignore="RtlCompat" />
 
             <EditText
@@ -63,6 +66,9 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.2"
                 app:layout_constraintStart_toStartOf="parent"
+                android:backgroundTint="@color/general_text_color"
+                android:textColor="@color/general_text_color"
+                android:textColorHint="@color/general_text_color"
                 app:layout_constraintTop_toBottomOf="@+id/fullnameEditText" />
 
             <EditText
@@ -80,6 +86,9 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.2"
                 app:layout_constraintStart_toStartOf="parent"
+                android:backgroundTint="@color/general_text_color"
+                android:textColor="@color/general_text_color"
+                android:textColorHint="@color/general_text_color"
                 app:layout_constraintTop_toBottomOf="@+id/emailEditText" />
 
             <EditText
@@ -97,6 +106,9 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.2"
                 app:layout_constraintStart_toStartOf="parent"
+                android:backgroundTint="@color/general_text_color"
+                android:textColor="@color/general_text_color"
+                android:textColorHint="@color/general_text_color"
                 app:layout_constraintTop_toBottomOf="@+id/emailEditText" />
 
             <Button
@@ -109,7 +121,7 @@
                 android:fontFamily="monospace"
                 android:gravity="center_horizontal|center_vertical"
                 android:text="Update"
-                android:textColor="@android:color/background_light"
+                android:textColor="@color/button_text"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"

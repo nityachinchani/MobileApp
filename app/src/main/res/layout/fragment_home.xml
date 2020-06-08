@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".View.BottomFragment">
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="#FCFFFF"
+        android:layout_gravity="bottom"
+        android:background="#132A3E"
         app:itemIconTint="@android:color/holo_blue_dark"
         app:itemTextColor="#76A5CD"
-        android:layout_width="match_parent"
-        android:layout_gravity="bottom"
-        app:menu="@menu/menu"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/fragmentContainer"></com.google.android.material.bottomnavigation.BottomNavigationView>
+        app:layout_constraintTop_toBottomOf="@+id/fragmentContainer"
+        app:menu="@menu/menu"></com.google.android.material.bottomnavigation.BottomNavigationView>
 
 
 </FrameLayout>

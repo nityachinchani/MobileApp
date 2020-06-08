@@ -3,20 +3,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background_color_main"
     tools:context=".View.UploadFragment">
-    <!--android:clickable="true"
-    android:focusable="true"
 
-    android:orientation="vertical"
-    android:background="@color/color_blue">-->
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/background_color_main">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#E5F6F8"
+            android:layout_height="wrap_content"
+            android:background="@color/background_color_main"
             android:clickable="false"
             android:focusable="true"
             android:orientation="vertical">
@@ -24,73 +22,73 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_horizontal|center_vertical"
+                android:gravity="center"
                 android:text="Choose from these options"
-                android:textColor="@android:color/holo_blue_dark"
-                android:textSize="25dp"
+                android:textColor="@color/general_text_color"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#E5F6F8"
-        android:layout_marginTop="30dp"
-        android:layout_marginBottom="30dp"
-        android:orientation="horizontal">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="10dp"
+                android:background="@color/background_color_main"
+                android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/button_choose"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/button_beautification"
-            android:layout_weight="1"
-            android:text="Gallery"
-            android:fontFamily="monospace"
-            android:textColor="@android:color/background_light"
-            android:textAlignment="center"
-            android:textAllCaps="false"
-            android:textSize="20sp"
-            android:textStyle="bold"/>
+                <Button
+                    android:id="@+id/button_choose"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/button_beautification"
+                    android:fontFamily="sans-serif-smallcaps"
+                    android:text="Gallery"
+                    android:textAlignment="center"
+                    android:textAllCaps="false"
+                    android:textColor="@color/button_text"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
 
-        <Button
-            android:id="@+id/button_camera"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/button_beautification"
-            android:layout_weight="1"
-            android:text="Camera"
-            android:fontFamily="monospace"
-            android:textColor="@android:color/background_light"
-            android:textAlignment="center"
-            android:textAllCaps="false"
-            android:textSize="20sp"
-            android:textStyle="bold"/>
-    </LinearLayout>
+                <Button
+                    android:id="@+id/button_camera"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/button_beautification"
+                    android:fontFamily="sans-serif-smallcaps"
+                    android:text="Camera"
+                    android:textAlignment="center"
+                    android:textAllCaps="false"
+                    android:textColor="@color/button_text"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
 
-    <ImageView
-        android:id="@+id/upload_image"
-        android:layout_width="match_parent"
-        android:layout_height="212dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginBottom="30dp"
-        android:src="@drawable/highlight"/>
+            <ImageView
+                android:id="@+id/upload_image"
+                android:layout_width="match_parent"
+                android:layout_height="220dp"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginVertical="15dp"
+                android:src="@drawable/highlight" />
 
-    <Button
-        android:id="@+id/button_con"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/button_beautification"
-        android:layout_weight="1"
-        android:text="Continue"
-        android:fontFamily="monospace"
-        android:textColor="@android:color/background_light"
-        android:textAlignment="center"
-        android:textAllCaps="false"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:enabled="false"/>
+            <Button
+                android:id="@+id/button_con"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/button_beautification"
+                android:enabled="false"
+                android:fontFamily="sans-serif-smallcaps"
+                android:text="Continue"
+                android:textAlignment="center"
+                android:textAllCaps="false"
+                android:textColor="@color/button_text"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
         </LinearLayout>
     </ScrollView>
