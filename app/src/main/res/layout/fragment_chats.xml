@@ -6,13 +6,8 @@
     tools:context=".View.ChatsFragment"
     android:background="@color/background_color_main">
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
         <ListView
             android:id="@+id/list_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
-    </ScrollView>
 </RelativeLayout>
